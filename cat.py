@@ -31,16 +31,16 @@ class Cat:
         self.check_status()
 
     def show(self):
-        st.write(f"🐾 {self.name}：饥饿值 = {self.hungry_index}；消化值 = {self.digest_index}")
+        st.write(f"🐾 {self.name}：饥饿值 = {self.hungry_index}%；消化值 = {self.digest_index}%")
 
 
 # 🖥️ Streamlit 前端界面
-st.title("猫咪生活模拟器")
+st.title("小猫Saturn生活模拟器")
 
 # --- 用户输入 ---
-name = st.text_input("请输入猫咪的名字：", "小土豆")
-initial_hungry = st.number_input("初始饥饿值（0–100）：", 0, 100, random.randint(50, 100))
-initial_digest = st.number_input("初始消化值（0–100）：", 0, 100, random.randint(50, 100))
+name = st.text_input("请输入猫咪的名字：", "Saturn")
+initial_hungry = st.number_input("初始饥饿值（0–100%）：", 0, 100, random.randint(50, 100))
+initial_digest = st.number_input("初始消化值（0–100%）：", 0, 100, random.randint(50, 100))
 loop_count = st.number_input("请设定模拟的回合数：", 1, 20, 3)
 
 # --- 创建猫对象 ---
