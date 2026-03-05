@@ -1,0 +1,4332 @@
+[
+  {
+    "id": "示例A",
+    "input": {
+      "name": "示例A",
+      "birth_date": "1990-01-15",
+      "birth_time": "12:00",
+      "longitude": 121.47,
+      "latitude": 31.23,
+      "utc_offset": 8.0
+    },
+    "graph": {
+      "centers": [
+        {
+          "id": "head",
+          "name_zh": "头脑中心",
+          "defined": false,
+          "position": {
+            "x": 0.48,
+            "y": 0.09
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "ajna",
+          "name_zh": "逻辑中心",
+          "defined": false,
+          "position": {
+            "x": 0.48,
+            "y": 0.22
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "throat",
+          "name_zh": "喉咙中心",
+          "defined": false,
+          "position": {
+            "x": 0.48,
+            "y": 0.37
+          },
+          "shape": "square"
+        },
+        {
+          "id": "g",
+          "name_zh": "G中心",
+          "defined": true,
+          "position": {
+            "x": 0.48,
+            "y": 0.53
+          },
+          "shape": "diamond"
+        },
+        {
+          "id": "heart",
+          "name_zh": "意志力中心",
+          "defined": false,
+          "position": {
+            "x": 0.61,
+            "y": 0.61
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "sacral",
+          "name_zh": "骶骨中心",
+          "defined": true,
+          "position": {
+            "x": 0.48,
+            "y": 0.81
+          },
+          "shape": "square"
+        },
+        {
+          "id": "solar_plexus",
+          "name_zh": "情绪中心",
+          "defined": false,
+          "position": {
+            "x": 0.75,
+            "y": 0.77
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "spleen",
+          "name_zh": "直觉中心",
+          "defined": true,
+          "position": {
+            "x": 0.18,
+            "y": 0.77
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "root",
+          "name_zh": "根中心",
+          "defined": true,
+          "position": {
+            "x": 0.47,
+            "y": 0.95
+          },
+          "shape": "square"
+        }
+      ],
+      "channels": [
+        {
+          "gate_a": 15,
+          "gate_b": 5,
+          "center_a": "g",
+          "center_b": "sacral",
+          "color": "mixed"
+        },
+        {
+          "gate_a": 10,
+          "gate_b": 57,
+          "center_a": "g",
+          "center_b": "spleen",
+          "color": "design"
+        },
+        {
+          "gate_a": 3,
+          "gate_b": 60,
+          "center_a": "sacral",
+          "center_b": "root",
+          "color": "mixed"
+        }
+      ],
+      "gates": [
+        {
+          "gate": 1,
+          "center": "g",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "pluto",
+              "line": 5
+            },
+            {
+              "side": "design",
+              "planet": "pluto",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 3,
+          "center": "sacral",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "earth",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 4,
+          "center": "ajna",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "south_node",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 5,
+          "center": "sacral",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "venus",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 7,
+          "center": "g",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "south_node",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 10,
+          "center": "g",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "uranus",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 13,
+          "center": "g",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "north_node",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 15,
+          "center": "g",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "jupiter",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 26,
+          "center": "heart",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mars",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 38,
+          "center": "root",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mercury",
+              "line": 3
+            },
+            {
+              "side": "personality",
+              "planet": "neptune",
+              "line": 4
+            },
+            {
+              "side": "design",
+              "planet": "neptune",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 39,
+          "center": "root",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "moon",
+              "line": 1
+            },
+            {
+              "side": "design",
+              "planet": "jupiter",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 48,
+          "center": "spleen",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mercury",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 49,
+          "center": "solar_plexus",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "north_node",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 50,
+          "center": "spleen",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "sun",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 54,
+          "center": "root",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "saturn",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 57,
+          "center": "spleen",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mars",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 58,
+          "center": "root",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "uranus",
+              "line": 3
+            },
+            {
+              "side": "design",
+              "planet": "saturn",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 60,
+          "center": "root",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "venus",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 61,
+          "center": "head",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "sun",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 62,
+          "center": "throat",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "earth",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 64,
+          "center": "head",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "moon",
+              "line": 3
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "type": "Generator",
+        "profile": "5/1",
+        "authority": "Sacral"
+      }
+    },
+    "words": {
+      "type_info": {
+        "key": "Generator",
+        "name_zh": "生产者",
+        "name_en": "Generator",
+        "theme": "满足 vs 挫败",
+        "strategy_zh": "等待回应",
+        "not_self": "挫败"
+      },
+      "authority_info": {
+        "key": "Sacral",
+        "name_zh": "骶骨权威",
+        "description": "你的身体知道答案。通过回应外在刺激的内在骶骨声音（嗯哼/嗯嗯）来做决定。"
+      },
+      "profile_info": {
+        "key": "5/1",
+        "name_zh": "异端者/调查者",
+        "line1": {
+          "number": 5,
+          "name_zh": "异端者",
+          "name_en": "Heretic"
+        },
+        "line2": {
+          "number": 1,
+          "name_zh": "调查者",
+          "name_en": "Investigator"
+        }
+      },
+      "definition_info": {
+        "key": "Single",
+        "name_zh": "单一定义",
+        "description": "所有定义的中心通过通道彼此相连，能量流动一致而稳定。"
+      },
+      "cross_info": {
+        "type": "Left Angle",
+        "name_en": "Left Angle Cross of Maya",
+        "name_zh": "左角度幻象之十字",
+        "gates": [
+          61,
+          62,
+          50,
+          3
+        ]
+      },
+      "center_infos": [
+        {
+          "id": "head",
+          "name_zh": "头脑中心",
+          "defined": false,
+          "theme": "灵感与疑问",
+          "not_self_theme": "试图回答所有不属于自己的问题"
+        },
+        {
+          "id": "ajna",
+          "name_zh": "逻辑中心",
+          "defined": false,
+          "theme": "概念化与思维处理",
+          "not_self_theme": "假装确定自己并不确定的事"
+        },
+        {
+          "id": "throat",
+          "name_zh": "喉咙中心",
+          "defined": false,
+          "theme": "沟通与行动的显化",
+          "not_self_theme": "试图引起注意或急于表达"
+        },
+        {
+          "id": "g",
+          "name_zh": "G中心",
+          "defined": true,
+          "theme": "身份认同、方向与爱",
+          "not_self_theme": "迷失方向，寻找爱和身份认同"
+        },
+        {
+          "id": "heart",
+          "name_zh": "意志力中心",
+          "defined": false,
+          "theme": "意志力、自我价值与物质世界",
+          "not_self_theme": "不断试图证明自己的价值"
+        },
+        {
+          "id": "sacral",
+          "name_zh": "骶骨中心",
+          "defined": true,
+          "theme": "生命力、性欲与工作能量",
+          "not_self_theme": "不知道什么时候够了"
+        },
+        {
+          "id": "solar_plexus",
+          "name_zh": "情绪中心",
+          "defined": false,
+          "theme": "情绪、感受与欲望",
+          "not_self_theme": "回避真相和冲突"
+        },
+        {
+          "id": "spleen",
+          "name_zh": "直觉中心",
+          "defined": true,
+          "theme": "直觉、健康与存活本能",
+          "not_self_theme": "紧抓不健康的东西不放"
+        },
+        {
+          "id": "root",
+          "name_zh": "根中心",
+          "defined": true,
+          "theme": "肾上腺素压力与驱动",
+          "not_self_theme": "急于想把事情做完以摆脱压力"
+        }
+      ],
+      "channel_infos": [
+        {
+          "gates": [
+            15,
+            5
+          ],
+          "name_zh": "韵律之通道",
+          "name_en": "Channel of Rhythm",
+          "centers": [
+            "g",
+            "sacral"
+          ],
+          "theme": "顺流——极端与固定模式"
+        },
+        {
+          "gates": [
+            10,
+            57
+          ],
+          "name_zh": "完美形式之通道",
+          "name_en": "Channel of Perfected Form",
+          "centers": [
+            "g",
+            "spleen"
+          ],
+          "theme": "存活——行为与直觉"
+        },
+        {
+          "gates": [
+            3,
+            60
+          ],
+          "name_zh": "变异之通道",
+          "name_en": "Channel of Mutation",
+          "centers": [
+            "sacral",
+            "root"
+          ],
+          "theme": "脉搏的能量——秩序与限制"
+        }
+      ],
+      "gate_infos": [
+        {
+          "gate": 1,
+          "name_zh": "自我表达之门",
+          "name_en": "Gate of Self-Expression",
+          "center": "g",
+          "keynote": "创造性的自我表达",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "pluto",
+              "line": 5
+            },
+            {
+              "side": "design",
+              "planet": "pluto",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 3,
+          "name_zh": "秩序之门",
+          "name_en": "Gate of Ordering",
+          "center": "sacral",
+          "keynote": "变异与创新的能量",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "earth",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 4,
+          "name_zh": "公式化之门",
+          "name_en": "Gate of Formulization",
+          "center": "ajna",
+          "keynote": "理解的公式化",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "south_node",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 5,
+          "name_zh": "等待之门",
+          "name_en": "Gate of Fixed Patterns",
+          "center": "sacral",
+          "keynote": "固定的节律与习惯",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "venus",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 7,
+          "name_zh": "军队之门",
+          "name_en": "Gate of the Role of the Self",
+          "center": "g",
+          "keynote": "在互动中的自我角色",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "south_node",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 10,
+          "name_zh": "自我行为之门",
+          "name_en": "Gate of the Behavior of the Self",
+          "center": "g",
+          "keynote": "爱自己的行为",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "uranus",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 13,
+          "name_zh": "聆听者之门",
+          "name_en": "Gate of the Listener",
+          "center": "g",
+          "keynote": "倾听与收集秘密",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "north_node",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 15,
+          "name_zh": "极端之门",
+          "name_en": "Gate of Extremes",
+          "center": "g",
+          "keynote": "人类行为的极端",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "jupiter",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 26,
+          "name_zh": "利己主义之门",
+          "name_en": "Gate of the Egoist",
+          "center": "heart",
+          "keynote": "伟大的驯服者之力",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mars",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 38,
+          "name_zh": "战士之门",
+          "name_en": "Gate of the Fighter",
+          "center": "root",
+          "keynote": "为目标斗争的压力",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mercury",
+              "line": 3
+            },
+            {
+              "side": "personality",
+              "planet": "neptune",
+              "line": 4
+            },
+            {
+              "side": "design",
+              "planet": "neptune",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 39,
+          "name_zh": "挑衅之门",
+          "name_en": "Gate of Provocation",
+          "center": "root",
+          "keynote": "通过挑衅激发精神",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "moon",
+              "line": 1
+            },
+            {
+              "side": "design",
+              "planet": "jupiter",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 48,
+          "name_zh": "深度之门",
+          "name_en": "Gate of Depth",
+          "center": "spleen",
+          "keynote": "深度与才华的恐惧",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mercury",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 49,
+          "name_zh": "革命之门",
+          "name_en": "Gate of Principles",
+          "center": "solar_plexus",
+          "keynote": "接受与拒绝的原则",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "north_node",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 50,
+          "name_zh": "价值之门",
+          "name_en": "Gate of Values",
+          "center": "spleen",
+          "keynote": "守护部落价值观",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "sun",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 54,
+          "name_zh": "少女出嫁之门",
+          "name_en": "Gate of Drive",
+          "center": "root",
+          "keynote": "向上攀升的野心",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "saturn",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 57,
+          "name_zh": "温柔之门",
+          "name_en": "Gate of Intuitive Clarity",
+          "center": "spleen",
+          "keynote": "当下直觉的清晰",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mars",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 58,
+          "name_zh": "喜悦之门",
+          "name_en": "Gate of Vitality",
+          "center": "root",
+          "keynote": "追求完美的活力",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "uranus",
+              "line": 3
+            },
+            {
+              "side": "design",
+              "planet": "saturn",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 60,
+          "name_zh": "限制之门",
+          "name_en": "Gate of Acceptance",
+          "center": "root",
+          "keynote": "接受限制带来变异",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "venus",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 61,
+          "name_zh": "内在真理之门",
+          "name_en": "Gate of Mystery",
+          "center": "head",
+          "keynote": "探索未知的灵感",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "sun",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 62,
+          "name_zh": "细节之门",
+          "name_en": "Gate of Detail",
+          "center": "throat",
+          "keynote": "表达细节与事实",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "earth",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 64,
+          "name_zh": "完成之前之门",
+          "name_en": "Gate of Confusion",
+          "center": "head",
+          "keynote": "从困惑中寻找意义",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "moon",
+              "line": 3
+            }
+          ]
+        }
+      ],
+      "activations": {
+        "personality": [
+          {
+            "planet": "sun",
+            "planet_zh": "太阳",
+            "gate": 61,
+            "line": 5,
+            "gate_name_zh": "内在真理之门",
+            "gate_name_en": "Gate of Mystery"
+          },
+          {
+            "planet": "earth",
+            "planet_zh": "地球",
+            "gate": 62,
+            "line": 5,
+            "gate_name_zh": "细节之门",
+            "gate_name_en": "Gate of Detail"
+          },
+          {
+            "planet": "north_node",
+            "planet_zh": "北交点",
+            "gate": 13,
+            "line": 5,
+            "gate_name_zh": "聆听者之门",
+            "gate_name_en": "Gate of the Listener"
+          },
+          {
+            "planet": "south_node",
+            "planet_zh": "南交点",
+            "gate": 7,
+            "line": 5,
+            "gate_name_zh": "军队之门",
+            "gate_name_en": "Gate of the Role of the Self"
+          },
+          {
+            "planet": "moon",
+            "planet_zh": "月亮",
+            "gate": 64,
+            "line": 3,
+            "gate_name_zh": "完成之前之门",
+            "gate_name_en": "Gate of Confusion"
+          },
+          {
+            "planet": "mercury",
+            "planet_zh": "水星",
+            "gate": 38,
+            "line": 3,
+            "gate_name_zh": "战士之门",
+            "gate_name_en": "Gate of the Fighter"
+          },
+          {
+            "planet": "venus",
+            "planet_zh": "金星",
+            "gate": 60,
+            "line": 5,
+            "gate_name_zh": "限制之门",
+            "gate_name_en": "Gate of Acceptance"
+          },
+          {
+            "planet": "mars",
+            "planet_zh": "火星",
+            "gate": 26,
+            "line": 3,
+            "gate_name_zh": "利己主义之门",
+            "gate_name_en": "Gate of the Egoist"
+          },
+          {
+            "planet": "jupiter",
+            "planet_zh": "木星",
+            "gate": 15,
+            "line": 6,
+            "gate_name_zh": "极端之门",
+            "gate_name_en": "Gate of Extremes"
+          },
+          {
+            "planet": "saturn",
+            "planet_zh": "土星",
+            "gate": 54,
+            "line": 3,
+            "gate_name_zh": "少女出嫁之门",
+            "gate_name_en": "Gate of Drive"
+          },
+          {
+            "planet": "uranus",
+            "planet_zh": "天王星",
+            "gate": 58,
+            "line": 3,
+            "gate_name_zh": "喜悦之门",
+            "gate_name_en": "Gate of Vitality"
+          },
+          {
+            "planet": "neptune",
+            "planet_zh": "海王星",
+            "gate": 38,
+            "line": 4,
+            "gate_name_zh": "战士之门",
+            "gate_name_en": "Gate of the Fighter"
+          },
+          {
+            "planet": "pluto",
+            "planet_zh": "冥王星",
+            "gate": 1,
+            "line": 5,
+            "gate_name_zh": "自我表达之门",
+            "gate_name_en": "Gate of Self-Expression"
+          }
+        ],
+        "design": [
+          {
+            "planet": "sun",
+            "planet_zh": "太阳",
+            "gate": 50,
+            "line": 1,
+            "gate_name_zh": "价值之门",
+            "gate_name_en": "Gate of Values"
+          },
+          {
+            "planet": "earth",
+            "planet_zh": "地球",
+            "gate": 3,
+            "line": 1,
+            "gate_name_zh": "秩序之门",
+            "gate_name_en": "Gate of Ordering"
+          },
+          {
+            "planet": "north_node",
+            "planet_zh": "北交点",
+            "gate": 49,
+            "line": 4,
+            "gate_name_zh": "革命之门",
+            "gate_name_en": "Gate of Principles"
+          },
+          {
+            "planet": "south_node",
+            "planet_zh": "南交点",
+            "gate": 4,
+            "line": 4,
+            "gate_name_zh": "公式化之门",
+            "gate_name_en": "Gate of Formulization"
+          },
+          {
+            "planet": "moon",
+            "planet_zh": "月亮",
+            "gate": 39,
+            "line": 1,
+            "gate_name_zh": "挑衅之门",
+            "gate_name_en": "Gate of Provocation"
+          },
+          {
+            "planet": "mercury",
+            "planet_zh": "水星",
+            "gate": 48,
+            "line": 4,
+            "gate_name_zh": "深度之门",
+            "gate_name_en": "Gate of Depth"
+          },
+          {
+            "planet": "venus",
+            "planet_zh": "金星",
+            "gate": 5,
+            "line": 2,
+            "gate_name_zh": "等待之门",
+            "gate_name_en": "Gate of Fixed Patterns"
+          },
+          {
+            "planet": "mars",
+            "planet_zh": "火星",
+            "gate": 57,
+            "line": 6,
+            "gate_name_zh": "温柔之门",
+            "gate_name_en": "Gate of Intuitive Clarity"
+          },
+          {
+            "planet": "jupiter",
+            "planet_zh": "木星",
+            "gate": 39,
+            "line": 2,
+            "gate_name_zh": "挑衅之门",
+            "gate_name_en": "Gate of Provocation"
+          },
+          {
+            "planet": "saturn",
+            "planet_zh": "土星",
+            "gate": 58,
+            "line": 5,
+            "gate_name_zh": "喜悦之门",
+            "gate_name_en": "Gate of Vitality"
+          },
+          {
+            "planet": "uranus",
+            "planet_zh": "天王星",
+            "gate": 10,
+            "line": 5,
+            "gate_name_zh": "自我行为之门",
+            "gate_name_en": "Gate of the Behavior of the Self"
+          },
+          {
+            "planet": "neptune",
+            "planet_zh": "海王星",
+            "gate": 38,
+            "line": 1,
+            "gate_name_zh": "战士之门",
+            "gate_name_en": "Gate of the Fighter"
+          },
+          {
+            "planet": "pluto",
+            "planet_zh": "冥王星",
+            "gate": 1,
+            "line": 2,
+            "gate_name_zh": "自我表达之门",
+            "gate_name_en": "Gate of Self-Expression"
+          }
+        ]
+      }
+    },
+    "chart_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 480 680\" width=\"480\" height=\"680\" style=\"font-family: -apple-system, BlinkMacSystemFont, sans-serif;\">\n<rect width=\"480\" height=\"680\" fill=\"#ffffff\" rx=\"12\"/>\n<text x=\"240\" y=\"28\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"#333\">示例A 的人类图</text>\n<text x=\"240\" y=\"44\" text-anchor=\"middle\" font-size=\"11\" fill=\"#888\">1990-01-15 12:00</text>\n<line x1=\"240\" y1=\"355\" x2=\"240\" y2=\"520\" stroke=\"#8e44ad\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<line x1=\"240\" y1=\"355\" x2=\"110\" y2=\"490\" stroke=\"#c0392b\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<line x1=\"240\" y1=\"520\" x2=\"240\" y2=\"620\" stroke=\"#8e44ad\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<polygon points=\"240,34 214,78 266,78\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"240\" y=\"64\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">头脑</text>\n<polygon points=\"240,124 214,168 266,168\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"240\" y=\"154\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">逻辑</text>\n<rect x=\"220\" y=\"230\" width=\"40\" height=\"40\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\" rx=\"3\"/>\n<text x=\"240\" y=\"254\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">喉咙</text>\n<polygon points=\"240,329 266,355 240,381 214,355\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\"/>\n<text x=\"240\" y=\"359\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">G</text>\n<polygon points=\"320,374 294,418 346,418\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"320\" y=\"404\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">意志力</text>\n<rect x=\"220\" y=\"500\" width=\"40\" height=\"40\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\" rx=\"3\"/>\n<text x=\"240\" y=\"524\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">骶骨</text>\n<polygon points=\"370,464 344,508 396,508\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"370\" y=\"494\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">情绪</text>\n<polygon points=\"110,464 84,508 136,508\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\"/>\n<text x=\"110\" y=\"494\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">直觉</text>\n<rect x=\"220\" y=\"600\" width=\"40\" height=\"40\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\" rx=\"3\"/>\n<text x=\"240\" y=\"624\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">根</text>\n<rect x=\"8\" y=\"650\" width=\"12\" height=\"12\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"1\"/>\n<text x=\"24\" y=\"660\" font-size=\"9\" fill=\"#888\">已定义</text>\n<rect x=\"60\" y=\"650\" width=\"12\" height=\"12\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<text x=\"76\" y=\"660\" font-size=\"9\" fill=\"#888\">未定义</text>\n<line x1=\"120\" y1=\"656\" x2=\"135\" y2=\"656\" stroke=\"#333\" stroke-width=\"2\"/>\n<text x=\"139\" y=\"660\" font-size=\"9\" fill=\"#888\">个性</text>\n<line x1=\"165\" y1=\"656\" x2=\"180\" y2=\"656\" stroke=\"#c0392b\" stroke-width=\"2\"/>\n<text x=\"184\" y=\"660\" font-size=\"9\" fill=\"#888\">设计</text>\n</svg>"
+  },
+  {
+    "id": "示例B",
+    "input": {
+      "name": "示例B",
+      "birth_date": "1985-06-20",
+      "birth_time": "08:30",
+      "longitude": 116.4,
+      "latitude": 39.9,
+      "utc_offset": 8.0
+    },
+    "graph": {
+      "centers": [
+        {
+          "id": "head",
+          "name_zh": "头脑中心",
+          "defined": false,
+          "position": {
+            "x": 0.48,
+            "y": 0.09
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "ajna",
+          "name_zh": "逻辑中心",
+          "defined": true,
+          "position": {
+            "x": 0.48,
+            "y": 0.22
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "throat",
+          "name_zh": "喉咙中心",
+          "defined": true,
+          "position": {
+            "x": 0.48,
+            "y": 0.37
+          },
+          "shape": "square"
+        },
+        {
+          "id": "g",
+          "name_zh": "G中心",
+          "defined": true,
+          "position": {
+            "x": 0.48,
+            "y": 0.53
+          },
+          "shape": "diamond"
+        },
+        {
+          "id": "heart",
+          "name_zh": "意志力中心",
+          "defined": true,
+          "position": {
+            "x": 0.61,
+            "y": 0.61
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "sacral",
+          "name_zh": "骶骨中心",
+          "defined": true,
+          "position": {
+            "x": 0.48,
+            "y": 0.81
+          },
+          "shape": "square"
+        },
+        {
+          "id": "solar_plexus",
+          "name_zh": "情绪中心",
+          "defined": false,
+          "position": {
+            "x": 0.75,
+            "y": 0.77
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "spleen",
+          "name_zh": "直觉中心",
+          "defined": false,
+          "position": {
+            "x": 0.18,
+            "y": 0.77
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "root",
+          "name_zh": "根中心",
+          "defined": true,
+          "position": {
+            "x": 0.47,
+            "y": 0.95
+          },
+          "shape": "square"
+        }
+      ],
+      "channels": [
+        {
+          "gate_a": 43,
+          "gate_b": 23,
+          "center_a": "ajna",
+          "center_b": "throat",
+          "color": "mixed"
+        },
+        {
+          "gate_a": 15,
+          "gate_b": 5,
+          "center_a": "g",
+          "center_b": "sacral",
+          "color": "personality"
+        },
+        {
+          "gate_a": 2,
+          "gate_b": 14,
+          "center_a": "g",
+          "center_b": "sacral",
+          "color": "mixed"
+        },
+        {
+          "gate_a": 25,
+          "gate_b": 51,
+          "center_a": "g",
+          "center_b": "heart",
+          "color": "design"
+        },
+        {
+          "gate_a": 42,
+          "gate_b": 53,
+          "center_a": "sacral",
+          "center_b": "root",
+          "color": "mixed"
+        }
+      ],
+      "gates": [
+        {
+          "gate": 1,
+          "center": "g",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "south_node",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 2,
+          "center": "g",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "north_node",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 5,
+          "center": "sacral",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "uranus",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 10,
+          "center": "g",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "earth",
+              "line": 1
+            },
+            {
+              "side": "personality",
+              "planet": "neptune",
+              "line": 5
+            },
+            {
+              "side": "design",
+              "planet": "neptune",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 13,
+          "center": "g",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "jupiter",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 14,
+          "center": "sacral",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "saturn",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 15,
+          "center": "g",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "sun",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 19,
+          "center": "root",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "jupiter",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 23,
+          "center": "throat",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "north_node",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 24,
+          "center": "ajna",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "venus",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 25,
+          "center": "g",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "sun",
+              "line": 3
+            },
+            {
+              "side": "design",
+              "planet": "moon",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 26,
+          "center": "heart",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "uranus",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 27,
+          "center": "sacral",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mars",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 28,
+          "center": "spleen",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "pluto",
+              "line": 1
+            },
+            {
+              "side": "design",
+              "planet": "pluto",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 39,
+          "center": "root",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mercury",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 42,
+          "center": "sacral",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "venus",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 43,
+          "center": "ajna",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "saturn",
+              "line": 4
+            },
+            {
+              "side": "design",
+              "planet": "south_node",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 46,
+          "center": "g",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "earth",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 51,
+          "center": "heart",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mercury",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 52,
+          "center": "root",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mars",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 53,
+          "center": "root",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "moon",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "type": "Generator",
+        "profile": "1/3",
+        "authority": "Sacral"
+      }
+    },
+    "words": {
+      "type_info": {
+        "key": "Generator",
+        "name_zh": "生产者",
+        "name_en": "Generator",
+        "theme": "满足 vs 挫败",
+        "strategy_zh": "等待回应",
+        "not_self": "挫败"
+      },
+      "authority_info": {
+        "key": "Sacral",
+        "name_zh": "骶骨权威",
+        "description": "你的身体知道答案。通过回应外在刺激的内在骶骨声音（嗯哼/嗯嗯）来做决定。"
+      },
+      "profile_info": {
+        "key": "1/3",
+        "name_zh": "调查者/烈士",
+        "line1": {
+          "number": 1,
+          "name_zh": "调查者",
+          "name_en": "Investigator"
+        },
+        "line2": {
+          "number": 3,
+          "name_zh": "烈士",
+          "name_en": "Martyr"
+        }
+      },
+      "definition_info": {
+        "key": "Split",
+        "name_zh": "二分定义",
+        "description": "定义的中心分成两个独立的组，需要桥梁来连接两部分能量。",
+        "split_type": "Small"
+      },
+      "cross_info": {
+        "type": "Right Angle",
+        "name_en": "Right Angle Cross of the Vessel of Love",
+        "name_zh": "右角度爱之器皿之十字",
+        "gates": [
+          15,
+          10,
+          25,
+          46
+        ]
+      },
+      "center_infos": [
+        {
+          "id": "head",
+          "name_zh": "头脑中心",
+          "defined": false,
+          "theme": "灵感与疑问",
+          "not_self_theme": "试图回答所有不属于自己的问题"
+        },
+        {
+          "id": "ajna",
+          "name_zh": "逻辑中心",
+          "defined": true,
+          "theme": "概念化与思维处理",
+          "not_self_theme": "假装确定自己并不确定的事"
+        },
+        {
+          "id": "throat",
+          "name_zh": "喉咙中心",
+          "defined": true,
+          "theme": "沟通与行动的显化",
+          "not_self_theme": "试图引起注意或急于表达"
+        },
+        {
+          "id": "g",
+          "name_zh": "G中心",
+          "defined": true,
+          "theme": "身份认同、方向与爱",
+          "not_self_theme": "迷失方向，寻找爱和身份认同"
+        },
+        {
+          "id": "heart",
+          "name_zh": "意志力中心",
+          "defined": true,
+          "theme": "意志力、自我价值与物质世界",
+          "not_self_theme": "不断试图证明自己的价值"
+        },
+        {
+          "id": "sacral",
+          "name_zh": "骶骨中心",
+          "defined": true,
+          "theme": "生命力、性欲与工作能量",
+          "not_self_theme": "不知道什么时候够了"
+        },
+        {
+          "id": "solar_plexus",
+          "name_zh": "情绪中心",
+          "defined": false,
+          "theme": "情绪、感受与欲望",
+          "not_self_theme": "回避真相和冲突"
+        },
+        {
+          "id": "spleen",
+          "name_zh": "直觉中心",
+          "defined": false,
+          "theme": "直觉、健康与存活本能",
+          "not_self_theme": "紧抓不健康的东西不放"
+        },
+        {
+          "id": "root",
+          "name_zh": "根中心",
+          "defined": true,
+          "theme": "肾上腺素压力与驱动",
+          "not_self_theme": "急于想把事情做完以摆脱压力"
+        }
+      ],
+      "channel_infos": [
+        {
+          "gates": [
+            43,
+            23
+          ],
+          "name_zh": "构建之通道",
+          "name_en": "Channel of Structuring",
+          "centers": [
+            "ajna",
+            "throat"
+          ],
+          "theme": "个体性——从洞见到同化"
+        },
+        {
+          "gates": [
+            15,
+            5
+          ],
+          "name_zh": "韵律之通道",
+          "name_en": "Channel of Rhythm",
+          "centers": [
+            "g",
+            "sacral"
+          ],
+          "theme": "顺流——极端与固定模式"
+        },
+        {
+          "gates": [
+            2,
+            14
+          ],
+          "name_zh": "脉动之通道",
+          "name_en": "Channel of the Beat",
+          "centers": [
+            "g",
+            "sacral"
+          ],
+          "theme": "掌管钥匙的人——方向与权力"
+        },
+        {
+          "gates": [
+            25,
+            51
+          ],
+          "name_zh": "发起之通道",
+          "name_en": "Channel of Initiation",
+          "centers": [
+            "g",
+            "heart"
+          ],
+          "theme": "需要成为第一——天真与震撼"
+        },
+        {
+          "gates": [
+            42,
+            53
+          ],
+          "name_zh": "成熟之通道",
+          "name_en": "Channel of Maturation",
+          "centers": [
+            "sacral",
+            "root"
+          ],
+          "theme": "平衡发展——增长与开始"
+        }
+      ],
+      "gate_infos": [
+        {
+          "gate": 1,
+          "name_zh": "自我表达之门",
+          "name_en": "Gate of Self-Expression",
+          "center": "g",
+          "keynote": "创造性的自我表达",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "south_node",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 2,
+          "name_zh": "接收之门",
+          "name_en": "Gate of the Receptive",
+          "center": "g",
+          "keynote": "更高知识的方向",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "north_node",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 5,
+          "name_zh": "等待之门",
+          "name_en": "Gate of Fixed Patterns",
+          "center": "sacral",
+          "keynote": "固定的节律与习惯",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "uranus",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 10,
+          "name_zh": "自我行为之门",
+          "name_en": "Gate of the Behavior of the Self",
+          "center": "g",
+          "keynote": "爱自己的行为",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "earth",
+              "line": 1
+            },
+            {
+              "side": "personality",
+              "planet": "neptune",
+              "line": 5
+            },
+            {
+              "side": "design",
+              "planet": "neptune",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 13,
+          "name_zh": "聆听者之门",
+          "name_en": "Gate of the Listener",
+          "center": "g",
+          "keynote": "倾听与收集秘密",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "jupiter",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 14,
+          "name_zh": "权力技巧之门",
+          "name_en": "Gate of Power Skills",
+          "center": "sacral",
+          "keynote": "掌握资源的能量",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "saturn",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 15,
+          "name_zh": "极端之门",
+          "name_en": "Gate of Extremes",
+          "center": "g",
+          "keynote": "人类行为的极端",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "sun",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 19,
+          "name_zh": "靠近之门",
+          "name_en": "Gate of Wanting",
+          "center": "root",
+          "keynote": "对资源和归属的需求",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "jupiter",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 23,
+          "name_zh": "同化之门",
+          "name_en": "Gate of Assimilation",
+          "center": "throat",
+          "keynote": "将复杂化为简单",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "north_node",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 24,
+          "name_zh": "回归之门",
+          "name_en": "Gate of Rationalization",
+          "center": "ajna",
+          "keynote": "反复思考与合理化",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "venus",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 25,
+          "name_zh": "天真之门",
+          "name_en": "Gate of Innocence",
+          "center": "g",
+          "keynote": "无条件之爱的精神",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "sun",
+              "line": 3
+            },
+            {
+              "side": "design",
+              "planet": "moon",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 26,
+          "name_zh": "利己主义之门",
+          "name_en": "Gate of the Egoist",
+          "center": "heart",
+          "keynote": "伟大的驯服者之力",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "uranus",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 27,
+          "name_zh": "滋养之门",
+          "name_en": "Gate of Caring",
+          "center": "sacral",
+          "keynote": "照顾与滋养他人",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mars",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 28,
+          "name_zh": "玩家之门",
+          "name_en": "Gate of the Game Player",
+          "center": "spleen",
+          "keynote": "为意义而挣扎",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "pluto",
+              "line": 1
+            },
+            {
+              "side": "design",
+              "planet": "pluto",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 39,
+          "name_zh": "挑衅之门",
+          "name_en": "Gate of Provocation",
+          "center": "root",
+          "keynote": "通过挑衅激发精神",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mercury",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 42,
+          "name_zh": "增长之门",
+          "name_en": "Gate of Growth",
+          "center": "sacral",
+          "keynote": "完成周期的能量",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "venus",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 43,
+          "name_zh": "突破之门",
+          "name_en": "Gate of Insight",
+          "center": "ajna",
+          "keynote": "独特的内在洞见",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "saturn",
+              "line": 4
+            },
+            {
+              "side": "design",
+              "planet": "south_node",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 46,
+          "name_zh": "身体之门",
+          "name_en": "Gate of the Determination of the Self",
+          "center": "g",
+          "keynote": "对身体的爱与决心",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "earth",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 51,
+          "name_zh": "激震之门",
+          "name_en": "Gate of Shock",
+          "center": "heart",
+          "keynote": "竞争与突然的震撼",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mercury",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 52,
+          "name_zh": "静止之门",
+          "name_en": "Gate of Stillness",
+          "center": "root",
+          "keynote": "专注与静止的压力",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mars",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 53,
+          "name_zh": "发展之门",
+          "name_en": "Gate of Beginnings",
+          "center": "root",
+          "keynote": "开启新循环的压力",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "moon",
+              "line": 2
+            }
+          ]
+        }
+      ],
+      "activations": {
+        "personality": [
+          {
+            "planet": "sun",
+            "planet_zh": "太阳",
+            "gate": 15,
+            "line": 1,
+            "gate_name_zh": "极端之门",
+            "gate_name_en": "Gate of Extremes"
+          },
+          {
+            "planet": "earth",
+            "planet_zh": "地球",
+            "gate": 10,
+            "line": 1,
+            "gate_name_zh": "自我行为之门",
+            "gate_name_en": "Gate of the Behavior of the Self"
+          },
+          {
+            "planet": "north_node",
+            "planet_zh": "北交点",
+            "gate": 2,
+            "line": 4,
+            "gate_name_zh": "接收之门",
+            "gate_name_en": "Gate of the Receptive"
+          },
+          {
+            "planet": "south_node",
+            "planet_zh": "南交点",
+            "gate": 1,
+            "line": 4,
+            "gate_name_zh": "自我表达之门",
+            "gate_name_en": "Gate of Self-Expression"
+          },
+          {
+            "planet": "moon",
+            "planet_zh": "月亮",
+            "gate": 53,
+            "line": 2,
+            "gate_name_zh": "发展之门",
+            "gate_name_en": "Gate of Beginnings"
+          },
+          {
+            "planet": "mercury",
+            "planet_zh": "水星",
+            "gate": 39,
+            "line": 4,
+            "gate_name_zh": "挑衅之门",
+            "gate_name_en": "Gate of Provocation"
+          },
+          {
+            "planet": "venus",
+            "planet_zh": "金星",
+            "gate": 24,
+            "line": 6,
+            "gate_name_zh": "回归之门",
+            "gate_name_en": "Gate of Rationalization"
+          },
+          {
+            "planet": "mars",
+            "planet_zh": "火星",
+            "gate": 52,
+            "line": 4,
+            "gate_name_zh": "静止之门",
+            "gate_name_en": "Gate of Stillness"
+          },
+          {
+            "planet": "jupiter",
+            "planet_zh": "木星",
+            "gate": 13,
+            "line": 4,
+            "gate_name_zh": "聆听者之门",
+            "gate_name_en": "Gate of the Listener"
+          },
+          {
+            "planet": "saturn",
+            "planet_zh": "土星",
+            "gate": 43,
+            "line": 4,
+            "gate_name_zh": "突破之门",
+            "gate_name_en": "Gate of Insight"
+          },
+          {
+            "planet": "uranus",
+            "planet_zh": "天王星",
+            "gate": 5,
+            "line": 5,
+            "gate_name_zh": "等待之门",
+            "gate_name_en": "Gate of Fixed Patterns"
+          },
+          {
+            "planet": "neptune",
+            "planet_zh": "海王星",
+            "gate": 10,
+            "line": 5,
+            "gate_name_zh": "自我行为之门",
+            "gate_name_en": "Gate of the Behavior of the Self"
+          },
+          {
+            "planet": "pluto",
+            "planet_zh": "冥王星",
+            "gate": 28,
+            "line": 1,
+            "gate_name_zh": "玩家之门",
+            "gate_name_en": "Gate of the Game Player"
+          }
+        ],
+        "design": [
+          {
+            "planet": "sun",
+            "planet_zh": "太阳",
+            "gate": 25,
+            "line": 3,
+            "gate_name_zh": "天真之门",
+            "gate_name_en": "Gate of Innocence"
+          },
+          {
+            "planet": "earth",
+            "planet_zh": "地球",
+            "gate": 46,
+            "line": 3,
+            "gate_name_zh": "身体之门",
+            "gate_name_en": "Gate of the Determination of the Self"
+          },
+          {
+            "planet": "north_node",
+            "planet_zh": "北交点",
+            "gate": 23,
+            "line": 3,
+            "gate_name_zh": "同化之门",
+            "gate_name_en": "Gate of Assimilation"
+          },
+          {
+            "planet": "south_node",
+            "planet_zh": "南交点",
+            "gate": 43,
+            "line": 3,
+            "gate_name_zh": "突破之门",
+            "gate_name_en": "Gate of Insight"
+          },
+          {
+            "planet": "moon",
+            "planet_zh": "月亮",
+            "gate": 25,
+            "line": 1,
+            "gate_name_zh": "天真之门",
+            "gate_name_en": "Gate of Innocence"
+          },
+          {
+            "planet": "mercury",
+            "planet_zh": "水星",
+            "gate": 51,
+            "line": 3,
+            "gate_name_zh": "激震之门",
+            "gate_name_en": "Gate of Shock"
+          },
+          {
+            "planet": "venus",
+            "planet_zh": "金星",
+            "gate": 42,
+            "line": 1,
+            "gate_name_zh": "增长之门",
+            "gate_name_en": "Gate of Growth"
+          },
+          {
+            "planet": "mars",
+            "planet_zh": "火星",
+            "gate": 27,
+            "line": 3,
+            "gate_name_zh": "滋养之门",
+            "gate_name_en": "Gate of Caring"
+          },
+          {
+            "planet": "jupiter",
+            "planet_zh": "木星",
+            "gate": 19,
+            "line": 2,
+            "gate_name_zh": "靠近之门",
+            "gate_name_en": "Gate of Wanting"
+          },
+          {
+            "planet": "saturn",
+            "planet_zh": "土星",
+            "gate": 14,
+            "line": 4,
+            "gate_name_zh": "权力技巧之门",
+            "gate_name_en": "Gate of Power Skills"
+          },
+          {
+            "planet": "uranus",
+            "planet_zh": "天王星",
+            "gate": 26,
+            "line": 2,
+            "gate_name_zh": "利己主义之门",
+            "gate_name_en": "Gate of the Egoist"
+          },
+          {
+            "planet": "neptune",
+            "planet_zh": "海王星",
+            "gate": 10,
+            "line": 6,
+            "gate_name_zh": "自我行为之门",
+            "gate_name_en": "Gate of the Behavior of the Self"
+          },
+          {
+            "planet": "pluto",
+            "planet_zh": "冥王星",
+            "gate": 28,
+            "line": 3,
+            "gate_name_zh": "玩家之门",
+            "gate_name_en": "Gate of the Game Player"
+          }
+        ]
+      }
+    },
+    "chart_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 480 680\" width=\"480\" height=\"680\" style=\"font-family: -apple-system, BlinkMacSystemFont, sans-serif;\">\n<rect width=\"480\" height=\"680\" fill=\"#ffffff\" rx=\"12\"/>\n<text x=\"240\" y=\"28\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"#333\">示例B 的人类图</text>\n<text x=\"240\" y=\"44\" text-anchor=\"middle\" font-size=\"11\" fill=\"#888\">1985-06-20 08:30</text>\n<line x1=\"240\" y1=\"150\" x2=\"240\" y2=\"250\" stroke=\"#8e44ad\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<line x1=\"240\" y1=\"355\" x2=\"240\" y2=\"520\" stroke=\"#333\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<line x1=\"240\" y1=\"355\" x2=\"240\" y2=\"520\" stroke=\"#8e44ad\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<line x1=\"240\" y1=\"355\" x2=\"320\" y2=\"400\" stroke=\"#c0392b\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<line x1=\"240\" y1=\"520\" x2=\"240\" y2=\"620\" stroke=\"#8e44ad\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<polygon points=\"240,34 214,78 266,78\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"240\" y=\"64\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">头脑</text>\n<polygon points=\"240,124 214,168 266,168\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\"/>\n<text x=\"240\" y=\"154\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">逻辑</text>\n<rect x=\"220\" y=\"230\" width=\"40\" height=\"40\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\" rx=\"3\"/>\n<text x=\"240\" y=\"254\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">喉咙</text>\n<polygon points=\"240,329 266,355 240,381 214,355\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\"/>\n<text x=\"240\" y=\"359\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">G</text>\n<polygon points=\"320,374 294,418 346,418\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\"/>\n<text x=\"320\" y=\"404\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">意志力</text>\n<rect x=\"220\" y=\"500\" width=\"40\" height=\"40\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\" rx=\"3\"/>\n<text x=\"240\" y=\"524\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">骶骨</text>\n<polygon points=\"370,464 344,508 396,508\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"370\" y=\"494\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">情绪</text>\n<polygon points=\"110,464 84,508 136,508\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"110\" y=\"494\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">直觉</text>\n<rect x=\"220\" y=\"600\" width=\"40\" height=\"40\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\" rx=\"3\"/>\n<text x=\"240\" y=\"624\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">根</text>\n<rect x=\"8\" y=\"650\" width=\"12\" height=\"12\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"1\"/>\n<text x=\"24\" y=\"660\" font-size=\"9\" fill=\"#888\">已定义</text>\n<rect x=\"60\" y=\"650\" width=\"12\" height=\"12\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<text x=\"76\" y=\"660\" font-size=\"9\" fill=\"#888\">未定义</text>\n<line x1=\"120\" y1=\"656\" x2=\"135\" y2=\"656\" stroke=\"#333\" stroke-width=\"2\"/>\n<text x=\"139\" y=\"660\" font-size=\"9\" fill=\"#888\">个性</text>\n<line x1=\"165\" y1=\"656\" x2=\"180\" y2=\"656\" stroke=\"#c0392b\" stroke-width=\"2\"/>\n<text x=\"184\" y=\"660\" font-size=\"9\" fill=\"#888\">设计</text>\n</svg>"
+  },
+  {
+    "id": "示例C",
+    "input": {
+      "name": "示例C",
+      "birth_date": "1995-11-03",
+      "birth_time": "22:15",
+      "longitude": 114.06,
+      "latitude": 22.54,
+      "utc_offset": 8.0
+    },
+    "graph": {
+      "centers": [
+        {
+          "id": "head",
+          "name_zh": "头脑中心",
+          "defined": true,
+          "position": {
+            "x": 0.48,
+            "y": 0.09
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "ajna",
+          "name_zh": "逻辑中心",
+          "defined": true,
+          "position": {
+            "x": 0.48,
+            "y": 0.22
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "throat",
+          "name_zh": "喉咙中心",
+          "defined": false,
+          "position": {
+            "x": 0.48,
+            "y": 0.37
+          },
+          "shape": "square"
+        },
+        {
+          "id": "g",
+          "name_zh": "G中心",
+          "defined": false,
+          "position": {
+            "x": 0.48,
+            "y": 0.53
+          },
+          "shape": "diamond"
+        },
+        {
+          "id": "heart",
+          "name_zh": "意志力中心",
+          "defined": false,
+          "position": {
+            "x": 0.61,
+            "y": 0.61
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "sacral",
+          "name_zh": "骶骨中心",
+          "defined": true,
+          "position": {
+            "x": 0.48,
+            "y": 0.81
+          },
+          "shape": "square"
+        },
+        {
+          "id": "solar_plexus",
+          "name_zh": "情绪中心",
+          "defined": false,
+          "position": {
+            "x": 0.75,
+            "y": 0.77
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "spleen",
+          "name_zh": "直觉中心",
+          "defined": false,
+          "position": {
+            "x": 0.18,
+            "y": 0.77
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "root",
+          "name_zh": "根中心",
+          "defined": true,
+          "position": {
+            "x": 0.47,
+            "y": 0.95
+          },
+          "shape": "square"
+        }
+      ],
+      "channels": [
+        {
+          "gate_a": 61,
+          "gate_b": 24,
+          "center_a": "head",
+          "center_b": "ajna",
+          "color": "mixed"
+        },
+        {
+          "gate_a": 3,
+          "gate_b": 60,
+          "center_a": "sacral",
+          "center_b": "root",
+          "color": "mixed"
+        }
+      ],
+      "gates": [
+        {
+          "gate": 3,
+          "center": "sacral",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "south_node",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 4,
+          "center": "ajna",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mercury",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 5,
+          "center": "sacral",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "jupiter",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 9,
+          "center": "sacral",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mars",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 14,
+          "center": "sacral",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "pluto",
+              "line": 6
+            },
+            {
+              "side": "design",
+              "planet": "pluto",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 18,
+          "center": "spleen",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mars",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 19,
+          "center": "root",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "earth",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 22,
+          "center": "solar_plexus",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "saturn",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 24,
+          "center": "ajna",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "earth",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 32,
+          "center": "spleen",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "north_node",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 33,
+          "center": "throat",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "sun",
+              "line": 6
+            },
+            {
+              "side": "design",
+              "planet": "venus",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 34,
+          "center": "sacral",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "venus",
+              "line": 1
+            },
+            {
+              "side": "design",
+              "planet": "moon",
+              "line": 2
+            },
+            {
+              "side": "design",
+              "planet": "jupiter",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 36,
+          "center": "solar_plexus",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "moon",
+              "line": 5
+            },
+            {
+              "side": "design",
+              "planet": "saturn",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 42,
+          "center": "sacral",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "south_node",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 44,
+          "center": "spleen",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "sun",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 50,
+          "center": "spleen",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mercury",
+              "line": 3
+            },
+            {
+              "side": "design",
+              "planet": "north_node",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 60,
+          "center": "root",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "uranus",
+              "line": 1
+            },
+            {
+              "side": "design",
+              "planet": "uranus",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 61,
+          "center": "head",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "neptune",
+              "line": 3
+            },
+            {
+              "side": "design",
+              "planet": "neptune",
+              "line": 4
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "type": "Generator",
+        "profile": "4/6",
+        "authority": "Sacral"
+      }
+    },
+    "words": {
+      "type_info": {
+        "key": "Generator",
+        "name_zh": "生产者",
+        "name_en": "Generator",
+        "theme": "满足 vs 挫败",
+        "strategy_zh": "等待回应",
+        "not_self": "挫败"
+      },
+      "authority_info": {
+        "key": "Sacral",
+        "name_zh": "骶骨权威",
+        "description": "你的身体知道答案。通过回应外在刺激的内在骶骨声音（嗯哼/嗯嗯）来做决定。"
+      },
+      "profile_info": {
+        "key": "4/6",
+        "name_zh": "机会者/榜样",
+        "line1": {
+          "number": 4,
+          "name_zh": "机会者",
+          "name_en": "Opportunist"
+        },
+        "line2": {
+          "number": 6,
+          "name_zh": "榜样",
+          "name_en": "Role Model"
+        }
+      },
+      "definition_info": {
+        "key": "Split",
+        "name_zh": "二分定义",
+        "description": "定义的中心分成两个独立的组，需要桥梁来连接两部分能量。",
+        "split_type": "Large"
+      },
+      "cross_info": {
+        "type": "Juxtaposition",
+        "name_en": "Juxtaposition Cross of the Four Ways",
+        "name_zh": "并列四条路之十字",
+        "gates": [
+          44,
+          24,
+          33,
+          19
+        ]
+      },
+      "center_infos": [
+        {
+          "id": "head",
+          "name_zh": "头脑中心",
+          "defined": true,
+          "theme": "灵感与疑问",
+          "not_self_theme": "试图回答所有不属于自己的问题"
+        },
+        {
+          "id": "ajna",
+          "name_zh": "逻辑中心",
+          "defined": true,
+          "theme": "概念化与思维处理",
+          "not_self_theme": "假装确定自己并不确定的事"
+        },
+        {
+          "id": "throat",
+          "name_zh": "喉咙中心",
+          "defined": false,
+          "theme": "沟通与行动的显化",
+          "not_self_theme": "试图引起注意或急于表达"
+        },
+        {
+          "id": "g",
+          "name_zh": "G中心",
+          "defined": false,
+          "theme": "身份认同、方向与爱",
+          "not_self_theme": "迷失方向，寻找爱和身份认同"
+        },
+        {
+          "id": "heart",
+          "name_zh": "意志力中心",
+          "defined": false,
+          "theme": "意志力、自我价值与物质世界",
+          "not_self_theme": "不断试图证明自己的价值"
+        },
+        {
+          "id": "sacral",
+          "name_zh": "骶骨中心",
+          "defined": true,
+          "theme": "生命力、性欲与工作能量",
+          "not_self_theme": "不知道什么时候够了"
+        },
+        {
+          "id": "solar_plexus",
+          "name_zh": "情绪中心",
+          "defined": false,
+          "theme": "情绪、感受与欲望",
+          "not_self_theme": "回避真相和冲突"
+        },
+        {
+          "id": "spleen",
+          "name_zh": "直觉中心",
+          "defined": false,
+          "theme": "直觉、健康与存活本能",
+          "not_self_theme": "紧抓不健康的东西不放"
+        },
+        {
+          "id": "root",
+          "name_zh": "根中心",
+          "defined": true,
+          "theme": "肾上腺素压力与驱动",
+          "not_self_theme": "急于想把事情做完以摆脱压力"
+        }
+      ],
+      "channel_infos": [
+        {
+          "gates": [
+            61,
+            24
+          ],
+          "name_zh": "觉知之通道",
+          "name_en": "Channel of Awareness",
+          "centers": [
+            "head",
+            "ajna"
+          ],
+          "theme": "思考者——从神秘到合理化"
+        },
+        {
+          "gates": [
+            3,
+            60
+          ],
+          "name_zh": "变异之通道",
+          "name_en": "Channel of Mutation",
+          "centers": [
+            "sacral",
+            "root"
+          ],
+          "theme": "脉搏的能量——秩序与限制"
+        }
+      ],
+      "gate_infos": [
+        {
+          "gate": 3,
+          "name_zh": "秩序之门",
+          "name_en": "Gate of Ordering",
+          "center": "sacral",
+          "keynote": "变异与创新的能量",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "south_node",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 4,
+          "name_zh": "公式化之门",
+          "name_en": "Gate of Formulization",
+          "center": "ajna",
+          "keynote": "理解的公式化",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mercury",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 5,
+          "name_zh": "等待之门",
+          "name_en": "Gate of Fixed Patterns",
+          "center": "sacral",
+          "keynote": "固定的节律与习惯",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "jupiter",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 9,
+          "name_zh": "专注之门",
+          "name_en": "Gate of Focus",
+          "center": "sacral",
+          "keynote": "处理细节的能量",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mars",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 14,
+          "name_zh": "权力技巧之门",
+          "name_en": "Gate of Power Skills",
+          "center": "sacral",
+          "keynote": "掌握资源的能量",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "pluto",
+              "line": 6
+            },
+            {
+              "side": "design",
+              "planet": "pluto",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 18,
+          "name_zh": "纠正之门",
+          "name_en": "Gate of Correction",
+          "center": "spleen",
+          "keynote": "发现并纠正模式",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mars",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 19,
+          "name_zh": "靠近之门",
+          "name_en": "Gate of Wanting",
+          "center": "root",
+          "keynote": "对资源和归属的需求",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "earth",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 22,
+          "name_zh": "优雅之门",
+          "name_en": "Gate of Openness",
+          "center": "solar_plexus",
+          "keynote": "情绪的开放与优雅",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "saturn",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 24,
+          "name_zh": "回归之门",
+          "name_en": "Gate of Rationalization",
+          "center": "ajna",
+          "keynote": "反复思考与合理化",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "earth",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 32,
+          "name_zh": "持久之门",
+          "name_en": "Gate of Continuity",
+          "center": "spleen",
+          "keynote": "本能地识别转变",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "north_node",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 33,
+          "name_zh": "隐退之门",
+          "name_en": "Gate of Privacy",
+          "center": "throat",
+          "keynote": "记忆与隐退",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "sun",
+              "line": 6
+            },
+            {
+              "side": "design",
+              "planet": "venus",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 34,
+          "name_zh": "强大之门",
+          "name_en": "Gate of Power",
+          "center": "sacral",
+          "keynote": "纯粹的骶骨力量",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "venus",
+              "line": 1
+            },
+            {
+              "side": "design",
+              "planet": "moon",
+              "line": 2
+            },
+            {
+              "side": "design",
+              "planet": "jupiter",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 36,
+          "name_zh": "幽暗之光之门",
+          "name_en": "Gate of Crisis",
+          "center": "solar_plexus",
+          "keynote": "情绪危机带来成长",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "moon",
+              "line": 5
+            },
+            {
+              "side": "design",
+              "planet": "saturn",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 42,
+          "name_zh": "增长之门",
+          "name_en": "Gate of Growth",
+          "center": "sacral",
+          "keynote": "完成周期的能量",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "south_node",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 44,
+          "name_zh": "警觉之门",
+          "name_en": "Gate of Alertness",
+          "center": "spleen",
+          "keynote": "本能识别模式",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "sun",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 50,
+          "name_zh": "价值之门",
+          "name_en": "Gate of Values",
+          "center": "spleen",
+          "keynote": "守护部落价值观",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mercury",
+              "line": 3
+            },
+            {
+              "side": "design",
+              "planet": "north_node",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 60,
+          "name_zh": "限制之门",
+          "name_en": "Gate of Acceptance",
+          "center": "root",
+          "keynote": "接受限制带来变异",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "uranus",
+              "line": 1
+            },
+            {
+              "side": "design",
+              "planet": "uranus",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 61,
+          "name_zh": "内在真理之门",
+          "name_en": "Gate of Mystery",
+          "center": "head",
+          "keynote": "探索未知的灵感",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "neptune",
+              "line": 3
+            },
+            {
+              "side": "design",
+              "planet": "neptune",
+              "line": 4
+            }
+          ]
+        }
+      ],
+      "activations": {
+        "personality": [
+          {
+            "planet": "sun",
+            "planet_zh": "太阳",
+            "gate": 44,
+            "line": 4,
+            "gate_name_zh": "警觉之门",
+            "gate_name_en": "Gate of Alertness"
+          },
+          {
+            "planet": "earth",
+            "planet_zh": "地球",
+            "gate": 24,
+            "line": 4,
+            "gate_name_zh": "回归之门",
+            "gate_name_en": "Gate of Rationalization"
+          },
+          {
+            "planet": "north_node",
+            "planet_zh": "北交点",
+            "gate": 32,
+            "line": 6,
+            "gate_name_zh": "持久之门",
+            "gate_name_en": "Gate of Continuity"
+          },
+          {
+            "planet": "south_node",
+            "planet_zh": "南交点",
+            "gate": 42,
+            "line": 6,
+            "gate_name_zh": "增长之门",
+            "gate_name_en": "Gate of Growth"
+          },
+          {
+            "planet": "moon",
+            "planet_zh": "月亮",
+            "gate": 36,
+            "line": 5,
+            "gate_name_zh": "幽暗之光之门",
+            "gate_name_en": "Gate of Crisis"
+          },
+          {
+            "planet": "mercury",
+            "planet_zh": "水星",
+            "gate": 50,
+            "line": 3,
+            "gate_name_zh": "价值之门",
+            "gate_name_en": "Gate of Values"
+          },
+          {
+            "planet": "venus",
+            "planet_zh": "金星",
+            "gate": 34,
+            "line": 1,
+            "gate_name_zh": "强大之门",
+            "gate_name_en": "Gate of Power"
+          },
+          {
+            "planet": "mars",
+            "planet_zh": "火星",
+            "gate": 9,
+            "line": 5,
+            "gate_name_zh": "专注之门",
+            "gate_name_en": "Gate of Focus"
+          },
+          {
+            "planet": "jupiter",
+            "planet_zh": "木星",
+            "gate": 5,
+            "line": 6,
+            "gate_name_zh": "等待之门",
+            "gate_name_en": "Gate of Fixed Patterns"
+          },
+          {
+            "planet": "saturn",
+            "planet_zh": "土星",
+            "gate": 22,
+            "line": 2,
+            "gate_name_zh": "优雅之门",
+            "gate_name_en": "Gate of Openness"
+          },
+          {
+            "planet": "uranus",
+            "planet_zh": "天王星",
+            "gate": 60,
+            "line": 1,
+            "gate_name_zh": "限制之门",
+            "gate_name_en": "Gate of Acceptance"
+          },
+          {
+            "planet": "neptune",
+            "planet_zh": "海王星",
+            "gate": 61,
+            "line": 3,
+            "gate_name_zh": "内在真理之门",
+            "gate_name_en": "Gate of Mystery"
+          },
+          {
+            "planet": "pluto",
+            "planet_zh": "冥王星",
+            "gate": 14,
+            "line": 6,
+            "gate_name_zh": "权力技巧之门",
+            "gate_name_en": "Gate of Power Skills"
+          }
+        ],
+        "design": [
+          {
+            "planet": "sun",
+            "planet_zh": "太阳",
+            "gate": 33,
+            "line": 6,
+            "gate_name_zh": "隐退之门",
+            "gate_name_en": "Gate of Privacy"
+          },
+          {
+            "planet": "earth",
+            "planet_zh": "地球",
+            "gate": 19,
+            "line": 6,
+            "gate_name_zh": "靠近之门",
+            "gate_name_en": "Gate of Wanting"
+          },
+          {
+            "planet": "north_node",
+            "planet_zh": "北交点",
+            "gate": 50,
+            "line": 5,
+            "gate_name_zh": "价值之门",
+            "gate_name_en": "Gate of Values"
+          },
+          {
+            "planet": "south_node",
+            "planet_zh": "南交点",
+            "gate": 3,
+            "line": 5,
+            "gate_name_zh": "秩序之门",
+            "gate_name_en": "Gate of Ordering"
+          },
+          {
+            "planet": "moon",
+            "planet_zh": "月亮",
+            "gate": 34,
+            "line": 2,
+            "gate_name_zh": "强大之门",
+            "gate_name_en": "Gate of Power"
+          },
+          {
+            "planet": "mercury",
+            "planet_zh": "水星",
+            "gate": 4,
+            "line": 4,
+            "gate_name_zh": "公式化之门",
+            "gate_name_en": "Gate of Formulization"
+          },
+          {
+            "planet": "venus",
+            "planet_zh": "金星",
+            "gate": 33,
+            "line": 1,
+            "gate_name_zh": "隐退之门",
+            "gate_name_en": "Gate of Privacy"
+          },
+          {
+            "planet": "mars",
+            "planet_zh": "火星",
+            "gate": 18,
+            "line": 6,
+            "gate_name_zh": "纠正之门",
+            "gate_name_en": "Gate of Correction"
+          },
+          {
+            "planet": "jupiter",
+            "planet_zh": "木星",
+            "gate": 34,
+            "line": 6,
+            "gate_name_zh": "强大之门",
+            "gate_name_en": "Gate of Power"
+          },
+          {
+            "planet": "saturn",
+            "planet_zh": "土星",
+            "gate": 36,
+            "line": 2,
+            "gate_name_zh": "幽暗之光之门",
+            "gate_name_en": "Gate of Crisis"
+          },
+          {
+            "planet": "uranus",
+            "planet_zh": "天王星",
+            "gate": 60,
+            "line": 2,
+            "gate_name_zh": "限制之门",
+            "gate_name_en": "Gate of Acceptance"
+          },
+          {
+            "planet": "neptune",
+            "planet_zh": "海王星",
+            "gate": 61,
+            "line": 4,
+            "gate_name_zh": "内在真理之门",
+            "gate_name_en": "Gate of Mystery"
+          },
+          {
+            "planet": "pluto",
+            "planet_zh": "冥王星",
+            "gate": 14,
+            "line": 4,
+            "gate_name_zh": "权力技巧之门",
+            "gate_name_en": "Gate of Power Skills"
+          }
+        ]
+      }
+    },
+    "chart_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 480 680\" width=\"480\" height=\"680\" style=\"font-family: -apple-system, BlinkMacSystemFont, sans-serif;\">\n<rect width=\"480\" height=\"680\" fill=\"#ffffff\" rx=\"12\"/>\n<text x=\"240\" y=\"28\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"#333\">示例C 的人类图</text>\n<text x=\"240\" y=\"44\" text-anchor=\"middle\" font-size=\"11\" fill=\"#888\">1995-11-03 22:15</text>\n<line x1=\"240\" y1=\"60\" x2=\"240\" y2=\"150\" stroke=\"#8e44ad\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<line x1=\"240\" y1=\"520\" x2=\"240\" y2=\"620\" stroke=\"#8e44ad\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<polygon points=\"240,34 214,78 266,78\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\"/>\n<text x=\"240\" y=\"64\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">头脑</text>\n<polygon points=\"240,124 214,168 266,168\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\"/>\n<text x=\"240\" y=\"154\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">逻辑</text>\n<rect x=\"220\" y=\"230\" width=\"40\" height=\"40\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\" rx=\"3\"/>\n<text x=\"240\" y=\"254\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">喉咙</text>\n<polygon points=\"240,329 266,355 240,381 214,355\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"240\" y=\"359\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">G</text>\n<polygon points=\"320,374 294,418 346,418\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"320\" y=\"404\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">意志力</text>\n<rect x=\"220\" y=\"500\" width=\"40\" height=\"40\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\" rx=\"3\"/>\n<text x=\"240\" y=\"524\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">骶骨</text>\n<polygon points=\"370,464 344,508 396,508\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"370\" y=\"494\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">情绪</text>\n<polygon points=\"110,464 84,508 136,508\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"110\" y=\"494\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">直觉</text>\n<rect x=\"220\" y=\"600\" width=\"40\" height=\"40\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\" rx=\"3\"/>\n<text x=\"240\" y=\"624\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">根</text>\n<rect x=\"8\" y=\"650\" width=\"12\" height=\"12\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"1\"/>\n<text x=\"24\" y=\"660\" font-size=\"9\" fill=\"#888\">已定义</text>\n<rect x=\"60\" y=\"650\" width=\"12\" height=\"12\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<text x=\"76\" y=\"660\" font-size=\"9\" fill=\"#888\">未定义</text>\n<line x1=\"120\" y1=\"656\" x2=\"135\" y2=\"656\" stroke=\"#333\" stroke-width=\"2\"/>\n<text x=\"139\" y=\"660\" font-size=\"9\" fill=\"#888\">个性</text>\n<line x1=\"165\" y1=\"656\" x2=\"180\" y2=\"656\" stroke=\"#c0392b\" stroke-width=\"2\"/>\n<text x=\"184\" y=\"660\" font-size=\"9\" fill=\"#888\">设计</text>\n</svg>"
+  },
+  {
+    "id": "示例D",
+    "input": {
+      "name": "示例D",
+      "birth_date": "2000-03-08",
+      "birth_time": "05:45",
+      "longitude": 104.07,
+      "latitude": 30.57,
+      "utc_offset": 8.0
+    },
+    "graph": {
+      "centers": [
+        {
+          "id": "head",
+          "name_zh": "头脑中心",
+          "defined": false,
+          "position": {
+            "x": 0.48,
+            "y": 0.09
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "ajna",
+          "name_zh": "逻辑中心",
+          "defined": false,
+          "position": {
+            "x": 0.48,
+            "y": 0.22
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "throat",
+          "name_zh": "喉咙中心",
+          "defined": false,
+          "position": {
+            "x": 0.48,
+            "y": 0.37
+          },
+          "shape": "square"
+        },
+        {
+          "id": "g",
+          "name_zh": "G中心",
+          "defined": false,
+          "position": {
+            "x": 0.48,
+            "y": 0.53
+          },
+          "shape": "diamond"
+        },
+        {
+          "id": "heart",
+          "name_zh": "意志力中心",
+          "defined": false,
+          "position": {
+            "x": 0.61,
+            "y": 0.61
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "sacral",
+          "name_zh": "骶骨中心",
+          "defined": false,
+          "position": {
+            "x": 0.48,
+            "y": 0.81
+          },
+          "shape": "square"
+        },
+        {
+          "id": "solar_plexus",
+          "name_zh": "情绪中心",
+          "defined": true,
+          "position": {
+            "x": 0.75,
+            "y": 0.77
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "spleen",
+          "name_zh": "直觉中心",
+          "defined": false,
+          "position": {
+            "x": 0.18,
+            "y": 0.77
+          },
+          "shape": "triangle"
+        },
+        {
+          "id": "root",
+          "name_zh": "根中心",
+          "defined": true,
+          "position": {
+            "x": 0.47,
+            "y": 0.95
+          },
+          "shape": "square"
+        }
+      ],
+      "channels": [
+        {
+          "gate_a": 49,
+          "gate_b": 19,
+          "center_a": "solar_plexus",
+          "center_b": "root",
+          "color": "mixed"
+        }
+      ],
+      "gates": [
+        {
+          "gate": 5,
+          "center": "sacral",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "pluto",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 9,
+          "center": "sacral",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "pluto",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 13,
+          "center": "g",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "uranus",
+              "line": 6
+            },
+            {
+              "side": "design",
+              "planet": "uranus",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 17,
+          "center": "ajna",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "moon",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 19,
+          "center": "root",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mars",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 22,
+          "center": "solar_plexus",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "sun",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 24,
+          "center": "ajna",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "saturn",
+              "line": 6
+            },
+            {
+              "side": "design",
+              "planet": "saturn",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 26,
+          "center": "heart",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "sun",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 27,
+          "center": "sacral",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "jupiter",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 28,
+          "center": "spleen",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "venus",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 31,
+          "center": "throat",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "north_node",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 34,
+          "center": "sacral",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mercury",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 41,
+          "center": "root",
+          "color": "both",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "neptune",
+              "line": 4
+            },
+            {
+              "side": "design",
+              "planet": "moon",
+              "line": 4
+            },
+            {
+              "side": "design",
+              "planet": "south_node",
+              "line": 5
+            },
+            {
+              "side": "design",
+              "planet": "neptune",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 42,
+          "center": "sacral",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "jupiter",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 45,
+          "center": "throat",
+          "color": "design",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "earth",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 47,
+          "center": "ajna",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "earth",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 49,
+          "center": "solar_plexus",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "venus",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 51,
+          "center": "heart",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mars",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 55,
+          "center": "solar_plexus",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mercury",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 56,
+          "center": "throat",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "north_node",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 60,
+          "center": "root",
+          "color": "personality",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "south_node",
+              "line": 6
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "type": "Projector",
+        "profile": "1/3",
+        "authority": "Emotional"
+      }
+    },
+    "words": {
+      "type_info": {
+        "key": "Projector",
+        "name_zh": "投射者",
+        "name_en": "Projector",
+        "theme": "成功 vs 苦涩",
+        "strategy_zh": "等待邀请",
+        "not_self": "苦涩"
+      },
+      "authority_info": {
+        "key": "Emotional",
+        "name_zh": "情绪权威",
+        "description": "在情绪波浪中等待清明，没有当下的真相。随时间感受，不在高潮或低谷做决定。"
+      },
+      "profile_info": {
+        "key": "1/3",
+        "name_zh": "调查者/烈士",
+        "line1": {
+          "number": 1,
+          "name_zh": "调查者",
+          "name_en": "Investigator"
+        },
+        "line2": {
+          "number": 3,
+          "name_zh": "烈士",
+          "name_en": "Martyr"
+        }
+      },
+      "definition_info": {
+        "key": "Single",
+        "name_zh": "单一定义",
+        "description": "所有定义的中心通过通道彼此相连，能量流动一致而稳定。"
+      },
+      "cross_info": {
+        "type": "Right Angle",
+        "name_en": "Right Angle Cross of Rulership",
+        "name_zh": "右角度统治之十字",
+        "gates": [
+          22,
+          47,
+          26,
+          45
+        ]
+      },
+      "center_infos": [
+        {
+          "id": "head",
+          "name_zh": "头脑中心",
+          "defined": false,
+          "theme": "灵感与疑问",
+          "not_self_theme": "试图回答所有不属于自己的问题"
+        },
+        {
+          "id": "ajna",
+          "name_zh": "逻辑中心",
+          "defined": false,
+          "theme": "概念化与思维处理",
+          "not_self_theme": "假装确定自己并不确定的事"
+        },
+        {
+          "id": "throat",
+          "name_zh": "喉咙中心",
+          "defined": false,
+          "theme": "沟通与行动的显化",
+          "not_self_theme": "试图引起注意或急于表达"
+        },
+        {
+          "id": "g",
+          "name_zh": "G中心",
+          "defined": false,
+          "theme": "身份认同、方向与爱",
+          "not_self_theme": "迷失方向，寻找爱和身份认同"
+        },
+        {
+          "id": "heart",
+          "name_zh": "意志力中心",
+          "defined": false,
+          "theme": "意志力、自我价值与物质世界",
+          "not_self_theme": "不断试图证明自己的价值"
+        },
+        {
+          "id": "sacral",
+          "name_zh": "骶骨中心",
+          "defined": false,
+          "theme": "生命力、性欲与工作能量",
+          "not_self_theme": "不知道什么时候够了"
+        },
+        {
+          "id": "solar_plexus",
+          "name_zh": "情绪中心",
+          "defined": true,
+          "theme": "情绪、感受与欲望",
+          "not_self_theme": "回避真相和冲突"
+        },
+        {
+          "id": "spleen",
+          "name_zh": "直觉中心",
+          "defined": false,
+          "theme": "直觉、健康与存活本能",
+          "not_self_theme": "紧抓不健康的东西不放"
+        },
+        {
+          "id": "root",
+          "name_zh": "根中心",
+          "defined": true,
+          "theme": "肾上腺素压力与驱动",
+          "not_self_theme": "急于想把事情做完以摆脱压力"
+        }
+      ],
+      "channel_infos": [
+        {
+          "gates": [
+            49,
+            19
+          ],
+          "name_zh": "综合之通道",
+          "name_en": "Channel of Synthesis",
+          "centers": [
+            "solar_plexus",
+            "root"
+          ],
+          "theme": "敏感——原则与靠近"
+        }
+      ],
+      "gate_infos": [
+        {
+          "gate": 5,
+          "name_zh": "等待之门",
+          "name_en": "Gate of Fixed Patterns",
+          "center": "sacral",
+          "keynote": "固定的节律与习惯",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "pluto",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 9,
+          "name_zh": "专注之门",
+          "name_en": "Gate of Focus",
+          "center": "sacral",
+          "keynote": "处理细节的能量",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "pluto",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 13,
+          "name_zh": "聆听者之门",
+          "name_en": "Gate of the Listener",
+          "center": "g",
+          "keynote": "倾听与收集秘密",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "uranus",
+              "line": 6
+            },
+            {
+              "side": "design",
+              "planet": "uranus",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 17,
+          "name_zh": "追随之门",
+          "name_en": "Gate of Opinions",
+          "center": "ajna",
+          "keynote": "逻辑性的意见与跟随",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "moon",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 19,
+          "name_zh": "靠近之门",
+          "name_en": "Gate of Wanting",
+          "center": "root",
+          "keynote": "对资源和归属的需求",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mars",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 22,
+          "name_zh": "优雅之门",
+          "name_en": "Gate of Openness",
+          "center": "solar_plexus",
+          "keynote": "情绪的开放与优雅",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "sun",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 24,
+          "name_zh": "回归之门",
+          "name_en": "Gate of Rationalization",
+          "center": "ajna",
+          "keynote": "反复思考与合理化",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "saturn",
+              "line": 6
+            },
+            {
+              "side": "design",
+              "planet": "saturn",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 26,
+          "name_zh": "利己主义之门",
+          "name_en": "Gate of the Egoist",
+          "center": "heart",
+          "keynote": "伟大的驯服者之力",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "sun",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 27,
+          "name_zh": "滋养之门",
+          "name_en": "Gate of Caring",
+          "center": "sacral",
+          "keynote": "照顾与滋养他人",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "jupiter",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 28,
+          "name_zh": "玩家之门",
+          "name_en": "Gate of the Game Player",
+          "center": "spleen",
+          "keynote": "为意义而挣扎",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "venus",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 31,
+          "name_zh": "影响之门",
+          "name_en": "Gate of Influence",
+          "center": "throat",
+          "keynote": "民主的领导力",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "north_node",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 34,
+          "name_zh": "强大之门",
+          "name_en": "Gate of Power",
+          "center": "sacral",
+          "keynote": "纯粹的骶骨力量",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "mercury",
+              "line": 2
+            }
+          ]
+        },
+        {
+          "gate": 41,
+          "name_zh": "收缩之门",
+          "name_en": "Gate of Contraction",
+          "center": "root",
+          "keynote": "幻想与新开始的压力",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "neptune",
+              "line": 4
+            },
+            {
+              "side": "design",
+              "planet": "moon",
+              "line": 4
+            },
+            {
+              "side": "design",
+              "planet": "south_node",
+              "line": 5
+            },
+            {
+              "side": "design",
+              "planet": "neptune",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 42,
+          "name_zh": "增长之门",
+          "name_en": "Gate of Growth",
+          "center": "sacral",
+          "keynote": "完成周期的能量",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "jupiter",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 45,
+          "name_zh": "聚集之门",
+          "name_en": "Gate of the Gatherer",
+          "center": "throat",
+          "keynote": "物质的聚集与分配",
+          "activated_by": [
+            {
+              "side": "design",
+              "planet": "earth",
+              "line": 3
+            }
+          ]
+        },
+        {
+          "gate": 47,
+          "name_zh": "领悟之门",
+          "name_en": "Gate of Realization",
+          "center": "ajna",
+          "keynote": "从困惑到领悟",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "earth",
+              "line": 1
+            }
+          ]
+        },
+        {
+          "gate": 49,
+          "name_zh": "革命之门",
+          "name_en": "Gate of Principles",
+          "center": "solar_plexus",
+          "keynote": "接受与拒绝的原则",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "venus",
+              "line": 5
+            }
+          ]
+        },
+        {
+          "gate": 51,
+          "name_zh": "激震之门",
+          "name_en": "Gate of Shock",
+          "center": "heart",
+          "keynote": "竞争与突然的震撼",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mars",
+              "line": 4
+            }
+          ]
+        },
+        {
+          "gate": 55,
+          "name_zh": "丰盛之门",
+          "name_en": "Gate of Spirit",
+          "center": "solar_plexus",
+          "keynote": "情绪丰盛的精神",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "mercury",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 56,
+          "name_zh": "旅人之门",
+          "name_en": "Gate of Stimulation",
+          "center": "throat",
+          "keynote": "通过故事刺激",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "north_node",
+              "line": 6
+            }
+          ]
+        },
+        {
+          "gate": 60,
+          "name_zh": "限制之门",
+          "name_en": "Gate of Acceptance",
+          "center": "root",
+          "keynote": "接受限制带来变异",
+          "activated_by": [
+            {
+              "side": "personality",
+              "planet": "south_node",
+              "line": 6
+            }
+          ]
+        }
+      ],
+      "activations": {
+        "personality": [
+          {
+            "planet": "sun",
+            "planet_zh": "太阳",
+            "gate": 22,
+            "line": 1,
+            "gate_name_zh": "优雅之门",
+            "gate_name_en": "Gate of Openness"
+          },
+          {
+            "planet": "earth",
+            "planet_zh": "地球",
+            "gate": 47,
+            "line": 1,
+            "gate_name_zh": "领悟之门",
+            "gate_name_en": "Gate of Realization"
+          },
+          {
+            "planet": "north_node",
+            "planet_zh": "北交点",
+            "gate": 56,
+            "line": 6,
+            "gate_name_zh": "旅人之门",
+            "gate_name_en": "Gate of Stimulation"
+          },
+          {
+            "planet": "south_node",
+            "planet_zh": "南交点",
+            "gate": 60,
+            "line": 6,
+            "gate_name_zh": "限制之门",
+            "gate_name_en": "Gate of Acceptance"
+          },
+          {
+            "planet": "moon",
+            "planet_zh": "月亮",
+            "gate": 17,
+            "line": 5,
+            "gate_name_zh": "追随之门",
+            "gate_name_en": "Gate of Opinions"
+          },
+          {
+            "planet": "mercury",
+            "planet_zh": "水星",
+            "gate": 55,
+            "line": 6,
+            "gate_name_zh": "丰盛之门",
+            "gate_name_en": "Gate of Spirit"
+          },
+          {
+            "planet": "venus",
+            "planet_zh": "金星",
+            "gate": 49,
+            "line": 5,
+            "gate_name_zh": "革命之门",
+            "gate_name_en": "Gate of Principles"
+          },
+          {
+            "planet": "mars",
+            "planet_zh": "火星",
+            "gate": 51,
+            "line": 4,
+            "gate_name_zh": "激震之门",
+            "gate_name_en": "Gate of Shock"
+          },
+          {
+            "planet": "jupiter",
+            "planet_zh": "木星",
+            "gate": 27,
+            "line": 3,
+            "gate_name_zh": "滋养之门",
+            "gate_name_en": "Gate of Caring"
+          },
+          {
+            "planet": "saturn",
+            "planet_zh": "土星",
+            "gate": 24,
+            "line": 6,
+            "gate_name_zh": "回归之门",
+            "gate_name_en": "Gate of Rationalization"
+          },
+          {
+            "planet": "uranus",
+            "planet_zh": "天王星",
+            "gate": 13,
+            "line": 6,
+            "gate_name_zh": "聆听者之门",
+            "gate_name_en": "Gate of the Listener"
+          },
+          {
+            "planet": "neptune",
+            "planet_zh": "海王星",
+            "gate": 41,
+            "line": 4,
+            "gate_name_zh": "收缩之门",
+            "gate_name_en": "Gate of Contraction"
+          },
+          {
+            "planet": "pluto",
+            "planet_zh": "冥王星",
+            "gate": 5,
+            "line": 2,
+            "gate_name_zh": "等待之门",
+            "gate_name_en": "Gate of Fixed Patterns"
+          }
+        ],
+        "design": [
+          {
+            "planet": "sun",
+            "planet_zh": "太阳",
+            "gate": 26,
+            "line": 3,
+            "gate_name_zh": "利己主义之门",
+            "gate_name_en": "Gate of the Egoist"
+          },
+          {
+            "planet": "earth",
+            "planet_zh": "地球",
+            "gate": 45,
+            "line": 3,
+            "gate_name_zh": "聚集之门",
+            "gate_name_en": "Gate of the Gatherer"
+          },
+          {
+            "planet": "north_node",
+            "planet_zh": "北交点",
+            "gate": 31,
+            "line": 5,
+            "gate_name_zh": "影响之门",
+            "gate_name_en": "Gate of Influence"
+          },
+          {
+            "planet": "south_node",
+            "planet_zh": "南交点",
+            "gate": 41,
+            "line": 5,
+            "gate_name_zh": "收缩之门",
+            "gate_name_en": "Gate of Contraction"
+          },
+          {
+            "planet": "moon",
+            "planet_zh": "月亮",
+            "gate": 41,
+            "line": 4,
+            "gate_name_zh": "收缩之门",
+            "gate_name_en": "Gate of Contraction"
+          },
+          {
+            "planet": "mercury",
+            "planet_zh": "水星",
+            "gate": 34,
+            "line": 2,
+            "gate_name_zh": "强大之门",
+            "gate_name_en": "Gate of Power"
+          },
+          {
+            "planet": "venus",
+            "planet_zh": "金星",
+            "gate": 28,
+            "line": 6,
+            "gate_name_zh": "玩家之门",
+            "gate_name_en": "Gate of the Game Player"
+          },
+          {
+            "planet": "mars",
+            "planet_zh": "火星",
+            "gate": 19,
+            "line": 5,
+            "gate_name_zh": "靠近之门",
+            "gate_name_en": "Gate of Wanting"
+          },
+          {
+            "planet": "jupiter",
+            "planet_zh": "木星",
+            "gate": 42,
+            "line": 5,
+            "gate_name_zh": "增长之门",
+            "gate_name_en": "Gate of Growth"
+          },
+          {
+            "planet": "saturn",
+            "planet_zh": "土星",
+            "gate": 24,
+            "line": 4,
+            "gate_name_zh": "回归之门",
+            "gate_name_en": "Gate of Rationalization"
+          },
+          {
+            "planet": "uranus",
+            "planet_zh": "天王星",
+            "gate": 13,
+            "line": 1,
+            "gate_name_zh": "聆听者之门",
+            "gate_name_en": "Gate of the Listener"
+          },
+          {
+            "planet": "neptune",
+            "planet_zh": "海王星",
+            "gate": 41,
+            "line": 1,
+            "gate_name_zh": "收缩之门",
+            "gate_name_en": "Gate of Contraction"
+          },
+          {
+            "planet": "pluto",
+            "planet_zh": "冥王星",
+            "gate": 9,
+            "line": 6,
+            "gate_name_zh": "专注之门",
+            "gate_name_en": "Gate of Focus"
+          }
+        ]
+      }
+    },
+    "chart_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 480 680\" width=\"480\" height=\"680\" style=\"font-family: -apple-system, BlinkMacSystemFont, sans-serif;\">\n<rect width=\"480\" height=\"680\" fill=\"#ffffff\" rx=\"12\"/>\n<text x=\"240\" y=\"28\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"bold\" fill=\"#333\">示例D 的人类图</text>\n<text x=\"240\" y=\"44\" text-anchor=\"middle\" font-size=\"11\" fill=\"#888\">2000-03-08 05:45</text>\n<line x1=\"370\" y1=\"490\" x2=\"240\" y2=\"620\" stroke=\"#8e44ad\" stroke-width=\"3\" stroke-linecap=\"round\" opacity=\"0.7\"/>\n<polygon points=\"240,34 214,78 266,78\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"240\" y=\"64\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">头脑</text>\n<polygon points=\"240,124 214,168 266,168\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"240\" y=\"154\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">逻辑</text>\n<rect x=\"220\" y=\"230\" width=\"40\" height=\"40\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\" rx=\"3\"/>\n<text x=\"240\" y=\"254\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">喉咙</text>\n<polygon points=\"240,329 266,355 240,381 214,355\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"240\" y=\"359\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">G</text>\n<polygon points=\"320,374 294,418 346,418\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"320\" y=\"404\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">意志力</text>\n<rect x=\"220\" y=\"500\" width=\"40\" height=\"40\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\" rx=\"3\"/>\n<text x=\"240\" y=\"524\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">骶骨</text>\n<polygon points=\"370,464 344,508 396,508\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\"/>\n<text x=\"370\" y=\"494\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">情绪</text>\n<polygon points=\"110,464 84,508 136,508\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"2\"/>\n<text x=\"110\" y=\"494\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">直觉</text>\n<rect x=\"220\" y=\"600\" width=\"40\" height=\"40\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"2\" rx=\"3\"/>\n<text x=\"240\" y=\"624\" text-anchor=\"middle\" font-size=\"10\" font-weight=\"bold\" fill=\"#333\">根</text>\n<rect x=\"8\" y=\"650\" width=\"12\" height=\"12\" fill=\"#f5c542\" stroke=\"#b8860b\" stroke-width=\"1\"/>\n<text x=\"24\" y=\"660\" font-size=\"9\" fill=\"#888\">已定义</text>\n<rect x=\"60\" y=\"650\" width=\"12\" height=\"12\" fill=\"#e8e8e8\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<text x=\"76\" y=\"660\" font-size=\"9\" fill=\"#888\">未定义</text>\n<line x1=\"120\" y1=\"656\" x2=\"135\" y2=\"656\" stroke=\"#333\" stroke-width=\"2\"/>\n<text x=\"139\" y=\"660\" font-size=\"9\" fill=\"#888\">个性</text>\n<line x1=\"165\" y1=\"656\" x2=\"180\" y2=\"656\" stroke=\"#c0392b\" stroke-width=\"2\"/>\n<text x=\"184\" y=\"660\" font-size=\"9\" fill=\"#888\">设计</text>\n</svg>"
+  }
+]
