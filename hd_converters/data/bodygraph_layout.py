@@ -8,42 +8,44 @@ Origin (0,0) = top-left; (1,1) = bottom-right.
 """
 
 # 9 center positions and shapes
-# Shapes: triangle (Head, Ajna), square (Throat, Sacral), diamond (G, Heart, Spleen, Solar Plexus, Root)
+# Normalized from hdkit empty-bodygraph.svg (1800x2400 viewBox)
+# Shapes match hdkit SVG: triangle (Head up, Ajna down, Heart down,
+#   Solar Plexus left, Spleen right), square (Throat, Sacral, Root), diamond (G)
 CENTER_LAYOUT: dict[str, dict] = {
     "head": {
-        "position": {"x": 0.50, "y": 0.04},
+        "position": {"x": 0.48, "y": 0.09},
         "shape": "triangle"
     },
     "ajna": {
-        "position": {"x": 0.50, "y": 0.17},
+        "position": {"x": 0.48, "y": 0.22},
         "shape": "triangle"
     },
     "throat": {
-        "position": {"x": 0.50, "y": 0.31},
+        "position": {"x": 0.48, "y": 0.37},
         "shape": "square"
     },
     "g": {
-        "position": {"x": 0.50, "y": 0.46},
+        "position": {"x": 0.48, "y": 0.53},
         "shape": "diamond"
     },
     "heart": {
-        "position": {"x": 0.32, "y": 0.42},
-        "shape": "diamond"  # small triangle in some renderings
+        "position": {"x": 0.61, "y": 0.61},
+        "shape": "triangle"
     },
     "sacral": {
-        "position": {"x": 0.50, "y": 0.67},
+        "position": {"x": 0.48, "y": 0.81},
         "shape": "square"
     },
     "solar_plexus": {
-        "position": {"x": 0.68, "y": 0.59},
-        "shape": "diamond"  # triangle pointing right in some renderings
+        "position": {"x": 0.75, "y": 0.77},
+        "shape": "triangle"
     },
     "spleen": {
-        "position": {"x": 0.32, "y": 0.59},
-        "shape": "diamond"  # triangle pointing left in some renderings
+        "position": {"x": 0.18, "y": 0.77},
+        "shape": "triangle"
     },
     "root": {
-        "position": {"x": 0.50, "y": 0.85},
+        "position": {"x": 0.47, "y": 0.95},
         "shape": "square"
     },
 }
