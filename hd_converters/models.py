@@ -39,6 +39,7 @@ class WordsData:
     center_infos: list[dict] = field(default_factory=list)
     channel_infos: list[dict] = field(default_factory=list)
     gate_infos: list[dict] = field(default_factory=list)
+    activations: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {
@@ -50,4 +51,5 @@ class WordsData:
             "center_infos": self.center_infos,
             "channel_infos": self.channel_infos,
             "gate_infos": self.gate_infos,
+            "activations": self.activations,
         }

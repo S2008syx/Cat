@@ -185,6 +185,51 @@ def convert_words(output: CalculatorOutput) -> WordsData:
                 "activated_by": activation_details.get(gate, []),
             })
 
+    # === Activations table (13 personality + 13 design rows) ===
+    planet_order = [
+        "sun", "earth", "north_node", "south_node", "moon",
+        "mercury", "venus", "mars", "jupiter", "saturn",
+        "uranus", "neptune", "pluto",
+    ]
+    planet_zh = {
+        "sun": "太阳", "earth": "地球", "north_node": "北交点",
+        "south_node": "南交点", "moon": "月亮", "mercury": "水星",
+        "venus": "金星", "mars": "火星", "jupiter": "木星",
+        "saturn": "土星", "uranus": "天王星", "neptune": "海王星",
+        "pluto": "冥王星",
+    }
+
+    def _build_rows(acts: list[dict]) -> list[dict]:
+        lookup = {a["planet"]: a for a in acts}
+        rows = []
+        for p in planet_order:
+            a = lookup.get(p)
+            if a:
+                gdata = GATE_DATA.get(a["gate"], {})
+                rows.append({
+                    "planet": p,
+                    "planet_zh": planet_zh.get(p, p),
+                    "gate": a["gate"],
+                    "line": a["line"],
+                    "gate_name_zh": gdata.get("name_zh", ""),
+                    "gate_name_en": gdata.get("name_en", ""),
+                })
+            else:
+                rows.append({
+                    "planet": p,
+                    "planet_zh": planet_zh.get(p, p),
+                    "gate": None,
+                    "line": None,
+                    "gate_name_zh": "",
+                    "gate_name_en": "",
+                })
+        return rows
+
+    activations = {
+        "personality": _build_rows(output.personality_activations),
+        "design": _build_rows(output.design_activations),
+    }
+
     return WordsData(
         type_info=type_info,
         authority_info=authority_info,
@@ -194,4 +239,5 @@ def convert_words(output: CalculatorOutput) -> WordsData:
         center_infos=center_infos,
         channel_infos=channel_infos,
         gate_infos=gate_infos,
+        activations=activations,
     )
