@@ -1,0 +1,78 @@
+"""
+Incarnation Cross names indexed by personality Sun gate number.
+
+Each gate maps to: name_en (Right Angle name), name_zh.
+For Left Angle and Juxtaposition, the cross name is based on the same gate
+but with different prefixes; this table stores the base cross name.
+"""
+
+# Indexed by personality Sun gate (1-64)
+# Right Angle Cross name is the canonical base name
+CROSS_DATA: dict[int, dict] = {
+    1: {"name_en": "Cross of the Sphinx", "name_zh": "斯芬克斯之十字"},
+    2: {"name_en": "Cross of the Sphinx", "name_zh": "斯芬克斯之十字"},
+    3: {"name_en": "Cross of Laws", "name_zh": "法则之十字"},
+    4: {"name_en": "Cross of Explanation", "name_zh": "解释之十字"},
+    5: {"name_en": "Cross of Consciousness", "name_zh": "意识之十字"},
+    6: {"name_en": "Cross of Eden", "name_zh": "伊甸园之十字"},
+    7: {"name_en": "Cross of the Sphinx", "name_zh": "斯芬克斯之十字"},
+    8: {"name_en": "Cross of Contagion", "name_zh": "感染之十字"},
+    9: {"name_en": "Cross of Planning", "name_zh": "计划之十字"},
+    10: {"name_en": "Cross of the Vessel of Love", "name_zh": "爱之器皿之十字"},
+    11: {"name_en": "Cross of Eden", "name_zh": "伊甸园之十字"},
+    12: {"name_en": "Cross of Eden", "name_zh": "伊甸园之十字"},
+    13: {"name_en": "Cross of the Sphinx", "name_zh": "斯芬克斯之十字"},
+    14: {"name_en": "Cross of Contagion", "name_zh": "感染之十字"},
+    15: {"name_en": "Cross of the Vessel of Love", "name_zh": "爱之器皿之十字"},
+    16: {"name_en": "Cross of Planning", "name_zh": "计划之十字"},
+    17: {"name_en": "Cross of Service", "name_zh": "服务之十字"},
+    18: {"name_en": "Cross of Service", "name_zh": "服务之十字"},
+    19: {"name_en": "Cross of the Four Ways", "name_zh": "四条路之十字"},
+    20: {"name_en": "Cross of the Sleeping Phoenix", "name_zh": "沉睡凤凰之十字"},
+    21: {"name_en": "Cross of Tension", "name_zh": "张力之十字"},
+    22: {"name_en": "Cross of Rulership", "name_zh": "统治之十字"},
+    23: {"name_en": "Cross of Explanation", "name_zh": "解释之十字"},
+    24: {"name_en": "Cross of the Four Ways", "name_zh": "四条路之十字"},
+    25: {"name_en": "Cross of the Vessel of Love", "name_zh": "爱之器皿之十字"},
+    26: {"name_en": "Cross of Rulership", "name_zh": "统治之十字"},
+    27: {"name_en": "Cross of the Unexpected", "name_zh": "意外之十字"},
+    28: {"name_en": "Cross of the Unexpected", "name_zh": "意外之十字"},
+    29: {"name_en": "Cross of Contagion", "name_zh": "感染之十字"},
+    30: {"name_en": "Cross of Contagion", "name_zh": "感染之十字"},
+    31: {"name_en": "Cross of the Unexpected", "name_zh": "意外之十字"},
+    32: {"name_en": "Cross of Maya", "name_zh": "幻象之十字"},
+    33: {"name_en": "Cross of the Four Ways", "name_zh": "四条路之十字"},
+    34: {"name_en": "Cross of the Sleeping Phoenix", "name_zh": "沉睡凤凰之十字"},
+    35: {"name_en": "Cross of Consciousness", "name_zh": "意识之十字"},
+    36: {"name_en": "Cross of Eden", "name_zh": "伊甸园之十字"},
+    37: {"name_en": "Cross of Planning", "name_zh": "计划之十字"},
+    38: {"name_en": "Cross of Tension", "name_zh": "张力之十字"},
+    39: {"name_en": "Cross of Tension", "name_zh": "张力之十字"},
+    40: {"name_en": "Cross of Planning", "name_zh": "计划之十字"},
+    41: {"name_en": "Cross of the Unexpected", "name_zh": "意外之十字"},
+    42: {"name_en": "Cross of Maya", "name_zh": "幻象之十字"},
+    43: {"name_en": "Cross of Explanation", "name_zh": "解释之十字"},
+    44: {"name_en": "Cross of the Four Ways", "name_zh": "四条路之十字"},
+    45: {"name_en": "Cross of Rulership", "name_zh": "统治之十字"},
+    46: {"name_en": "Cross of the Vessel of Love", "name_zh": "爱之器皿之十字"},
+    47: {"name_en": "Cross of Rulership", "name_zh": "统治之十字"},
+    48: {"name_en": "Cross of Tension", "name_zh": "张力之十字"},
+    49: {"name_en": "Cross of Explanation", "name_zh": "解释之十字"},
+    50: {"name_en": "Cross of Laws", "name_zh": "法则之十字"},
+    51: {"name_en": "Cross of Penetration", "name_zh": "穿透之十字"},
+    52: {"name_en": "Cross of Service", "name_zh": "服务之十字"},
+    53: {"name_en": "Cross of Penetration", "name_zh": "穿透之十字"},
+    54: {"name_en": "Cross of Penetration", "name_zh": "穿透之十字"},
+    55: {"name_en": "Cross of the Sleeping Phoenix", "name_zh": "沉睡凤凰之十字"},
+    56: {"name_en": "Cross of Laws", "name_zh": "法则之十字"},
+    57: {"name_en": "Cross of Penetration", "name_zh": "穿透之十字"},
+    58: {"name_en": "Cross of Service", "name_zh": "服务之十字"},
+    59: {"name_en": "Cross of the Sleeping Phoenix", "name_zh": "沉睡凤凰之十字"},
+    60: {"name_en": "Cross of Laws", "name_zh": "法则之十字"},
+    61: {"name_en": "Cross of Maya", "name_zh": "幻象之十字"},
+    62: {"name_en": "Cross of Maya", "name_zh": "幻象之十字"},
+    63: {"name_en": "Cross of Consciousness", "name_zh": "意识之十字"},
+    64: {"name_en": "Cross of Consciousness", "name_zh": "意识之十字"},
+}
+
+assert len(CROSS_DATA) == 64, f"Expected 64 cross entries, got {len(CROSS_DATA)}"
