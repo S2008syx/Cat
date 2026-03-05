@@ -1,14 +1,16 @@
 """
 FastAPI backend for Human Design chart calculation.
 
-Demo mode: returns mock data. Switch to real calculator later.
+Real pipeline: UserData → Calculator → Converters → JSON response.
 """
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from .mock_data import MOCK_CHART_RESPONSE
+from .user_data import local_to_utc
+from hd_calculator import calculate
+from hd_converters import convert_graph, convert_words
 
 app = FastAPI(title="Human Design Chart API")
 
@@ -31,11 +33,24 @@ class ChartRequest(BaseModel):
 
 @app.post("/api/chart")
 def get_chart(req: ChartRequest):
-    """Return HD chart data. Currently returns mock data for demo."""
-    # TODO: wire up real pipeline:
-    #   1. user_data.local_to_utc(req.birth_date, req.birth_time, req.utc_offset)
-    #   2. hd_calculator.calculate(birth_utc, req.latitude, req.longitude)
-    #   3. convert_graph(output) + convert_words(output)
+    """Full HD chart pipeline: input → UTC → calculate → convert → JSON."""
+    try:
+        birth_utc = local_to_utc(req.birth_date, req.birth_time, req.utc_offset)
+    except (ValueError, OverflowError) as e:
+        raise HTTPException(status_code=400, detail=f"日期时间格式错误: {e}")
+
+    try:
+        calc_output = calculate(
+            birth_utc=birth_utc,
+            latitude=req.latitude,
+            longitude=req.longitude,
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"计算错误: {e}")
+
+    graph_data = convert_graph(calc_output)
+    words_data = convert_words(calc_output)
+
     return {
         "input": {
             "name": req.name,
@@ -45,7 +60,8 @@ def get_chart(req: ChartRequest):
             "latitude": req.latitude,
             "utc_offset": req.utc_offset,
         },
-        **MOCK_CHART_RESPONSE,
+        "graph": graph_data.to_dict(),
+        "words": words_data.to_dict(),
     }
 
 
