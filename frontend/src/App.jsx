@@ -41,6 +41,26 @@ export default function App() {
           <div className="result-section">
             <div className="result-left">
               <Bodygraph graphData={result.graph} />
+              {result.chart_svg && (
+                <div className="chart-image-section">
+                  <h4>人类图图片</h4>
+                  <div dangerouslySetInnerHTML={{ __html: result.chart_svg }} />
+                  <button
+                    className="chart-download-btn"
+                    onClick={() => {
+                      const blob = new Blob([result.chart_svg], { type: "image/svg+xml" });
+                      const url = URL.createObjectURL(blob);
+                      const a = document.createElement("a");
+                      a.href = url;
+                      a.download = `${result.input?.name || "chart"}_人类图.svg`;
+                      a.click();
+                      URL.revokeObjectURL(url);
+                    }}
+                  >
+                    下载 SVG 图片
+                  </button>
+                </div>
+              )}
             </div>
             <div className="result-right">
               <ReportPanel wordsData={result.words} inputData={result.input} />

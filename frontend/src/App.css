@@ -420,6 +420,124 @@
   color: #c0392b;
 }
 
+/* === Activation Table === */
+.activation-table-wrapper {
+  overflow-x: auto;
+}
+
+.activation-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e8e8e8;
+}
+
+.activation-table th,
+.activation-table td {
+  padding: 6px 8px;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.at-header-design {
+  background: #fde8e8;
+  color: #c0392b;
+  font-weight: 600;
+}
+
+.at-header-personality {
+  background: #e8e8e8;
+  color: #333;
+  font-weight: 600;
+}
+
+.at-header-planet {
+  background: #f5f3ff;
+  color: #6c5ce7;
+  font-weight: 600;
+}
+
+.activation-table thead tr:nth-child(2) th {
+  background: #fafafa;
+  font-size: 11px;
+  color: #999;
+  font-weight: 500;
+}
+
+.at-planet {
+  font-weight: 600;
+  color: #6c5ce7;
+  background: #f9f8ff;
+  white-space: nowrap;
+}
+
+.at-gate {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.at-line {
+  color: #888;
+}
+
+.at-name {
+  font-size: 12px;
+  color: #666;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.at-design-cell {
+  background: #fffafa;
+}
+
+.at-personality-cell {
+  background: #fafafa;
+}
+
+.activation-table tbody tr:hover {
+  background: #f5f3ff;
+}
+
+.activation-table tbody tr:hover .at-design-cell,
+.activation-table tbody tr:hover .at-personality-cell {
+  background: #f5f3ff;
+}
+
+/* === Chart Image === */
+.chart-image-section {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.chart-image-section img {
+  max-width: 100%;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+}
+
+.chart-download-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background: #6c5ce7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.chart-download-btn:hover {
+  background: #5a4bd1;
+}
+
 /* === Responsive === */
 @media (max-width: 768px) {
   .result-section {

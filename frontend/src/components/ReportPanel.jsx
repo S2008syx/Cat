@@ -20,10 +20,54 @@ function Tag({ label, value }) {
   );
 }
 
+function ActivationTable({ activations }) {
+  if (!activations) return null;
+  const { personality = [], design = [] } = activations;
+
+  return (
+    <div className="activation-table-wrapper">
+      <table className="activation-table">
+        <thead>
+          <tr>
+            <th colSpan={3} className="at-header-design">设计 (潜意识)</th>
+            <th className="at-header-planet">星体</th>
+            <th colSpan={3} className="at-header-personality">个性 (意识)</th>
+          </tr>
+          <tr>
+            <th>闸门名</th>
+            <th>爻</th>
+            <th>闸门</th>
+            <th></th>
+            <th>闸门</th>
+            <th>爻</th>
+            <th>闸门名</th>
+          </tr>
+        </thead>
+        <tbody>
+          {personality.map((p, i) => {
+            const d = design[i] || {};
+            return (
+              <tr key={i}>
+                <td className="at-name at-design-cell">{d.gate_name_zh || "-"}</td>
+                <td className="at-line at-design-cell">{d.line ?? "-"}</td>
+                <td className="at-gate at-design-cell">{d.gate ?? "-"}</td>
+                <td className="at-planet">{p.planet_zh}</td>
+                <td className="at-gate at-personality-cell">{p.gate ?? "-"}</td>
+                <td className="at-line at-personality-cell">{p.line ?? "-"}</td>
+                <td className="at-name at-personality-cell">{p.gate_name_zh || "-"}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export default function ReportPanel({ wordsData, inputData }) {
   if (!wordsData) return null;
 
-  const { type_info, authority_info, profile_info, definition_info, cross_info, center_infos, channel_infos, gate_infos } = wordsData;
+  const { type_info, authority_info, profile_info, definition_info, cross_info, center_infos, channel_infos, gate_infos, activations } = wordsData;
 
   return (
     <div className="report-panel">
@@ -42,6 +86,11 @@ export default function ReportPanel({ wordsData, inputData }) {
           <Tag label="定义" value={definition_info.name_zh} />
           <Tag label="轮回交叉" value={cross_info.name_zh} />
         </div>
+      </Section>
+
+      {/* Activation Table */}
+      <Section title="星体激活表">
+        <ActivationTable activations={activations} />
       </Section>
 
       {/* Type description */}
