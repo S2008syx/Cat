@@ -16,3 +16,10 @@ export async function fetchChart({ name, birthDate, birthTime, longitude, latitu
   if (!res.ok) throw new Error(`API error: ${res.status}`);
   return res.json();
 }
+
+export async function searchPlaces(query) {
+  const res = await fetch(`${API_BASE}/api/places?q=${encodeURIComponent(query)}`);
+  if (!res.ok) return [];
+  const data = await res.json();
+  return data.results || [];
+}

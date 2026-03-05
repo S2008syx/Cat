@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from .user_data import local_to_utc
+from .geocode import search_places, geocode
 from hd_calculator import calculate
 from hd_converters import convert_graph, convert_words
 
@@ -63,6 +64,25 @@ def get_chart(req: ChartRequest):
         "graph": graph_data.to_dict(),
         "words": words_data.to_dict(),
     }
+
+
+@app.get("/api/places")
+def search(q: str = ""):
+    """Search places via 高德地图 API (or built-in fallback)."""
+    if not q.strip():
+        return {"results": []}
+    return {"results": search_places(q.strip())}
+
+
+@app.get("/api/geocode")
+def geocode_address(address: str = ""):
+    """Geocode address → {longitude, latitude, utc_offset}."""
+    if not address.strip():
+        raise HTTPException(status_code=400, detail="address 参数不能为空")
+    result = geocode(address.strip())
+    if not result:
+        raise HTTPException(status_code=404, detail=f"找不到地址: {address}")
+    return result
 
 
 @app.get("/api/health")

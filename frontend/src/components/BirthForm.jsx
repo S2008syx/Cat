@@ -1,30 +1,56 @@
-import { useState } from "react";
-
-const EXAMPLE_PLACES = [
-  { label: "上海", lng: 121.4737, lat: 31.2304, utcOffset: 8 },
-  { label: "北京", lng: 116.4074, lat: 39.9042, utcOffset: 8 },
-  { label: "纽约", lng: -74.006, lat: 40.7128, utcOffset: -5 },
-  { label: "伦敦", lng: -0.1276, lat: 51.5074, utcOffset: 0 },
-  { label: "东京", lng: 139.6917, lat: 35.6895, utcOffset: 9 },
-];
+import { useState, useEffect, useRef } from "react";
+import { searchPlaces } from "../api";
 
 export default function BirthForm({ onSubmit, loading }) {
   const [name, setName] = useState("");
   const [birthDate, setBirthDate] = useState("1990-01-15");
   const [birthTime, setBirthTime] = useState("06:30");
-  const [placeIdx, setPlaceIdx] = useState(0);
 
-  const place = EXAMPLE_PLACES[placeIdx];
+  // Place search state
+  const [placeQuery, setPlaceQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedPlace, setSelectedPlace] = useState(null);
+  const searchTimeout = useRef(null);
+
+  // Debounced search
+  useEffect(() => {
+    if (!placeQuery.trim()) {
+      setSuggestions([]);
+      return;
+    }
+    clearTimeout(searchTimeout.current);
+    searchTimeout.current = setTimeout(async () => {
+      const results = await searchPlaces(placeQuery);
+      setSuggestions(results);
+      setShowSuggestions(true);
+    }, 300);
+    return () => clearTimeout(searchTimeout.current);
+  }, [placeQuery]);
+
+  const handleSelectPlace = (place) => {
+    const [lng, lat] = place.location.split(",").map(Number);
+    setSelectedPlace({
+      name: place.name,
+      district: place.district,
+      lng,
+      lat,
+      utcOffset: Math.round(lng / 15),
+    });
+    setPlaceQuery(place.district ? `${place.district} ${place.name}` : place.name);
+    setShowSuggestions(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!selectedPlace) return;
     onSubmit({
       name: name || "匿名",
       birthDate,
       birthTime,
-      longitude: place.lng,
-      latitude: place.lat,
-      utcOffset: place.utcOffset,
+      longitude: selectedPlace.lng,
+      latitude: selectedPlace.lat,
+      utcOffset: selectedPlace.utcOffset,
     });
   };
 
@@ -62,24 +88,41 @@ export default function BirthForm({ onSubmit, loading }) {
         />
       </div>
 
-      <div className="form-field">
+      <div className="form-field place-field">
         <label>出生地点</label>
-        <select value={placeIdx} onChange={(e) => setPlaceIdx(Number(e.target.value))}>
-          {EXAMPLE_PLACES.map((p, i) => (
-            <option key={p.label} value={i}>
-              {p.label} (UTC{p.utcOffset >= 0 ? "+" : ""}{p.utcOffset})
-            </option>
-          ))}
-        </select>
-        <span className="place-hint">
-          经度 {place.lng}° / 纬度 {place.lat}°
-        </span>
-        <p className="form-note">
-          Demo 模式：从预设城市选择。正式版将接入高德地图搜索。
-        </p>
+        <input
+          type="text"
+          value={placeQuery}
+          onChange={(e) => {
+            setPlaceQuery(e.target.value);
+            setSelectedPlace(null);
+          }}
+          onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
+          onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+          placeholder="输入城市名称搜索，如：上海、北京、New York"
+          autoComplete="off"
+        />
+        {showSuggestions && suggestions.length > 0 && (
+          <ul className="place-suggestions">
+            {suggestions.map((s, i) => (
+              <li key={i} onMouseDown={() => handleSelectPlace(s)}>
+                <strong>{s.name}</strong>
+                {s.district && <span className="suggestion-district">{s.district}</span>}
+              </li>
+            ))}
+          </ul>
+        )}
+        {selectedPlace && (
+          <span className="place-hint">
+            {selectedPlace.name} — 经度 {selectedPlace.lng.toFixed(4)}° / 纬度 {selectedPlace.lat.toFixed(4)}° (UTC{selectedPlace.utcOffset >= 0 ? "+" : ""}{selectedPlace.utcOffset})
+          </span>
+        )}
+        {!selectedPlace && placeQuery && (
+          <span className="place-hint">请从搜索结果中选择一个地点</span>
+        )}
       </div>
 
-      <button type="submit" disabled={loading}>
+      <button type="submit" disabled={loading || !selectedPlace}>
         {loading ? "计算中..." : "生成图表"}
       </button>
     </form>
