@@ -42,21 +42,25 @@ from .chart_properties import (
     determine_authority,
     determine_profile,
     determine_incarnation_cross,
+    determine_variables,
 )
+from .transit import calculate_transit
+from .solar_return import calculate_solar_return
 
 
 def calculate(birth_utc: datetime, latitude: float, longitude: float) -> CalculatorOutput:
     """Calculate a complete Human Design chart.
 
-    This is the ONLY public interface of this module.
+    This is the main public interface of this module.
     Part 2 calls this function, Part 4 consumes its return value.
 
-    Internally runs a 5-layer pipeline:
+    Internally runs a 6-layer pipeline:
       1. Time → Planet positions (Swiss Ephemeris)
-      2. Positions → Gates and Lines (longitude mapping)
+      2. Positions → Gates, Lines, Colors, Tones, Bases (longitude mapping)
       3. Gates → Channels + Centers (pattern matching)
       4. Centers → Definition type (BFS connected components)
       5. Combined → Type, Strategy, Authority, Profile, Cross
+      6. Color/Tone → Variables / Arrows (cognitive orientation)
 
     Args:
         birth_utc: UTC birth datetime (converted by Part 2).
@@ -77,7 +81,7 @@ def calculate(birth_utc: datetime, latitude: float, longitude: float) -> Calcula
     design_positions = calculate_planet_positions(design_jd)
     design_utc = julian_day_to_utc(design_jd)
 
-    # === Layer 2: Positions → Gates and Lines ===
+    # === Layer 2: Positions → Gates, Lines, Colors, Tones, Bases ===
     personality_activations = map_all_activations(personality_positions)
     design_activations = map_all_activations(design_positions)
 
@@ -116,6 +120,9 @@ def calculate(birth_utc: datetime, latitude: float, longitude: float) -> Calcula
         profile,
     )
 
+    # === Layer 6: Variables / Arrows ===
+    variables = determine_variables(personality_activations, design_activations)
+
     # === Build output ===
     return CalculatorOutput(
         type=hd_type,
@@ -137,11 +144,15 @@ def calculate(birth_utc: datetime, latitude: float, longitude: float) -> Calcula
             }
             for ch in active_channels
         ],
+        variables=variables,
         personality_activations=[
             {
                 "planet": a["planet"],
                 "gate": a["gate"],
                 "line": a["line"],
+                "color": a["color"],
+                "tone": a["tone"],
+                "base": a["base"],
                 "longitude": a["longitude"],
             }
             for a in personality_activations
@@ -151,6 +162,9 @@ def calculate(birth_utc: datetime, latitude: float, longitude: float) -> Calcula
                 "planet": a["planet"],
                 "gate": a["gate"],
                 "line": a["line"],
+                "color": a["color"],
+                "tone": a["tone"],
+                "base": a["base"],
                 "longitude": a["longitude"],
             }
             for a in design_activations

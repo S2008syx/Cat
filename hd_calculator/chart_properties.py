@@ -375,6 +375,82 @@ def determine_profile(personality_sun_line: int, design_sun_line: int) -> str:
 # 参考内容: 化身十字 (Incarnation Cross) — 轮廓首位决定十字类型
 # 修改说明: 实现为简单映射函数
 
+def determine_variables(
+    personality_activations: list[dict],
+    design_activations: list[dict],
+) -> dict:
+    """Determine the four Variables (Arrows) from activation Color and Tone.
+
+    Variables are the four directional arrows shown at the corners of a
+    Human Design bodygraph. Each arrow points Left (strategic/focused) or
+    Right (receptive/peripheral), representing a person's cognitive and
+    biological orientation.
+
+    The four Variables are derived from Color values (1-3 = Left, 4-6 = Right)
+    of specific activations:
+
+      Arrow Position   │ Source                 │ Domain
+      ─────────────────┼────────────────────────┼──────────────────────
+      Top-Right        │ Personality Sun Color   │ Motivation (mind)
+      Top-Left         │ Design Sun Color        │ Digestion (body)
+      Bottom-Right     │ Personality North Node Color │ Perspective (mind)
+      Bottom-Left      │ Design North Node Color │ Environment (body)
+
+    Direction rule:
+      Color 1-3 → "Left"  (strategic, focused, active)
+      Color 4-6 → "Right" (receptive, peripheral, passive)
+
+    Tone further specifies the quality within each Variable (1-6).
+
+    Args:
+        personality_activations: 13 conscious activations (must include
+            color/tone fields from the extended gate mapping).
+        design_activations: 13 unconscious activations.
+
+    Returns:
+        Dict with four Variable entries:
+        {
+            "digestion":   {"arrow": "Left"|"Right", "color": int, "tone": int},
+            "environment": {"arrow": "Left"|"Right", "color": int, "tone": int},
+            "motivation":  {"arrow": "Left"|"Right", "color": int, "tone": int},
+            "perspective": {"arrow": "Left"|"Right", "color": int, "tone": int},
+        }
+    """
+    def _find(activations: list[dict], planet: str) -> dict:
+        return next(a for a in activations if a["planet"] == planet)
+
+    def _arrow(color: int) -> str:
+        return "Left" if color <= 3 else "Right"
+
+    p_sun = _find(personality_activations, "sun")
+    d_sun = _find(design_activations, "sun")
+    p_node = _find(personality_activations, "north_node")
+    d_node = _find(design_activations, "north_node")
+
+    return {
+        "digestion": {
+            "arrow": _arrow(d_sun["color"]),
+            "color": d_sun["color"],
+            "tone": d_sun["tone"],
+        },
+        "environment": {
+            "arrow": _arrow(d_node["color"]),
+            "color": d_node["color"],
+            "tone": d_node["tone"],
+        },
+        "motivation": {
+            "arrow": _arrow(p_sun["color"]),
+            "color": p_sun["color"],
+            "tone": p_sun["tone"],
+        },
+        "perspective": {
+            "arrow": _arrow(p_node["color"]),
+            "color": p_node["color"],
+            "tone": p_node["tone"],
+        },
+    }
+
+
 def determine_incarnation_cross(
     personality_sun_gate: int,
     personality_earth_gate: int,
