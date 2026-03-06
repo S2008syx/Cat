@@ -34,18 +34,24 @@ class CalculatorInput:
 
 @dataclass
 class Activation:
-    """A single planetary activation (gate/line assignment).
+    """A single planetary activation (gate/line/color/tone/base assignment).
 
     Attributes:
         planet: Planet name (e.g. "sun", "moon", "mercury").
         gate: Gate number (1-64).
         line: Line number (1-6).
+        color: Color number (1-6). Subdivides the line arc into 6 equal parts.
+        tone: Tone number (1-6). Subdivides the color arc into 6 equal parts.
+        base: Base number (1-5). Subdivides the tone arc into 5 equal parts.
         longitude: Ecliptic longitude in degrees (0-360).
     """
 
     planet: str
     gate: int
     line: int
+    color: int
+    tone: int
+    base: int
     longitude: float
 
 
@@ -113,10 +119,21 @@ class CalculatorOutput:
     """List of active channels: [{"gate_a": 6, "gate_b": 59,
     "center_a": "solar_plexus", "center_b": "sacral"}, ...]."""
 
+    # === Variables / Arrows ===
+    variables: dict
+    """Four arrows derived from Color values of Sun and North Node activations.
+    {
+        "digestion":   {"arrow": "Left"|"Right", "color": int, "tone": int},
+        "environment": {"arrow": "Left"|"Right", "color": int, "tone": int},
+        "motivation":  {"arrow": "Left"|"Right", "color": int, "tone": int},
+        "perspective": {"arrow": "Left"|"Right", "color": int, "tone": int},
+    }"""
+
     # === Gates (full 26 activations) ===
     personality_activations: list[dict]
     """Personality (conscious) activations:
-    [{"planet": "sun", "gate": 40, "line": 4, "longitude": 123.456}, ...]."""
+    [{"planet": "sun", "gate": 40, "line": 4, "color": 2, "tone": 5,
+      "base": 1, "longitude": 123.456}, ...]."""
 
     design_activations: list[dict]
     """Design (unconscious) activations: same structure as personality."""

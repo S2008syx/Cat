@@ -11,8 +11,16 @@ A pure Python computation engine that calculates Human Design chart parameters f
 - [Quick Start](#quick-start)
 - [Installation](#installation)
 - [API Reference](#api-reference)
+  - [calculate()](#calculatebirth_utc-latitude-longitude--calculatoroutput)
+  - [calculate_transit()](#calculate_transittransit_utc-natal_gates--dict)
+  - [calculate_solar_return()](#calculate_solar_returnbirth_utc-year-latitude-longitude--dict)
 - [Architecture](#architecture)
 - [Calculation Pipeline](#calculation-pipeline)
+- [Advanced Features](#advanced-features)
+  - [Color / Tone / Base](#color--tone--base)
+  - [Variables / Arrows](#variables--arrows)
+  - [Transit Charts](#transit-charts)
+  - [Solar Return Charts](#solar-return-charts)
 - [Data Tables](#data-tables)
 - [Algorithms](#algorithms)
 - [Verification](#verification)
@@ -25,8 +33,11 @@ A pure Python computation engine that calculates Human Design chart parameters f
 
 ```python
 from hd_calculator import calculate
+from hd_calculator.transit import calculate_transit
+from hd_calculator.solar_return import calculate_solar_return
 from datetime import datetime, timezone
 
+# --- Natal Chart ---
 result = calculate(
     birth_utc=datetime(1990, 1, 15, 6, 30, tzinfo=timezone.utc),
     latitude=31.2304,
@@ -39,6 +50,30 @@ print(result.authority)     # "Emotional"
 print(result.strategy)      # "To Respond"
 print(result.definition_type)  # "Single"
 print(result.defined_centers)  # ["sacral", "solar_plexus", ...]
+print(result.variables)     # {"digestion": {"arrow": "Right", ...}, ...}
+
+# Each activation now includes color/tone/base:
+sun = result.personality_activations[0]
+print(f"Sun: Gate {sun['gate']}.{sun['line']} Color={sun['color']} Tone={sun['tone']} Base={sun['base']}")
+
+# --- Transit (daily planetary weather) ---
+transit = calculate_transit(
+    transit_utc=datetime(2026, 3, 6, 12, 0, tzinfo=timezone.utc),
+    natal_gates=set(result.all_active_gates),
+)
+print(transit["active_gates"])        # Gates lit up right now
+print(transit["completed_channels"])  # Channels completed by transit overlay
+
+# --- Solar Return (annual theme chart) ---
+sr = calculate_solar_return(
+    birth_utc=datetime(1990, 1, 15, 6, 30, tzinfo=timezone.utc),
+    year=2026,
+    latitude=31.2304,
+    longitude=121.4737,
+)
+print(sr["return_utc"])        # 2026-01-15 00:16:56 UTC
+print(sr["chart"].type)        # Type for 2026
+print(sr["chart"].profile)     # Profile for 2026
 ```
 
 ## Installation
@@ -53,7 +88,7 @@ No other external dependencies. The module uses the **Moshier ephemeris** (built
 
 ### `calculate(birth_utc, latitude, longitude) → CalculatorOutput`
 
-The **only public function**. Takes birth data, returns a complete Human Design chart.
+The primary public function. Takes birth data, returns a complete Human Design chart.
 
 #### Parameters
 
@@ -80,10 +115,58 @@ The **only public function**. Takes birth data, returns a complete Human Design 
 | `defined_centers` | `list[str]` | Centers with active channels passing through them |
 | `undefined_centers` | `list[str]` | Centers with no active channels |
 | `active_channels` | `list[dict]` | Each: `{"gate_a", "gate_b", "center_a", "center_b"}` |
-| `personality_activations` | `list[dict]` | 13 conscious activations: `{"planet", "gate", "line", "longitude"}` |
+| `variables` | `dict` | Four arrows: `{"digestion", "environment", "motivation", "perspective"}` each with `{"arrow", "color", "tone"}` |
+| `personality_activations` | `list[dict]` | 13 conscious activations: `{"planet", "gate", "line", "color", "tone", "base", "longitude"}` |
 | `design_activations` | `list[dict]` | 13 unconscious activations: same structure |
 | `design_utc` | `datetime` | Computed design moment (88° Sun regression) |
 | `all_active_gates` | `list[int]` | Deduplicated, sorted list of all activated gates |
+
+### `calculate_transit(transit_utc, natal_gates=None) → dict`
+
+Calculates planetary transit activations for any given moment. Import from `hd_calculator.transit`.
+
+#### Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `transit_utc` | `datetime` | UTC time for the transit moment |
+| `natal_gates` | `set[int] \| None` | Optional natal gate set for overlay analysis |
+
+#### Returns
+
+| Field | Type | Condition | Description |
+|-------|------|-----------|-------------|
+| `transit_utc` | `datetime` | Always | The transit moment used |
+| `activations` | `list[dict]` | Always | 13 planetary activations with gate/line/color/tone/base |
+| `active_gates` | `list[int]` | Always | Gates activated by current transits |
+| `transit_channels` | `list[dict]` | Always | Channels formed by transit planets alone |
+| `transit_defined_centers` | `list[str]` | Always | Centers defined by transit alone |
+| `completed_channels` | `list[dict]` | With `natal_gates` | Channels completed by natal + transit overlay |
+| `overlay_defined_centers` | `list[str]` | With `natal_gates` | All defined centers after overlay |
+| `overlay_undefined_centers` | `list[str]` | With `natal_gates` | Centers still undefined after overlay |
+
+### `calculate_solar_return(birth_utc, year, latitude, longitude) → dict`
+
+Calculates a Solar Return chart — the full HD chart for the precise moment the Sun returns to its natal longitude. Import from `hd_calculator.solar_return`.
+
+#### Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `birth_utc` | `datetime` | UTC birth time |
+| `year` | `int` | Calendar year for the Solar Return |
+| `latitude` | `float` | Birth place latitude (passed to `calculate()`) |
+| `longitude` | `float` | Birth place longitude (passed to `calculate()`) |
+
+#### Returns
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `return_utc` | `datetime` | Exact UTC moment of the Solar Return |
+| `return_jd` | `float` | Julian Day of the Solar Return |
+| `year` | `int` | Requested year |
+| `natal_sun_longitude` | `float` | The natal Sun longitude (target) |
+| `chart` | `CalculatorOutput` | Full HD chart for the return moment |
 
 ---
 
@@ -96,8 +179,10 @@ hd_calculator/
 ├── __init__.py           # Public API: calculate()
 ├── models.py             # Data models (CalculatorInput, CalculatorOutput, etc.)
 ├── ephemeris.py          # Layer 1: Swiss Ephemeris wrapper
-├── gate_mapping.py       # Layer 2: Longitude → Gate/Line mapping
-├── chart_properties.py   # Layers 3-5: Channels, Centers, Type, Authority, etc.
+├── gate_mapping.py       # Layer 2: Longitude → Gate/Line/Color/Tone/Base mapping
+├── chart_properties.py   # Layers 3-6: Channels, Centers, Type, Authority, Variables, etc.
+├── transit.py            # Transit chart calculation (daily planetary weather)
+├── solar_return.py       # Solar Return chart calculation (annual theme)
 ├── data/
 │   ├── gates.py          # 64-gate sequence table
 │   ├── centers.py        # 9 centers with gate assignments
@@ -108,13 +193,16 @@ hd_calculator/
 
 ### Module Boundary
 
-Only `calculate()` is exported. All other functions (`ephemeris`, `gate_mapping`, `chart_properties`) are internal implementation details.
+Three public functions:
+- `calculate()` — Natal chart (main entry point)
+- `calculate_transit()` — Transit/daily chart (from `hd_calculator.transit`)
+- `calculate_solar_return()` — Solar Return/annual chart (from `hd_calculator.solar_return`)
 
 ---
 
 ## Calculation Pipeline
 
-The calculator runs a 5-layer pipeline:
+The calculator runs a 6-layer pipeline:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -133,8 +221,11 @@ The calculator runs a 5-layer pipeline:
          │  LAYER 2: Gate Mapping        │
          │  Longitude → Gate (1-64)      │
          │           → Line (1-6)        │
+         │           → Color (1-6)       │
+         │           → Tone (1-6)        │
+         │           → Base (1-5)        │
          └───────────────┬───────────────┘
-                         │ 26 activations
+                         │ 26 activations (with subdivisions)
          ┌───────────────▼───────────────┐
          │  LAYER 3: Pattern Matching    │
          │  Gates → Active Channels      │
@@ -154,8 +245,15 @@ The calculator runs a 5-layer pipeline:
          │  Profile, Incarnation Cross   │
          └───────────────┬───────────────┘
                          │
+         ┌───────────────▼───────────────┐
+         │  LAYER 6: Variables / Arrows  │
+         │  Color/Tone → 4 Arrows        │
+         │  (Digestion, Environment,     │
+         │   Motivation, Perspective)    │
+         └───────────────┬───────────────┘
+                         │
 ┌────────────────────────▼────────────────────────────────────┐
-│ OUTPUT: CalculatorOutput (17 fields)                        │
+│ OUTPUT: CalculatorOutput (20 fields)                        │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -180,21 +278,24 @@ Two sets of positions are computed:
 - **Personality** (conscious): Planets at the birth moment
 - **Design** (unconscious): Planets at the 88° Sun regression moment
 
-### Layer 2: Gate Mapping (Longitude → Gate/Line)
+### Layer 2: Gate Mapping (Longitude → Gate/Line/Color/Tone/Base)
 
 **File:** `gate_mapping.py`
 
-Maps each planet's ecliptic longitude to a Human Design gate and line.
+Maps each planet's ecliptic longitude to a Human Design gate, line, and sub-line subdivisions.
 
 - The ecliptic (360°) is divided into **64 gates** of **5.625°** each
 - Each gate has **6 lines** of **0.9375°** each
+- Each line has **6 colors** of **0.15625°** each
+- Each color has **6 tones** of **~0.02604°** each
+- Each tone has **5 bases** of **~0.00521°** each
 - Starting point: **Gate 41 at 302°** (Aquarius 2°)
 
 ```
-Longitude 302.0° → Gate 41, Line 1
-Longitude 307.625° → Gate 19, Line 1
+Longitude 302.0° → Gate 41, Line 1, Color 1, Tone 1, Base 1
+Longitude 307.625° → Gate 19, Line 1, ...
 ...wraps around through all 64 gates...
-Longitude 301.99° → Gate 60, Line 6
+Longitude 301.99° → Gate 60, Line 6, ...
 ```
 
 ### Layer 3: Channels & Centers
@@ -265,6 +366,75 @@ Uses **BFS connected components** on the graph of defined centers:
 | 1, 2, 3 | Right Angle |
 | 4 | Juxtaposition |
 | 5, 6 | Left Angle |
+
+---
+
+## Advanced Features
+
+### Color / Tone / Base
+
+Each planetary activation is subdivided beyond Gate and Line into three additional levels of precision:
+
+```
+Gate (5.625°)
+ └── Line (0.9375°)          ← 6 per gate
+      └── Color (0.15625°)    ← 6 per line
+           └── Tone (0.02604°) ← 6 per color
+                └── Base (0.00521°) ← 5 per tone
+```
+
+These subdivisions are used in advanced Human Design analysis, particularly for deriving Variables (Arrows). The Swiss Ephemeris provides planetary positions with sub-arcsecond precision (~0.001°), which is more than sufficient for Base-level calculations (~0.005°).
+
+### Variables / Arrows
+
+Variables are four directional arrows displayed at the corners of a bodygraph. Each arrow points **Left** (strategic/focused/active) or **Right** (receptive/peripheral/passive).
+
+| Arrow | Position | Source | Domain |
+|-------|----------|--------|--------|
+| Digestion | Top-Left | Design Sun Color | Body/nutrition |
+| Environment | Bottom-Left | Design North Node Color | Physical space |
+| Motivation | Top-Right | Personality Sun Color | Mental driver |
+| Perspective | Bottom-Right | Personality North Node Color | Awareness |
+
+**Direction rule:** Color 1-3 → Left, Color 4-6 → Right.
+
+Each Variable also carries a Tone value (1-6) that further specifies the quality:
+
+| Tone | Quality |
+|------|---------|
+| 1 | Smell / Certainty |
+| 2 | Taste / Uncertainty |
+| 3 | Outer Vision / Action |
+| 4 | Inner Vision / Meditation |
+| 5 | Feeling / Judgment |
+| 6 | Touch / Acceptance |
+
+### Transit Charts
+
+Transit charts calculate the "daily planetary weather" — which gates and channels are activated by the current positions of the 13 celestial bodies.
+
+**Standalone mode:** Shows which gates/channels/centers are collectively activated right now. This affects everyone — it is the background energy field.
+
+**Overlay mode:** When combined with a natal chart, shows which dormant natal gates become "completed" by transiting planets, temporarily forming new channels and defining new centers.
+
+Example: A person has natal Gate 6 (Solar Plexus) but not Gate 59 (Sacral). If transit Mars activates Gate 59, the 6-59 channel is temporarily completed, defining both centers for the duration of the transit.
+
+### Solar Return Charts
+
+A Solar Return chart is calculated for the precise moment each year when the Sun returns to its exact natal ecliptic longitude.
+
+**How it works:**
+1. Find the person's natal Sun longitude (e.g., 294.8449°)
+2. Use Newton-Raphson iteration to find the exact Julian Day in the target year when the Sun reaches that longitude again
+3. Calculate a full Human Design chart for that moment
+
+**What changes year to year:**
+- The Sun gate stays the same (same longitude), but its Line/Color/Tone/Base may differ slightly
+- All other planets (Moon, Mercury, Venus, etc.) are at completely different positions
+- This produces different channels, centers, Type, Authority, Profile, and Variables
+- The resulting chart describes the energetic theme for that year
+
+**Practical use:** Compare the Solar Return chart against the natal chart to identify which themes, centers, and channels are "active" for the year — similar to a detailed annual horoscope but based on Human Design mechanics.
 
 ---
 
@@ -341,19 +511,51 @@ Finds the moment when the Sun was exactly 88° behind its birth position:
 
 Convergence precision: < 0.36 arcseconds. Typically converges in 3-5 iterations.
 
-### Longitude → Gate/Line Mapping
+### Longitude → Gate/Line/Color/Tone/Base Mapping
 
 ```
 1. offset = (longitude − 302°) mod 360°
-2. gate_index = floor(offset / 5.625°)       → 0..63
+2. gate_index = floor(offset / 5.625°)          → 0..63
 3. remainder = offset − gate_index × 5.625°
-4. line = floor(remainder / 0.9375°) + 1      → 1..6
-5. gate = GATE_ORDER[gate_index]               → 1..64
+4. line = floor(remainder / 0.9375°) + 1         → 1..6
+5. remainder -= (line - 1) × 0.9375°
+6. color = floor(remainder / 0.15625°) + 1       → 1..6
+7. remainder -= (color - 1) × 0.15625°
+8. tone = floor(remainder / 0.026042°) + 1       → 1..6
+9. remainder -= (tone - 1) × 0.026042°
+10. base = floor(remainder / 0.005208°) + 1      → 1..5
+11. gate = GATE_ORDER[gate_index]                 → 1..64
+```
+
+### Variables / Arrows Derivation
+
+```
+1. Get Color value from Design Sun activation     → Digestion arrow
+2. Get Color value from Design North Node          → Environment arrow
+3. Get Color value from Personality Sun             → Motivation arrow
+4. Get Color value from Personality North Node      → Perspective arrow
+5. For each: Color 1-3 = Left, Color 4-6 = Right
 ```
 
 ### Connected Components (Definition Type)
 
 Standard BFS on an adjacency graph built from active channels. Each connected component of defined centers forms one "definition."
+
+### Solar Return (Newton-Raphson)
+
+Finds the precise moment when the Sun returns to its natal longitude in a target year:
+
+```
+1. target_lon = natal Sun longitude
+2. Initial estimate: birth_jd + (year − birth_year) × 365.2422
+3. Iterate (max 50):
+   a. Get Sun longitude & speed at current estimate
+   b. diff = shortest_arc(current_lon, target_lon)
+   c. If |diff| < 0.0001°: converged ✓
+   d. Else: estimate += diff / sun_speed
+```
+
+Same convergence characteristics as the 88° regression: < 0.36 arcseconds, typically 3-5 iterations.
 
 ---
 
