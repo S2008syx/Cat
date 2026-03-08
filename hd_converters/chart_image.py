@@ -110,11 +110,10 @@ def _channel_path_d(ga: int, gb: int) -> str:
     return f"M {x1},{y1} L {x2},{y2}"
 
 
-def _render_inactive_channels(active_keys: set[tuple[int, int]]) -> str:
+def _render_all_channels_gray() -> str:
+    """Draw ALL 36 channels in light gray as background grid."""
     parts: list[str] = []
     for ga, gb in ALL_CHANNELS:
-        if (ga, gb) in active_keys or (gb, ga) in active_keys:
-            continue
         d = _channel_path_d(ga, gb)
         parts.append(
             f'<path d="{d}" fill="none" stroke="{C_CHANNEL_INACTIVE}" '
@@ -127,7 +126,8 @@ def _render_inactive_channels(active_keys: set[tuple[int, int]]) -> str:
 # Layer 3 — Active channels (colored)
 # ---------------------------------------------------------------------------
 def _render_active_channels(
-    channels: list[dict], gate_color_map: dict[int, str]
+    channels: list[dict], gate_color_map: dict[int, str],
+    defs: list[str],
 ) -> str:
     """Render active channels with split coloring for mixed channels."""
     parts: list[str] = []
@@ -148,28 +148,28 @@ def _render_active_channels(
             x2, y2 = GATE_POSITIONS.get(gb, (0, 0))
             mx, my = (x1 + x2) // 2, (y1 + y2) // 2
 
+            color_a = _gate_color_value(gate_color_map.get(ga, "personality"))
+            color_b = _gate_color_value(gate_color_map.get(gb, "design"))
+
             # Check for bezier curve
             key = (ga, gb)
             rev = (gb, ga)
             ctrl = CHANNEL_CURVES.get(key) or CHANNEL_CURVES.get(rev)
 
-            color_a = _gate_color_value(gate_color_map.get(ga, "personality"))
-            color_b = _gate_color_value(gate_color_map.get(gb, "design"))
-
             if ctrl:
-                # For curves, draw the full path but use a gradient
+                # For curves, use a linear gradient for split coloring
+                d = _channel_path_d(ga, gb)
                 grad_id = f"grad_{ga}_{gb}"
-                parts.append(
-                    f'<defs><linearGradient id="{grad_id}" '
+                defs.append(
+                    f'<linearGradient id="{grad_id}" '
                     f'x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
                     f'gradientUnits="userSpaceOnUse">'
                     f'<stop offset="0%" stop-color="{color_a}"/>'
                     f'<stop offset="50%" stop-color="{color_a}"/>'
                     f'<stop offset="50%" stop-color="{color_b}"/>'
                     f'<stop offset="100%" stop-color="{color_b}"/>'
-                    f'</linearGradient></defs>'
+                    f'</linearGradient>'
                 )
-                d = _channel_path_d(ga, gb)
                 parts.append(
                     f'<path d="{d}" fill="none" stroke="url(#{grad_id})" '
                     f'stroke-width="4" stroke-linecap="round" opacity="0.85"/>'
@@ -281,13 +281,18 @@ _GATE_FONT = 8
 
 
 def _render_gate_numbers(active_gates: set[int], gate_color_map: dict[int, str]) -> str:
-    """Render all 64 gate numbers. Active gates are bold + colored."""
+    """Render all 64 gate numbers with white background for readability."""
     parts: list[str] = []
     for gate_num, (gx, gy) in GATE_POSITIONS.items():
         is_active = gate_num in active_gates
         color = _gate_color_value(gate_color_map[gate_num]) if gate_num in gate_color_map else "#bbb"
         weight = "bold" if is_active else "normal"
         font_size = _GATE_FONT + 1 if is_active else _GATE_FONT
+        # White background circle for readability over channel lines
+        bg_r = 7 if gate_num >= 10 else 5
+        parts.append(
+            f'<circle cx="{gx}" cy="{gy}" r="{bg_r}" fill="white" opacity="0.85"/>'
+        )
         parts.append(
             f'<text x="{gx}" y="{gy + 3}" text-anchor="middle" '
             f'font-size="{font_size}" font-weight="{weight}" fill="{color}" '
@@ -524,19 +529,19 @@ def generate_chart_svg(
 
     active_gates = set(gate_color_map.keys())
 
-    # Active channel keys
-    active_channel_keys: set[tuple[int, int]] = set()
-    for ch in graph_data.get("channels", []):
-        active_channel_keys.add((ch["gate_a"], ch["gate_b"]))
+    # Collect gradient defs for mixed channels
+    svg_defs: list[str] = []
 
     # --- Layer 1: Human silhouette ---
     parts.append(_render_silhouette())
 
-    # --- Layer 2: Inactive channels ---
-    parts.append(_render_inactive_channels(active_channel_keys))
+    # --- Layer 2: All channels in gray (background grid) ---
+    parts.append(_render_all_channels_gray())
 
-    # --- Layer 3: Active channels ---
-    parts.append(_render_active_channels(graph_data.get("channels", []), gate_color_map))
+    # --- Layer 3: Active channels (colored overlay) ---
+    parts.append(
+        _render_active_channels(graph_data.get("channels", []), gate_color_map, svg_defs)
+    )
 
     # --- Layer 4: Centers ---
     parts.append(_render_centers(graph_data.get("centers", [])))
@@ -559,6 +564,11 @@ def generate_chart_svg(
 
     # --- Legend ---
     parts.append(_render_legend())
+
+    # Inject <defs> block (gradients, etc.) right after the opening tags
+    if svg_defs:
+        defs_block = "<defs>\n" + "\n".join(svg_defs) + "\n</defs>"
+        parts.insert(2, defs_block)
 
     parts.append("</svg>")
     return "\n".join(parts)

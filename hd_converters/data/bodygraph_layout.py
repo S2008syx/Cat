@@ -173,9 +173,9 @@ GATE_POSITIONS: dict[int, tuple[int, int]] = {
     46: (398, 384),
 
     # === Heart (472, 400) — 4 gates ===
-    21: (450, 386),    # to 45 (Throat)
-    51: (450, 398),    # to 25 (G)
-    26: (452, 416),    # to 44 (Spleen)
+    21: (446, 382),    # to 45 (Throat)
+    51: (452, 400),    # to 25 (G)
+    26: (452, 420),    # to 44 (Spleen)
     40: (496, 406),    # to 37 (Solar Plexus)
 
     # === Sacral (380, 498) — 9 gates ===
@@ -194,22 +194,22 @@ GATE_POSITIONS: dict[int, tuple[int, int]] = {
     9:  (400, 520),
 
     # === Solar Plexus (510, 472) — 7 gates ===
-    36: (480, 450),    # to 35 (Throat)
-    22: (482, 462),    # to 12 (Throat)
-    37: (516, 454),    # to 40 (Heart)
+    36: (476, 448),    # to 35 (Throat)
+    22: (480, 464),    # to 12 (Throat)
+    37: (518, 452),    # to 40 (Heart)
     6:  (488, 478),    # to 59 (Sacral)
-    49: (530, 490),    # to 19 (Root)
-    55: (522, 496),    # to 39 (Root)
-    30: (514, 492),    # to 41 (Root)
+    49: (538, 488),    # to 19 (Root)
+    55: (524, 502),    # to 39 (Root)
+    30: (506, 494),    # to 41 (Root)
 
     # === Spleen (250, 472) — 7 gates ===
-    57: (274, 456),    # Integration gate — connects to 20, 10, 34
-    48: (272, 464),    # to 16 (Throat)
-    44: (272, 480),    # to 26 (Heart)
-    50: (260, 490),    # to 27 (Sacral)
-    18: (254, 500),    # to 58 (Root)
-    28: (242, 494),    # to 38 (Root)
-    32: (236, 484),    # to 54 (Root)
+    57: (276, 452),    # Integration gate — connects to 20, 10, 34
+    48: (270, 464),    # to 16 (Throat)
+    44: (268, 480),    # to 26 (Heart)
+    50: (256, 494),    # to 27 (Sacral)
+    18: (250, 508),    # to 58 (Root)
+    28: (234, 496),    # to 38 (Root)
+    32: (230, 482),    # to 54 (Root)
 
     # === Root (380, 600) — 9 gates ===
     # Upper (to Sacral)
