@@ -102,6 +102,7 @@ def convert_graph(output: CalculatorOutput) -> GraphData:
         "type": output.type,
         "profile": output.profile,
         "authority": output.authority,
+        "variables": output.variables,
     }
 
     return GraphData(
