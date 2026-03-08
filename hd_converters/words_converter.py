@@ -155,12 +155,14 @@ def convert_words(output: CalculatorOutput) -> WordsData:
     for act in output.personality_activations:
         g = act["gate"]
         activation_details.setdefault(g, []).append({
-            "side": "personality", "planet": act["planet"], "line": act["line"]
+            "side": "personality", "planet": act["planet"], "line": act["line"],
+            "color": act["color"], "tone": act["tone"], "base": act["base"],
         })
     for act in output.design_activations:
         g = act["gate"]
         activation_details.setdefault(g, []).append({
-            "side": "design", "planet": act["planet"], "line": act["line"]
+            "side": "design", "planet": act["planet"], "line": act["line"],
+            "color": act["color"], "tone": act["tone"], "base": act["base"],
         })
 
     gate_infos = []
@@ -211,6 +213,9 @@ def convert_words(output: CalculatorOutput) -> WordsData:
                     "planet_zh": planet_zh.get(p, p),
                     "gate": a["gate"],
                     "line": a["line"],
+                    "color": a["color"],
+                    "tone": a["tone"],
+                    "base": a["base"],
                     "gate_name_zh": gdata.get("name_zh", ""),
                     "gate_name_en": gdata.get("name_en", ""),
                 })
@@ -220,6 +225,9 @@ def convert_words(output: CalculatorOutput) -> WordsData:
                     "planet_zh": planet_zh.get(p, p),
                     "gate": None,
                     "line": None,
+                    "color": None,
+                    "tone": None,
+                    "base": None,
                     "gate_name_zh": "",
                     "gate_name_en": "",
                 })
