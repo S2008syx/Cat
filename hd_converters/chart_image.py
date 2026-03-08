@@ -3,110 +3,489 @@ Bodygraph SVG image generator.
 
 Generates a self-contained SVG string from GraphData + WordsData,
 suitable for rendering as an <img> or downloading.
+
+Rendering layers (back to front):
+  1. Human body silhouette (light gray outline)
+  2. Inactive channels (all 36, light gray)
+  3. Active channels (colored: black/red/purple, split for mixed)
+  4. Center shapes (9 centers, defined=gold, undefined=gray)
+  5. Gate activation dots (colored circles for active gates)
+  6. Gate numbers (all 64 labels)
+  7. Variables arrows + Tone numbers (top area)
+  8. Activation tables (left=Design/red, right=Personality/black)
+  9. Info bar (Type / Profile / Authority / Cross)
 """
 
 from __future__ import annotations
 
+from .data.bodygraph_layout import (
+    CENTER_RENDER_POS, CENTER_RENDER_SHAPES, CENTER_RENDER_LABELS,
+    GATE_POSITIONS, GATE_TO_CENTER,
+    ALL_CHANNELS, CHANNEL_CURVES, SILHOUETTE_PATH,
+)
 
-# SVG canvas
-W, H = 480, 680
-PAD = 20
+# ---------------------------------------------------------------------------
+# Canvas
+# ---------------------------------------------------------------------------
+W, H = 760, 880
 
+# ---------------------------------------------------------------------------
 # Colors
+# ---------------------------------------------------------------------------
 C_DEFINED = "#f5c542"
 C_UNDEFINED = "#e8e8e8"
 C_STROKE_DEF = "#b8860b"
 C_STROKE_UNDEF = "#aaa"
 C_PERSONALITY = "#333"
 C_DESIGN = "#c0392b"
-C_MIXED = "#8e44ad"
+C_BOTH = "#8e44ad"
+C_CHANNEL_INACTIVE = "#e0e0e0"
 C_BG = "#ffffff"
 C_TEXT = "#333"
-C_ACCENT = "#6c5ce7"
+C_SILHOUETTE = "#f0f0f0"
 
-# Center positions (absolute px)
-_CENTER_POS = {
-    "head":          (240, 60),
-    "ajna":          (240, 150),
-    "throat":        (240, 250),
-    "g":             (240, 355),
-    "heart":         (320, 400),
-    "sacral":        (240, 520),
-    "solar_plexus":  (370, 490),
-    "spleen":        (110, 490),
-    "root":          (240, 620),
-}
-
-_CENTER_SHAPES = {
-    "head": "triangle",
-    "ajna": "triangle",
-    "throat": "square",
-    "g": "diamond",
-    "heart": "triangle",
-    "sacral": "square",
-    "solar_plexus": "triangle",
-    "spleen": "triangle",
-    "root": "square",
-}
-
-_CENTER_LABELS = {
-    "head": "头脑",
-    "ajna": "逻辑",
-    "throat": "喉咙",
-    "g": "G",
-    "heart": "意志力",
-    "sacral": "骶骨",
-    "solar_plexus": "情绪",
-    "spleen": "直觉",
-    "root": "根",
+# Planet display order and symbols
+_PLANET_ORDER = [
+    "sun", "earth", "north_node", "south_node", "moon",
+    "mercury", "venus", "mars", "jupiter", "saturn",
+    "uranus", "neptune", "pluto",
+]
+_PLANET_SYMBOLS: dict[str, str] = {
+    "sun": "\u2609", "earth": "\u2295",
+    "north_node": "\u260a", "south_node": "\u260b",
+    "moon": "\u263d", "mercury": "\u263f",
+    "venus": "\u2640", "mars": "\u2642",
+    "jupiter": "\u2643", "saturn": "\u2644",
+    "uranus": "\u2645", "neptune": "\u2646",
+    "pluto": "\u2647",
 }
 
 
 def _escape(s: str) -> str:
-    return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+    return (
+        s.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+    )
 
 
-def _center_shape_svg(cid: str, defined: bool, size: int = 26) -> str:
-    x, y = _CENTER_POS[cid]
+def _gate_color_value(color: str) -> str:
+    """Map gate/channel color key to CSS color."""
+    return {
+        "personality": C_PERSONALITY,
+        "design": C_DESIGN,
+        "both": C_BOTH,
+        "mixed": C_BOTH,
+    }.get(color, "#999")
+
+
+# ---------------------------------------------------------------------------
+# Layer 1 — Human silhouette
+# ---------------------------------------------------------------------------
+def _render_silhouette() -> str:
+    return (
+        f'<path d="{SILHOUETTE_PATH}" fill="none" '
+        f'stroke="{C_SILHOUETTE}" stroke-width="1.8" stroke-linecap="round"/>'
+    )
+
+
+# ---------------------------------------------------------------------------
+# Layer 2 — Inactive channels (all 36, light gray)
+# ---------------------------------------------------------------------------
+def _channel_path_d(ga: int, gb: int) -> str:
+    """Build SVG path 'd' attribute for a channel between two gates."""
+    x1, y1 = GATE_POSITIONS[ga]
+    x2, y2 = GATE_POSITIONS[gb]
+    key = (ga, gb)
+    rev = (gb, ga)
+    ctrl = CHANNEL_CURVES.get(key) or CHANNEL_CURVES.get(rev)
+    if ctrl and len(ctrl) == 1:
+        cx, cy = ctrl[0]
+        return f"M {x1},{y1} Q {cx},{cy} {x2},{y2}"
+    if ctrl and len(ctrl) == 2:
+        c1x, c1y = ctrl[0]
+        c2x, c2y = ctrl[1]
+        return f"M {x1},{y1} C {c1x},{c1y} {c2x},{c2y} {x2},{y2}"
+    return f"M {x1},{y1} L {x2},{y2}"
+
+
+def _render_inactive_channels(active_keys: set[tuple[int, int]]) -> str:
+    parts: list[str] = []
+    for ga, gb in ALL_CHANNELS:
+        if (ga, gb) in active_keys or (gb, ga) in active_keys:
+            continue
+        d = _channel_path_d(ga, gb)
+        parts.append(
+            f'<path d="{d}" fill="none" stroke="{C_CHANNEL_INACTIVE}" '
+            f'stroke-width="3" stroke-linecap="round"/>'
+        )
+    return "\n".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# Layer 3 — Active channels (colored)
+# ---------------------------------------------------------------------------
+def _render_active_channels(
+    channels: list[dict], gate_color_map: dict[int, str]
+) -> str:
+    """Render active channels with split coloring for mixed channels."""
+    parts: list[str] = []
+    for ch in channels:
+        ga, gb = ch["gate_a"], ch["gate_b"]
+        ch_color = ch.get("color", "personality")
+
+        if ch_color != "mixed":
+            css = _gate_color_value(ch_color)
+            d = _channel_path_d(ga, gb)
+            parts.append(
+                f'<path d="{d}" fill="none" stroke="{css}" '
+                f'stroke-width="4" stroke-linecap="round" opacity="0.85"/>'
+            )
+        else:
+            # Split coloring: each half takes its gate's color
+            x1, y1 = GATE_POSITIONS.get(ga, (0, 0))
+            x2, y2 = GATE_POSITIONS.get(gb, (0, 0))
+            mx, my = (x1 + x2) // 2, (y1 + y2) // 2
+
+            # Check for bezier curve
+            key = (ga, gb)
+            rev = (gb, ga)
+            ctrl = CHANNEL_CURVES.get(key) or CHANNEL_CURVES.get(rev)
+
+            color_a = _gate_color_value(gate_color_map.get(ga, "personality"))
+            color_b = _gate_color_value(gate_color_map.get(gb, "design"))
+
+            if ctrl:
+                # For curves, draw the full path but use a gradient
+                grad_id = f"grad_{ga}_{gb}"
+                parts.append(
+                    f'<defs><linearGradient id="{grad_id}" '
+                    f'x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
+                    f'gradientUnits="userSpaceOnUse">'
+                    f'<stop offset="0%" stop-color="{color_a}"/>'
+                    f'<stop offset="50%" stop-color="{color_a}"/>'
+                    f'<stop offset="50%" stop-color="{color_b}"/>'
+                    f'<stop offset="100%" stop-color="{color_b}"/>'
+                    f'</linearGradient></defs>'
+                )
+                d = _channel_path_d(ga, gb)
+                parts.append(
+                    f'<path d="{d}" fill="none" stroke="url(#{grad_id})" '
+                    f'stroke-width="4" stroke-linecap="round" opacity="0.85"/>'
+                )
+            else:
+                # Straight line: two half-segments
+                parts.append(
+                    f'<line x1="{x1}" y1="{y1}" x2="{mx}" y2="{my}" '
+                    f'stroke="{color_a}" stroke-width="4" '
+                    f'stroke-linecap="round" opacity="0.85"/>'
+                )
+                parts.append(
+                    f'<line x1="{mx}" y1="{my}" x2="{x2}" y2="{y2}" '
+                    f'stroke="{color_b}" stroke-width="4" '
+                    f'stroke-linecap="round" opacity="0.85"/>'
+                )
+    return "\n".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# Layer 4 — Center shapes
+# ---------------------------------------------------------------------------
+_CENTER_SIZE = 26
+
+
+def _center_shape_svg(cid: str, defined: bool) -> str:
+    x, y = CENTER_RENDER_POS[cid]
     fill = C_DEFINED if defined else C_UNDEFINED
     stroke = C_STROKE_DEF if defined else C_STROKE_UNDEF
-    shape = _CENTER_SHAPES[cid]
-    label = _CENTER_LABELS.get(cid, cid)
+    shape = CENTER_RENDER_SHAPES[cid]
+    label = CENTER_RENDER_LABELS.get(cid, cid)
+    s = _CENTER_SIZE
 
-    parts = []
-    if shape == "triangle":
-        pts = f"{x},{y - size} {x - size},{y + int(size * 0.7)} {x + size},{y + int(size * 0.7)}"
-        parts.append(f'<polygon points="{pts}" fill="{fill}" stroke="{stroke}" stroke-width="2"/>')
-    elif shape == "diamond":
-        pts = f"{x},{y - size} {x + size},{y} {x},{y + size} {x - size},{y}"
-        parts.append(f'<polygon points="{pts}" fill="{fill}" stroke="{stroke}" stroke-width="2"/>')
-    else:  # square
-        s2 = int(size * 0.8)
+    parts: list[str] = []
+    if shape == "triangle_up":
+        pts = f"{x},{y - s} {x - s},{y + int(s * 0.7)} {x + s},{y + int(s * 0.7)}"
         parts.append(
-            f'<rect x="{x - s2}" y="{y - s2}" width="{s2 * 2}" height="{s2 * 2}" '
+            f'<polygon points="{pts}" fill="{fill}" stroke="{stroke}" stroke-width="2"/>'
+        )
+    elif shape == "triangle_down":
+        pts = f"{x - s},{y - int(s * 0.7)} {x + s},{y - int(s * 0.7)} {x},{y + s}"
+        parts.append(
+            f'<polygon points="{pts}" fill="{fill}" stroke="{stroke}" stroke-width="2"/>'
+        )
+    elif shape == "triangle_left":
+        pts = f"{x + int(s * 0.7)},{y - s} {x + int(s * 0.7)},{y + s} {x - s},{y}"
+        parts.append(
+            f'<polygon points="{pts}" fill="{fill}" stroke="{stroke}" stroke-width="2"/>'
+        )
+    elif shape == "triangle_right":
+        pts = f"{x - int(s * 0.7)},{y - s} {x + s},{y} {x - int(s * 0.7)},{y + s}"
+        parts.append(
+            f'<polygon points="{pts}" fill="{fill}" stroke="{stroke}" stroke-width="2"/>'
+        )
+    elif shape == "diamond":
+        pts = f"{x},{y - s} {x + s},{y} {x},{y + s} {x - s},{y}"
+        parts.append(
+            f'<polygon points="{pts}" fill="{fill}" stroke="{stroke}" stroke-width="2"/>'
+        )
+    else:  # square
+        hs = int(s * 0.8)
+        parts.append(
+            f'<rect x="{x - hs}" y="{y - hs}" width="{hs * 2}" height="{hs * 2}" '
             f'fill="{fill}" stroke="{stroke}" stroke-width="2" rx="3"/>'
         )
-    # label
+    # Center label
     parts.append(
-        f'<text x="{x}" y="{y + 4}" text-anchor="middle" font-size="10" '
-        f'font-weight="bold" fill="{C_TEXT}">{_escape(label)}</text>'
+        f'<text x="{x}" y="{y + 4}" text-anchor="middle" font-size="9" '
+        f'font-weight="bold" fill="{C_TEXT}" pointer-events="none">'
+        f'{_escape(label)}</text>'
     )
     return "\n".join(parts)
 
 
-def _channel_line_svg(center_a: str, center_b: str, color: str) -> str:
-    if center_a not in _CENTER_POS or center_b not in _CENTER_POS:
+def _render_centers(centers: list[dict]) -> str:
+    defined_set: set[str] = set()
+    for c in centers:
+        if c.get("defined"):
+            defined_set.add(c["id"])
+    parts = [_center_shape_svg(cid, cid in defined_set) for cid in CENTER_RENDER_POS]
+    return "\n".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# Layer 5 — Gate activation dots
+# ---------------------------------------------------------------------------
+_GATE_DOT_R = 8
+
+
+def _render_gate_dots(gate_color_map: dict[int, str]) -> str:
+    """Draw colored dots behind gate numbers for active gates."""
+    parts: list[str] = []
+    for gate_num, color_key in gate_color_map.items():
+        if gate_num not in GATE_POSITIONS:
+            continue
+        gx, gy = GATE_POSITIONS[gate_num]
+        css = _gate_color_value(color_key)
+        parts.append(
+            f'<circle cx="{gx}" cy="{gy}" r="{_GATE_DOT_R}" '
+            f'fill="{css}" opacity="0.25"/>'
+        )
+    return "\n".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# Layer 6 — Gate numbers
+# ---------------------------------------------------------------------------
+_GATE_FONT = 8
+
+
+def _render_gate_numbers(active_gates: set[int], gate_color_map: dict[int, str]) -> str:
+    """Render all 64 gate numbers. Active gates are bold + colored."""
+    parts: list[str] = []
+    for gate_num, (gx, gy) in GATE_POSITIONS.items():
+        is_active = gate_num in active_gates
+        color = _gate_color_value(gate_color_map[gate_num]) if gate_num in gate_color_map else "#bbb"
+        weight = "bold" if is_active else "normal"
+        font_size = _GATE_FONT + 1 if is_active else _GATE_FONT
+        parts.append(
+            f'<text x="{gx}" y="{gy + 3}" text-anchor="middle" '
+            f'font-size="{font_size}" font-weight="{weight}" fill="{color}" '
+            f'pointer-events="none">{gate_num}</text>'
+        )
+    return "\n".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# Layer 7 — Variables arrows + Tone
+# ---------------------------------------------------------------------------
+_ARROW_LABELS = {
+    "digestion": "消化",
+    "environment": "环境",
+    "motivation": "动机",
+    "perspective": "观点",
+}
+
+
+def _render_variables(variables: dict | None) -> str:
+    if not variables:
         return ""
-    x1, y1 = _CENTER_POS[center_a]
-    x2, y2 = _CENTER_POS[center_b]
-    c = {"personality": C_PERSONALITY, "design": C_DESIGN, "mixed": C_MIXED}.get(color, "#999")
-    return (
-        f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" '
-        f'stroke="{c}" stroke-width="3" stroke-linecap="round" opacity="0.7"/>'
-    )
+    parts: list[str] = []
+    # Four arrows positioned across the top of the bodygraph
+    # Layout: ←2  ←3  |  4→  5→  (left pair = body, right pair = mind)
+    base_y = 48
+    positions = [
+        ("digestion",   280, base_y),    # top-left
+        ("environment", 340, base_y),    # left-center
+        ("motivation",  420, base_y),    # right-center
+        ("perspective", 480, base_y),    # top-right
+    ]
+    for var_key, vx, vy in positions:
+        var = variables.get(var_key)
+        if not var:
+            continue
+        arrow_dir = var.get("arrow", "Left")
+        tone = var.get("tone", "")
+        arrow_sym = "\u2190" if arrow_dir == "Left" else "\u2192"  # ← or →
+        label = _ARROW_LABELS.get(var_key, var_key)
+        display = f"{arrow_sym} {tone}" if tone else arrow_sym
+        parts.append(
+            f'<text x="{vx}" y="{vy}" text-anchor="middle" font-size="11" '
+            f'fill="{C_TEXT}">{_escape(display)}</text>'
+        )
+        parts.append(
+            f'<text x="{vx}" y="{vy + 12}" text-anchor="middle" font-size="7" '
+            f'fill="#999">{_escape(label)}</text>'
+        )
+    return "\n".join(parts)
 
 
-def generate_chart_svg(graph_data: dict, words_data: dict, name: str = "", birth_info: str = "") -> str:
+# ---------------------------------------------------------------------------
+# Layer 8 — Activation tables (side panels)
+# ---------------------------------------------------------------------------
+def _render_activation_tables(activations: dict | None) -> str:
+    """Left panel = Design (red), Right panel = Personality (black)."""
+    if not activations:
+        return ""
+    parts: list[str] = []
+
+    def _draw_table(
+        rows: list[dict], start_x: int, start_y: int,
+        text_color: str, side_label: str
+    ) -> None:
+        # Header
+        parts.append(
+            f'<text x="{start_x + 55}" y="{start_y}" text-anchor="middle" '
+            f'font-size="10" font-weight="bold" fill="{text_color}">'
+            f'{_escape(side_label)}</text>'
+        )
+        row_h = 18
+        for i, row in enumerate(rows):
+            ry = start_y + 16 + i * row_h
+            planet = row.get("planet", "")
+            symbol = _PLANET_SYMBOLS.get(planet, "?")
+            gate = row.get("gate")
+            line = row.get("line")
+            if gate is not None:
+                gate_line = f"{gate}.{line}"
+            else:
+                gate_line = "-"
+            # Planet symbol
+            parts.append(
+                f'<text x="{start_x + 6}" y="{ry}" font-size="12" '
+                f'fill="{text_color}">{symbol}</text>'
+            )
+            # Gate.Line
+            parts.append(
+                f'<text x="{start_x + 26}" y="{ry}" font-size="10" '
+                f'fill="{text_color}">{_escape(gate_line)}</text>'
+            )
+            # Gate name (truncated)
+            gname = row.get("gate_name_zh", "")
+            if len(gname) > 5:
+                gname = gname[:5] + ".."
+            parts.append(
+                f'<text x="{start_x + 64}" y="{ry}" font-size="8" '
+                f'fill="{text_color}" opacity="0.7">{_escape(gname)}</text>'
+            )
+
+    # Design (left, red)
+    design_rows = activations.get("design", [])
+    _draw_table(design_rows, 8, 110, C_DESIGN, "Design \u8bbe\u8ba1")
+
+    # Personality (right, black)
+    personality_rows = activations.get("personality", [])
+    _draw_table(personality_rows, 640, 110, C_PERSONALITY, "Personality \u4e2a\u6027")
+
+    return "\n".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# Layer 9 — Info bar
+# ---------------------------------------------------------------------------
+def _render_info_bar(words_data: dict) -> str:
+    parts: list[str] = []
+    meta_y = 710
+    line_h = 18
+
+    info_items: list[str] = []
+    type_zh = words_data.get("type_info", {}).get("name_zh", "")
+    strategy = words_data.get("type_info", {}).get("strategy", "")
+    authority_zh = words_data.get("authority_info", {}).get("name_zh", "")
+    profile_key = words_data.get("profile_info", {}).get("key", "")
+    definition_zh = words_data.get("definition_info", {}).get("name_zh", "")
+    not_self = words_data.get("type_info", {}).get("not_self", "")
+    cross_zh = words_data.get("cross_info", {}).get("name_zh", "")
+
+    if type_zh:
+        info_items.append(f"\u7c7b\u578b: {type_zh}")
+    if strategy:
+        info_items.append(f"\u7b56\u7565: {strategy}")
+    if profile_key:
+        info_items.append(f"\u4eba\u751f\u89d2\u8272: {profile_key}")
+    if authority_zh:
+        info_items.append(f"\u6743\u5a01: {authority_zh}")
+    if definition_zh:
+        info_items.append(f"\u5b9a\u4e49: {definition_zh}")
+    if not_self:
+        info_items.append(f"\u975e\u81ea\u6211\u4e3b\u9898: {not_self}")
+    if cross_zh:
+        info_items.append(f"\u8f6e\u56de\u4ea4\u53c9: {cross_zh}")
+
+    # Two-column layout
+    col1_x, col2_x = 30, 400
+    for i, item in enumerate(info_items):
+        col_x = col1_x if i % 2 == 0 else col2_x
+        row = i // 2
+        parts.append(
+            f'<text x="{col_x}" y="{meta_y + row * line_h}" '
+            f'font-size="10" fill="{C_TEXT}">{_escape(item)}</text>'
+        )
+
+    return "\n".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# Legend
+# ---------------------------------------------------------------------------
+def _render_legend() -> str:
+    ly = H - 22
+    parts: list[str] = []
+    items = [
+        (C_DEFINED, C_STROKE_DEF, "\u5df2\u5b9a\u4e49"),
+        (C_UNDEFINED, C_STROKE_UNDEF, "\u672a\u5b9a\u4e49"),
+    ]
+    lx = 200
+    for fill, stroke, label in items:
+        parts.append(
+            f'<rect x="{lx}" y="{ly - 10}" width="12" height="12" '
+            f'fill="{fill}" stroke="{stroke}" stroke-width="1"/>'
+        )
+        parts.append(f'<text x="{lx + 16}" y="{ly}" font-size="9" fill="#888">{label}</text>')
+        lx += 64
+
+    line_items = [
+        (C_PERSONALITY, "\u4e2a\u6027(Personality)"),
+        (C_DESIGN, "\u8bbe\u8ba1(Design)"),
+        (C_BOTH, "\u4e24\u8005(Both)"),
+    ]
+    for color, label in line_items:
+        parts.append(
+            f'<line x1="{lx}" y1="{ly - 4}" x2="{lx + 15}" y2="{ly - 4}" '
+            f'stroke="{color}" stroke-width="2"/>'
+        )
+        parts.append(f'<text x="{lx + 19}" y="{ly}" font-size="9" fill="#888">{label}</text>')
+        lx += 90
+    return "\n".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# Public API
+# ---------------------------------------------------------------------------
+def generate_chart_svg(
+    graph_data: dict, words_data: dict,
+    name: str = "", birth_info: str = "",
+) -> str:
     """Generate a self-contained SVG bodygraph image.
 
     Args:
@@ -118,94 +497,68 @@ def generate_chart_svg(graph_data: dict, words_data: dict, name: str = "", birth
     Returns:
         SVG string.
     """
-    parts = [
+    parts: list[str] = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
-        f'width="{W}" height="{H}" style="font-family: -apple-system, BlinkMacSystemFont, sans-serif;">',
+        f'width="{W}" height="{H}" '
+        f'style="font-family: -apple-system, BlinkMacSystemFont, \'Noto Sans SC\', sans-serif;">',
         f'<rect width="{W}" height="{H}" fill="{C_BG}" rx="12"/>',
     ]
 
-    # Title
-    title = _escape(f"{name} 的人类图" if name else "人类图")
+    # --- Title ---
+    title = _escape(f"{name} \u7684\u4eba\u7c7b\u56fe" if name else "\u4eba\u7c7b\u56fe")
     parts.append(
-        f'<text x="{W // 2}" y="28" text-anchor="middle" font-size="16" '
+        f'<text x="{W // 2}" y="22" text-anchor="middle" font-size="15" '
         f'font-weight="bold" fill="{C_TEXT}">{title}</text>'
     )
     if birth_info:
         parts.append(
-            f'<text x="{W // 2}" y="44" text-anchor="middle" font-size="11" '
+            f'<text x="{W // 2}" y="36" text-anchor="middle" font-size="10" '
             f'fill="#888">{_escape(birth_info)}</text>'
         )
 
-    # Meta info (type / profile / authority)
-    meta = graph_data.get("meta", {})
-    type_zh = words_data.get("type_info", {}).get("name_zh", meta.get("type", ""))
-    profile = meta.get("profile", "")
-    authority_zh = words_data.get("authority_info", {}).get("name_zh", meta.get("authority", ""))
-    # Not-self theme
-    not_self = words_data.get("type_info", {}).get("not_self", "")
+    # --- Build lookup structures ---
+    # Gate color map: gate_num → "personality" | "design" | "both"
+    gate_color_map: dict[int, str] = {}
+    for g in graph_data.get("gates", []):
+        gate_color_map[g["gate"]] = g.get("color", "personality")
 
-    # Channels (draw behind centers)
+    active_gates = set(gate_color_map.keys())
+
+    # Active channel keys
+    active_channel_keys: set[tuple[int, int]] = set()
     for ch in graph_data.get("channels", []):
-        parts.append(_channel_line_svg(ch["center_a"], ch["center_b"], ch["color"]))
+        active_channel_keys.add((ch["gate_a"], ch["gate_b"]))
 
-    # Centers
-    centers_defined = {}
-    for c in graph_data.get("centers", []):
-        centers_defined[c["id"]] = c["defined"]
-    for cid in _CENTER_POS:
-        defined = centers_defined.get(cid, False)
-        parts.append(_center_shape_svg(cid, defined))
+    # --- Layer 1: Human silhouette ---
+    parts.append(_render_silhouette())
 
-    # Info box at bottom-left
-    info_lines = []
-    if type_zh:
-        info_lines.append(f"类型: {type_zh}")
-    if profile:
-        info_lines.append(f"人生角色: {profile}")
-    if authority_zh:
-        info_lines.append(f"权威: {authority_zh}")
-    definition_zh = words_data.get("definition_info", {}).get("name_zh", "")
-    if definition_zh:
-        info_lines.append(f"定义: {definition_zh}")
-    if not_self:
-        info_lines.append(f"非自我主题: {not_self}")
+    # --- Layer 2: Inactive channels ---
+    parts.append(_render_inactive_channels(active_channel_keys))
 
-    # Draw info text
-    # Strategy
-    strategy = words_data.get("type_info", {}).get("strategy", "")
-    if strategy:
-        info_lines.append(f"策略: {strategy}")
+    # --- Layer 3: Active channels ---
+    parts.append(_render_active_channels(graph_data.get("channels", []), gate_color_map))
 
-    cross_zh = words_data.get("cross_info", {}).get("name_zh", "")
-    if cross_zh:
-        info_lines.append(f"轮回交叉: {cross_zh}")
+    # --- Layer 4: Centers ---
+    parts.append(_render_centers(graph_data.get("centers", [])))
 
-    # Render info lines in a box area top-right corner
-    # Actually let's keep them simple above the graph
-    # We'll put them below the title area
+    # --- Layer 5: Gate activation dots ---
+    parts.append(_render_gate_dots(gate_color_map))
 
-    # Legend
-    ly = H - 20
-    parts.append(
-        f'<rect x="8" y="{ly - 10}" width="12" height="12" fill="{C_DEFINED}" '
-        f'stroke="{C_STROKE_DEF}" stroke-width="1"/>'
-    )
-    parts.append(f'<text x="24" y="{ly}" font-size="9" fill="#888">已定义</text>')
-    parts.append(
-        f'<rect x="60" y="{ly - 10}" width="12" height="12" fill="{C_UNDEFINED}" '
-        f'stroke="{C_STROKE_UNDEF}" stroke-width="1"/>'
-    )
-    parts.append(f'<text x="76" y="{ly}" font-size="9" fill="#888">未定义</text>')
-    parts.append(
-        f'<line x1="120" y1="{ly - 4}" x2="135" y2="{ly - 4}" '
-        f'stroke="{C_PERSONALITY}" stroke-width="2"/>'
-    )
-    parts.append(f'<text x="139" y="{ly}" font-size="9" fill="#888">个性</text>')
-    parts.append(
-        f'<line x1="165" y1="{ly - 4}" x2="180" y2="{ly - 4}" '
-        f'stroke="{C_DESIGN}" stroke-width="2"/>'
-    )
-    parts.append(f'<text x="184" y="{ly}" font-size="9" fill="#888">设计</text>')
+    # --- Layer 6: Gate numbers ---
+    parts.append(_render_gate_numbers(active_gates, gate_color_map))
+
+    # --- Layer 7: Variables arrows + Tone ---
+    variables = graph_data.get("meta", {}).get("variables")
+    parts.append(_render_variables(variables))
+
+    # --- Layer 8: Activation tables ---
+    parts.append(_render_activation_tables(words_data.get("activations")))
+
+    # --- Layer 9: Info bar ---
+    parts.append(_render_info_bar(words_data))
+
+    # --- Legend ---
+    parts.append(_render_legend())
 
     parts.append("</svg>")
     return "\n".join(parts)
