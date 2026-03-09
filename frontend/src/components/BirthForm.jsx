@@ -10,11 +10,13 @@ export default function BirthForm({ onSubmit, loading }) {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [searched, setSearched] = useState(false);
   const searchTimeout = useRef(null);
 
   useEffect(() => {
     if (!placeQuery.trim()) {
       setSuggestions([]);
+      setSearched(false);
       return;
     }
     clearTimeout(searchTimeout.current);
@@ -23,8 +25,10 @@ export default function BirthForm({ onSubmit, loading }) {
         const results = await searchPlaces(placeQuery);
         setSuggestions(results);
         setShowSuggestions(true);
+        setSearched(true);
       } catch {
         setSuggestions([]);
+        setSearched(true);
       }
     }, 300);
     return () => clearTimeout(searchTimeout.current);
@@ -112,12 +116,15 @@ export default function BirthForm({ onSubmit, loading }) {
             ))}
           </ul>
         )}
+        {showSuggestions && searched && suggestions.length === 0 && !selectedPlace && (
+          <div className="place-no-result">未找到匹配的城市，请尝试其他关键词</div>
+        )}
         {selectedPlace && (
           <span className="place-hint">
             {selectedPlace.name} — {Math.abs(selectedPlace.lng).toFixed(2)}°{selectedPlace.lng >= 0 ? "E" : "W"} / {Math.abs(selectedPlace.lat).toFixed(2)}°{selectedPlace.lat >= 0 ? "N" : "S"} (UTC{selectedPlace.utcOffset >= 0 ? "+" : ""}{selectedPlace.utcOffset})
           </span>
         )}
-        {!selectedPlace && placeQuery && (
+        {!selectedPlace && placeQuery && !showSuggestions && (
           <span className="place-hint">请从搜索结果中选择一个地点</span>
         )}
       </div>
