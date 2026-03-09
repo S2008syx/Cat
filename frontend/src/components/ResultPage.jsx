@@ -1,9 +1,11 @@
 /**
- * Result page — displays bodygraph SVG (left) and text info (right).
+ * Result page — displays bodygraph (left) and text info (right).
  */
+import Bodygraph from "./Bodygraph";
+import ReportPanel from "./ReportPanel";
 
 export default function ResultPage({ result, onBack }) {
-  const { words, input, chart_svg } = result;
+  const { graph, words, input, chart_svg } = result;
 
   const typeInfo = words?.type_info || {};
   const authorityInfo = words?.authority_info || {};
@@ -37,7 +39,7 @@ export default function ResultPage({ result, onBack }) {
 
       {/* Main content */}
       <div className="result-content">
-        {/* Left: Bodygraph SVG */}
+        {/* Left: Bodygraph */}
         <div className="result-left">
           {chart_svg ? (
             <div className="chart-container">
@@ -48,6 +50,8 @@ export default function ResultPage({ result, onBack }) {
                 </button>
               </div>
             </div>
+          ) : graph ? (
+            <Bodygraph graphData={graph} />
           ) : (
             <div className="chart-container" style={{ textAlign: "center", padding: "80px 0", color: "#6b8bb5" }}>
               图表生成中...
@@ -60,18 +64,18 @@ export default function ResultPage({ result, onBack }) {
           <div className="info-panel">
             <div className="info-panel-title">基本信息</div>
 
-            {/* Type - largest card */}
+            {/* Type */}
             <div className="info-card">
               <div className="info-card-label">类型 Type</div>
               <div className="info-card-value">{typeInfo.name_zh || "-"}</div>
               <div className="info-card-sub">{typeInfo.key || ""}</div>
             </div>
 
-            {/* Strategy + Authority in grid */}
+            {/* Strategy + Authority */}
             <div className="info-grid">
               <div className="info-card">
                 <div className="info-card-label">策略 Strategy</div>
-                <div className="info-card-value">{typeInfo.strategy_zh || "-"}</div>
+                <div className="info-card-value">{typeInfo.strategy_zh || typeInfo.strategy || "-"}</div>
               </div>
               <div className="info-card">
                 <div className="info-card-label">内在权威 Authority</div>
@@ -80,7 +84,7 @@ export default function ResultPage({ result, onBack }) {
               </div>
             </div>
 
-            {/* Profile + Definition in grid */}
+            {/* Profile + Definition */}
             <div className="info-grid">
               <div className="info-card">
                 <div className="info-card-label">人生角色 Profile</div>
@@ -106,6 +110,9 @@ export default function ResultPage({ result, onBack }) {
               <div className="info-card-sub">{crossInfo.name_en || ""}</div>
             </div>
           </div>
+
+          {/* Detailed report */}
+          <ReportPanel wordsData={words} inputData={input} />
         </div>
       </div>
     </div>
