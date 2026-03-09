@@ -10,37 +10,25 @@ export default function BirthForm({ onSubmit, loading }) {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [searchStatus, setSearchStatus] = useState("idle"); // "idle" | "found" | "not_found" | "error"
+  const [searchStatus, setSearchStatus] = useState("idle"); // "idle" | "found" | "not_found"
   const [searchMsg, setSearchMsg] = useState("");
-  const [searching, setSearching] = useState(false);
 
-  const handleSearch = async () => {
+  const handleSearch = () => {
     const q = placeQuery.trim();
     if (!q) return;
-    setSearching(true);
     setSelectedPlace(null);
     setSearchStatus("idle");
     setSearchMsg("");
-    try {
-      const { results, source } = await searchPlaces(q);
-      setSuggestions(results);
-      if (results.length > 0) {
-        setShowSuggestions(true);
-        setSearchStatus("found");
-        const hint = source === "offline" ? "（离线数据）" : "";
-        setSearchMsg(`找到 ${results.length} 个结果${hint}，请点击选择`);
-      } else {
-        setShowSuggestions(false);
-        setSearchStatus("not_found");
-        setSearchMsg(`未找到"${q}"，请输入正确的中国城市名（如：北京、上海、广州）`);
-      }
-    } catch (err) {
-      setSuggestions([]);
+    const results = searchPlaces(q);
+    setSuggestions(results);
+    if (results.length > 0) {
+      setShowSuggestions(true);
+      setSearchStatus("found");
+      setSearchMsg(`找到 ${results.length} 个结果，请点击选择`);
+    } else {
       setShowSuggestions(false);
-      setSearchStatus("error");
-      setSearchMsg(`搜索异常：${err?.message || "未知错误"}`);
-    } finally {
-      setSearching(false);
+      setSearchStatus("not_found");
+      setSearchMsg(`未找到"${q}"，请输入正确的中国城市名（如：北京、上海、广州）`);
     }
   };
 
@@ -73,7 +61,7 @@ export default function BirthForm({ onSubmit, loading }) {
 
   const searchBtnClass =
     searchStatus === "found" ? "search-btn found" :
-    (searchStatus === "not_found" || searchStatus === "error") ? "search-btn not-found" :
+    searchStatus === "not_found" ? "search-btn not-found" :
     "search-btn";
 
   return (
@@ -134,9 +122,9 @@ export default function BirthForm({ onSubmit, loading }) {
             type="button"
             className={searchBtnClass}
             onClick={handleSearch}
-            disabled={searching || !placeQuery.trim()}
+            disabled={!placeQuery.trim()}
           >
-            {searching ? "..." : "搜索"}
+            搜索
           </button>
         </div>
         {showSuggestions && suggestions.length > 0 && (

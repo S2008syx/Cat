@@ -7,24 +7,16 @@ import "./App.css";
 export default function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const handleSubmit = async (formData) => {
     setLoading(true);
-    setError(null);
-    try {
-      const data = await fetchChart(formData);
-      setResult(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+    const data = await fetchChart(formData);
+    setResult(data);
+    setLoading(false);
   };
 
   const handleBack = () => {
     setResult(null);
-    setError(null);
   };
 
   // Page 2: Result
@@ -46,8 +38,6 @@ export default function App() {
         </div>
 
         <BirthForm onSubmit={handleSubmit} loading={loading} />
-
-        {error && <div className="error-banner" role="alert">错误: {error}</div>}
       </div>
 
       {loading && (
