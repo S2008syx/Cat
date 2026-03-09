@@ -43,6 +43,9 @@ CITIES = [
     {"name": "呼伦贝尔", "name_en": "Hulunbuir", "province": "内蒙古自治区", "country": "CN", "lng": 119.7656, "lat": 49.2117, "utc_offset": 8},
     {"name": "巴彦淖尔", "name_en": "Bayannur", "province": "内蒙古自治区", "country": "CN", "lng": 107.3878, "lat": 40.7431, "utc_offset": 8},
     {"name": "乌兰察布", "name_en": "Ulanqab", "province": "内蒙古自治区", "country": "CN", "lng": 113.1327, "lat": 40.9942, "utc_offset": 8},
+    {"name": "兴安盟", "name_en": "Xinganmeng", "province": "内蒙古自治区", "country": "CN", "lng": 122.0378, "lat": 46.0763, "utc_offset": 8},
+    {"name": "锡林郭勒", "name_en": "Xilingol", "province": "内蒙古自治区", "country": "CN", "lng": 116.0477, "lat": 43.9333, "utc_offset": 8},
+    {"name": "阿拉善盟", "name_en": "Alxa", "province": "内蒙古自治区", "country": "CN", "lng": 105.7289, "lat": 38.8513, "utc_offset": 8},
 
     # ===== 辽宁省 =====
     {"name": "沈阳", "name_en": "Shenyang", "province": "辽宁省", "country": "CN", "lng": 123.4315, "lat": 41.8057, "utc_offset": 8},
@@ -69,6 +72,7 @@ CITIES = [
     {"name": "白山", "name_en": "Baishan", "province": "吉林省", "country": "CN", "lng": 126.4244, "lat": 41.9425, "utc_offset": 8},
     {"name": "松原", "name_en": "Songyuan", "province": "吉林省", "country": "CN", "lng": 124.8234, "lat": 45.1418, "utc_offset": 8},
     {"name": "白城", "name_en": "Baicheng", "province": "吉林省", "country": "CN", "lng": 122.841, "lat": 45.619, "utc_offset": 8},
+    {"name": "延边", "name_en": "Yanbian", "province": "吉林省", "country": "CN", "lng": 129.5132, "lat": 42.8967, "utc_offset": 8},
 
     # ===== 黑龙江省 =====
     {"name": "哈尔滨", "name_en": "Harbin", "province": "黑龙江省", "country": "CN", "lng": 126.6424, "lat": 45.7567, "utc_offset": 8},
@@ -83,6 +87,7 @@ CITIES = [
     {"name": "牡丹江", "name_en": "Mudanjiang", "province": "黑龙江省", "country": "CN", "lng": 129.6188, "lat": 44.5527, "utc_offset": 8},
     {"name": "黑河", "name_en": "Heihe", "province": "黑龙江省", "country": "CN", "lng": 127.499, "lat": 50.2496, "utc_offset": 8},
     {"name": "绥化", "name_en": "Suihua", "province": "黑龙江省", "country": "CN", "lng": 126.9688, "lat": 46.6535, "utc_offset": 8},
+    {"name": "大兴安岭", "name_en": "Daxinganling", "province": "黑龙江省", "country": "CN", "lng": 124.1116, "lat": 52.3353, "utc_offset": 8},
 
     # ===== 江苏省 =====
     {"name": "南京", "name_en": "Nanjing", "province": "江苏省", "country": "CN", "lng": 118.7969, "lat": 32.0603, "utc_offset": 8},
@@ -129,6 +134,7 @@ CITIES = [
     {"name": "亳州", "name_en": "Bozhou", "province": "安徽省", "country": "CN", "lng": 115.7785, "lat": 33.8693, "utc_offset": 8},
     {"name": "池州", "name_en": "Chizhou", "province": "安徽省", "country": "CN", "lng": 117.4894, "lat": 30.656, "utc_offset": 8},
     {"name": "宣城", "name_en": "Xuancheng", "province": "安徽省", "country": "CN", "lng": 118.758, "lat": 30.9457, "utc_offset": 8},
+    {"name": "巢湖", "name_en": "Chaohu", "province": "安徽省", "country": "CN", "lng": 117.8742, "lat": 31.6005, "utc_offset": 8},
 
     # ===== 福建省 =====
     {"name": "福州", "name_en": "Fuzhou", "province": "福建省", "country": "CN", "lng": 119.2965, "lat": 26.0745, "utc_offset": 8},
@@ -171,6 +177,7 @@ CITIES = [
     {"name": "聊城", "name_en": "Liaocheng", "province": "山东省", "country": "CN", "lng": 115.9854, "lat": 36.4565, "utc_offset": 8},
     {"name": "滨州", "name_en": "Binzhou", "province": "山东省", "country": "CN", "lng": 117.9703, "lat": 37.3822, "utc_offset": 8},
     {"name": "菏泽", "name_en": "Heze", "province": "山东省", "country": "CN", "lng": 115.4804, "lat": 35.234, "utc_offset": 8},
+    {"name": "莱芜", "name_en": "Laiwu", "province": "山东省", "country": "CN", "lng": 117.6777, "lat": 36.2144, "utc_offset": 8},
 
     # ===== 河南省 =====
     {"name": "郑州", "name_en": "Zhengzhou", "province": "河南省", "country": "CN", "lng": 113.6254, "lat": 34.7466, "utc_offset": 8},
@@ -204,6 +211,7 @@ CITIES = [
     {"name": "黄冈", "name_en": "Huanggang", "province": "湖北省", "country": "CN", "lng": 114.8726, "lat": 30.4536, "utc_offset": 8},
     {"name": "咸宁", "name_en": "Xianning", "province": "湖北省", "country": "CN", "lng": 114.3226, "lat": 29.8413, "utc_offset": 8},
     {"name": "随州", "name_en": "Suizhou", "province": "湖北省", "country": "CN", "lng": 113.3826, "lat": 31.6904, "utc_offset": 8},
+    {"name": "恩施", "name_en": "Enshi", "province": "湖北省", "country": "CN", "lng": 109.4869, "lat": 30.2831, "utc_offset": 8},
 
     # ===== 湖南省 =====
     {"name": "长沙", "name_en": "Changsha", "province": "湖南省", "country": "CN", "lng": 112.9388, "lat": 28.2278, "utc_offset": 8},
@@ -219,6 +227,7 @@ CITIES = [
     {"name": "永州", "name_en": "Yongzhou", "province": "湖南省", "country": "CN", "lng": 111.6082, "lat": 26.4345, "utc_offset": 8},
     {"name": "怀化", "name_en": "Huaihua", "province": "湖南省", "country": "CN", "lng": 109.9535, "lat": 27.5494, "utc_offset": 8},
     {"name": "娄底", "name_en": "Loudi", "province": "湖南省", "country": "CN", "lng": 112.0004, "lat": 27.6979, "utc_offset": 8},
+    {"name": "湘西", "name_en": "Xiangxi", "province": "湖南省", "country": "CN", "lng": 109.7395, "lat": 28.3111, "utc_offset": 8},
 
     # ===== 广东省 =====
     {"name": "广州", "name_en": "Guangzhou", "province": "广东省", "country": "CN", "lng": 113.2644, "lat": 23.1291, "utc_offset": 8},
@@ -284,6 +293,9 @@ CITIES = [
     {"name": "雅安", "name_en": "Yaan", "province": "四川省", "country": "CN", "lng": 103.0139, "lat": 29.9892, "utc_offset": 8},
     {"name": "巴中", "name_en": "Bazhong", "province": "四川省", "country": "CN", "lng": 106.7474, "lat": 31.8672, "utc_offset": 8},
     {"name": "资阳", "name_en": "Ziyang", "province": "四川省", "country": "CN", "lng": 104.6279, "lat": 30.1222, "utc_offset": 8},
+    {"name": "阿坝", "name_en": "Aba", "province": "四川省", "country": "CN", "lng": 102.2215, "lat": 31.8998, "utc_offset": 8},
+    {"name": "甘孜", "name_en": "Ganzi", "province": "四川省", "country": "CN", "lng": 101.9625, "lat": 30.0507, "utc_offset": 8},
+    {"name": "凉山", "name_en": "Liangshan", "province": "四川省", "country": "CN", "lng": 102.2634, "lat": 27.8868, "utc_offset": 8},
 
     # ===== 贵州省 =====
     {"name": "贵阳", "name_en": "Guiyang", "province": "贵州省", "country": "CN", "lng": 106.7135, "lat": 26.5783, "utc_offset": 8},
@@ -292,6 +304,9 @@ CITIES = [
     {"name": "安顺", "name_en": "Anshun", "province": "贵州省", "country": "CN", "lng": 105.9323, "lat": 26.2455, "utc_offset": 8},
     {"name": "毕节", "name_en": "Bijie", "province": "贵州省", "country": "CN", "lng": 105.2847, "lat": 27.3017, "utc_offset": 8},
     {"name": "铜仁", "name_en": "Tongren", "province": "贵州省", "country": "CN", "lng": 109.191, "lat": 27.7183, "utc_offset": 8},
+    {"name": "黔西南", "name_en": "Qianxinan", "province": "贵州省", "country": "CN", "lng": 104.9063, "lat": 25.088, "utc_offset": 8},
+    {"name": "黔东南", "name_en": "Qiandongnan", "province": "贵州省", "country": "CN", "lng": 107.9852, "lat": 26.5836, "utc_offset": 8},
+    {"name": "黔南", "name_en": "Qiannan", "province": "贵州省", "country": "CN", "lng": 107.5223, "lat": 26.2539, "utc_offset": 8},
 
     # ===== 云南省 =====
     {"name": "昆明", "name_en": "Kunming", "province": "云南省", "country": "CN", "lng": 102.8329, "lat": 24.8801, "utc_offset": 8},
@@ -302,6 +317,14 @@ CITIES = [
     {"name": "丽江", "name_en": "Lijiang", "province": "云南省", "country": "CN", "lng": 100.227, "lat": 26.8721, "utc_offset": 8},
     {"name": "普洱", "name_en": "Puer", "province": "云南省", "country": "CN", "lng": 100.9721, "lat": 22.7772, "utc_offset": 8},
     {"name": "临沧", "name_en": "Lincang", "province": "云南省", "country": "CN", "lng": 100.0868, "lat": 23.8866, "utc_offset": 8},
+    {"name": "楚雄", "name_en": "Chuxiong", "province": "云南省", "country": "CN", "lng": 101.546, "lat": 25.042, "utc_offset": 8},
+    {"name": "红河", "name_en": "Honghe", "province": "云南省", "country": "CN", "lng": 103.3756, "lat": 23.3641, "utc_offset": 8},
+    {"name": "文山", "name_en": "Wenshan", "province": "云南省", "country": "CN", "lng": 104.2441, "lat": 23.3695, "utc_offset": 8},
+    {"name": "西双版纳", "name_en": "Xishuangbanna", "province": "云南省", "country": "CN", "lng": 100.7971, "lat": 22.0017, "utc_offset": 8},
+    {"name": "大理", "name_en": "Dali", "province": "云南省", "country": "CN", "lng": 100.2676, "lat": 25.6065, "utc_offset": 8},
+    {"name": "德宏", "name_en": "Dehong", "province": "云南省", "country": "CN", "lng": 98.5854, "lat": 24.4367, "utc_offset": 8},
+    {"name": "怒江", "name_en": "Nujiang", "province": "云南省", "country": "CN", "lng": 98.8543, "lat": 25.8509, "utc_offset": 8},
+    {"name": "迪庆", "name_en": "Diqing", "province": "云南省", "country": "CN", "lng": 99.7065, "lat": 27.8269, "utc_offset": 8},
 
     # ===== 西藏自治区 =====
     {"name": "拉萨", "name_en": "Lhasa", "province": "西藏自治区", "country": "CN", "lng": 91.1322, "lat": 29.6604, "utc_offset": 8},
@@ -310,6 +333,7 @@ CITIES = [
     {"name": "林芝", "name_en": "Nyingchi", "province": "西藏自治区", "country": "CN", "lng": 94.3624, "lat": 29.649, "utc_offset": 8},
     {"name": "山南", "name_en": "Shannan", "province": "西藏自治区", "country": "CN", "lng": 91.7665, "lat": 29.236, "utc_offset": 8},
     {"name": "那曲", "name_en": "Nagqu", "province": "西藏自治区", "country": "CN", "lng": 92.0602, "lat": 31.4762, "utc_offset": 8},
+    {"name": "阿里", "name_en": "Ngari", "province": "西藏自治区", "country": "CN", "lng": 80.1055, "lat": 32.503, "utc_offset": 8},
 
     # ===== 陕西省 =====
     {"name": "西安", "name_en": "Xian", "province": "陕西省", "country": "CN", "lng": 108.9402, "lat": 34.3416, "utc_offset": 8},
@@ -336,10 +360,18 @@ CITIES = [
     {"name": "庆阳", "name_en": "Qingyang", "province": "甘肃省", "country": "CN", "lng": 107.6382, "lat": 35.7341, "utc_offset": 8},
     {"name": "定西", "name_en": "Dingxi", "province": "甘肃省", "country": "CN", "lng": 104.592, "lat": 35.5806, "utc_offset": 8},
     {"name": "陇南", "name_en": "Longnan", "province": "甘肃省", "country": "CN", "lng": 104.9219, "lat": 33.3886, "utc_offset": 8},
+    {"name": "甘南", "name_en": "Gannan", "province": "甘肃省", "country": "CN", "lng": 102.911, "lat": 34.9864, "utc_offset": 8},
+    {"name": "临夏", "name_en": "Linxia", "province": "甘肃省", "country": "CN", "lng": 103.2106, "lat": 35.5994, "utc_offset": 8},
 
     # ===== 青海省 =====
     {"name": "西宁", "name_en": "Xining", "province": "青海省", "country": "CN", "lng": 101.7782, "lat": 36.6171, "utc_offset": 8},
     {"name": "海东", "name_en": "Haidong", "province": "青海省", "country": "CN", "lng": 102.1028, "lat": 36.5029, "utc_offset": 8},
+    {"name": "海北", "name_en": "Haibei", "province": "青海省", "country": "CN", "lng": 100.901, "lat": 36.9594, "utc_offset": 8},
+    {"name": "黄南", "name_en": "Huangnan", "province": "青海省", "country": "CN", "lng": 102.015, "lat": 35.5177, "utc_offset": 8},
+    {"name": "海南", "name_en": "Hainan", "province": "青海省", "country": "CN", "lng": 100.6199, "lat": 36.2863, "utc_offset": 8},
+    {"name": "果洛", "name_en": "Guoluo", "province": "青海省", "country": "CN", "lng": 100.2424, "lat": 34.4736, "utc_offset": 8},
+    {"name": "玉树", "name_en": "Yushu", "province": "青海省", "country": "CN", "lng": 97.0085, "lat": 33.004, "utc_offset": 8},
+    {"name": "海西", "name_en": "Haixi", "province": "青海省", "country": "CN", "lng": 97.3706, "lat": 37.3737, "utc_offset": 8},
 
     # ===== 宁夏回族自治区 =====
     {"name": "银川", "name_en": "Yinchuan", "province": "宁夏回族自治区", "country": "CN", "lng": 106.2782, "lat": 38.4664, "utc_offset": 8},
@@ -353,6 +385,16 @@ CITIES = [
     {"name": "克拉玛依", "name_en": "Karamay", "province": "新疆维吾尔自治区", "country": "CN", "lng": 84.8739, "lat": 45.5959, "utc_offset": 8},
     {"name": "吐鲁番", "name_en": "Turpan", "province": "新疆维吾尔自治区", "country": "CN", "lng": 89.1841, "lat": 42.9476, "utc_offset": 8},
     {"name": "哈密", "name_en": "Hami", "province": "新疆维吾尔自治区", "country": "CN", "lng": 93.5151, "lat": 42.8185, "utc_offset": 8},
+    {"name": "昌吉", "name_en": "Changji", "province": "新疆维吾尔自治区", "country": "CN", "lng": 87.304, "lat": 44.0146, "utc_offset": 8},
+    {"name": "博尔塔拉", "name_en": "Bortala", "province": "新疆维吾尔自治区", "country": "CN", "lng": 82.0748, "lat": 44.9056, "utc_offset": 8},
+    {"name": "巴音郭楞", "name_en": "Bayingol", "province": "新疆维吾尔自治区", "country": "CN", "lng": 86.145, "lat": 41.7641, "utc_offset": 8},
+    {"name": "阿克苏", "name_en": "Aksu", "province": "新疆维吾尔自治区", "country": "CN", "lng": 80.2651, "lat": 41.1707, "utc_offset": 8},
+    {"name": "克孜勒苏柯尔克孜", "name_en": "Kizilsu", "province": "新疆维吾尔自治区", "country": "CN", "lng": 76.1728, "lat": 39.7134, "utc_offset": 8},
+    {"name": "喀什", "name_en": "Kashgar", "province": "新疆维吾尔自治区", "country": "CN", "lng": 75.9891, "lat": 39.4677, "utc_offset": 8},
+    {"name": "和田", "name_en": "Hotan", "province": "新疆维吾尔自治区", "country": "CN", "lng": 79.9253, "lat": 37.1107, "utc_offset": 8},
+    {"name": "伊犁", "name_en": "Yili", "province": "新疆维吾尔自治区", "country": "CN", "lng": 81.3179, "lat": 43.9219, "utc_offset": 8},
+    {"name": "塔城", "name_en": "Tacheng", "province": "新疆维吾尔自治区", "country": "CN", "lng": 82.9857, "lat": 46.7463, "utc_offset": 8},
+    {"name": "阿勒泰", "name_en": "Altay", "province": "新疆维吾尔自治区", "country": "CN", "lng": 88.1316, "lat": 47.8484, "utc_offset": 8},
 
     # ===== 特别行政区 (SAR) =====
     {"name": "香港", "name_en": "Hong Kong", "province": "香港特别行政区", "country": "CN", "lng": 114.1694, "lat": 22.3193, "utc_offset": 8},
