@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { searchPlaces } from "../api";
 
 export default function BirthForm({ onSubmit, loading }) {
@@ -10,29 +10,33 @@ export default function BirthForm({ onSubmit, loading }) {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [searched, setSearched] = useState(false);
-  const searchTimeout = useRef(null);
+  const [searchStatus, setSearchStatus] = useState("idle"); // "idle" | "found" | "not_found"
+  const [searching, setSearching] = useState(false);
 
-  useEffect(() => {
-    if (!placeQuery.trim()) {
-      setSuggestions([]);
-      setSearched(false);
-      return;
-    }
-    clearTimeout(searchTimeout.current);
-    searchTimeout.current = setTimeout(async () => {
-      try {
-        const results = await searchPlaces(placeQuery);
-        setSuggestions(results);
+  const handleSearch = async () => {
+    const q = placeQuery.trim();
+    if (!q) return;
+    setSearching(true);
+    setSelectedPlace(null);
+    setSearchStatus("idle");
+    try {
+      const results = await searchPlaces(q);
+      setSuggestions(results);
+      if (results.length > 0) {
         setShowSuggestions(true);
-        setSearched(true);
-      } catch {
-        setSuggestions([]);
-        setSearched(true);
+        setSearchStatus("found");
+      } else {
+        setShowSuggestions(false);
+        setSearchStatus("not_found");
       }
-    }, 300);
-    return () => clearTimeout(searchTimeout.current);
-  }, [placeQuery]);
+    } catch {
+      setSuggestions([]);
+      setShowSuggestions(false);
+      setSearchStatus("not_found");
+    } finally {
+      setSearching(false);
+    }
+  };
 
   const handleSelectPlace = (place) => {
     const [lng, lat] = place.location.split(",").map(Number);
@@ -59,6 +63,11 @@ export default function BirthForm({ onSubmit, loading }) {
       utcOffset: selectedPlace.utcOffset,
     });
   };
+
+  const searchBtnClass =
+    searchStatus === "found" ? "search-btn found" :
+    searchStatus === "not_found" ? "search-btn not-found" :
+    "search-btn";
 
   return (
     <form className="form-card" onSubmit={handleSubmit}>
@@ -94,18 +103,34 @@ export default function BirthForm({ onSubmit, loading }) {
 
       <div className="form-field place-field">
         <label>出生地点</label>
-        <input
-          type="text"
-          value={placeQuery}
-          onChange={(e) => {
-            setPlaceQuery(e.target.value);
-            setSelectedPlace(null);
-          }}
-          onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
-          onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          placeholder="输入城市名搜索，如：上海、北京"
-          autoComplete="off"
-        />
+        <div className="place-input-row">
+          <input
+            type="text"
+            value={placeQuery}
+            onChange={(e) => {
+              setPlaceQuery(e.target.value);
+              setSelectedPlace(null);
+              setSearchStatus("idle");
+              setShowSuggestions(false);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSearch();
+              }
+            }}
+            placeholder="输入城市名，如：上海、北京"
+            autoComplete="off"
+          />
+          <button
+            type="button"
+            className={searchBtnClass}
+            onClick={handleSearch}
+            disabled={searching || !placeQuery.trim()}
+          >
+            {searching ? "..." : "搜索"}
+          </button>
+        </div>
         {showSuggestions && suggestions.length > 0 && (
           <ul className="place-suggestions">
             {suggestions.map((s, i) => (
@@ -116,16 +141,13 @@ export default function BirthForm({ onSubmit, loading }) {
             ))}
           </ul>
         )}
-        {showSuggestions && searched && suggestions.length === 0 && !selectedPlace && (
-          <div className="place-no-result">未找到匹配的城市，请尝试其他关键词</div>
+        {searchStatus === "not_found" && (
+          <div className="place-no-result">未找到匹配的城市，请输入正确的中国城市名</div>
         )}
         {selectedPlace && (
           <span className="place-hint">
             {selectedPlace.name} — {Math.abs(selectedPlace.lng).toFixed(2)}°{selectedPlace.lng >= 0 ? "E" : "W"} / {Math.abs(selectedPlace.lat).toFixed(2)}°{selectedPlace.lat >= 0 ? "N" : "S"} (UTC{selectedPlace.utcOffset >= 0 ? "+" : ""}{selectedPlace.utcOffset})
           </span>
-        )}
-        {!selectedPlace && placeQuery && !showSuggestions && (
-          <span className="place-hint">请从搜索结果中选择一个地点</span>
         )}
       </div>
 
