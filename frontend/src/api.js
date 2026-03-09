@@ -26,7 +26,7 @@ export async function fetchChart({ name, birthDate, birthTime, longitude, latitu
 
 export async function searchPlaces(query) {
   const res = await fetch(`${API_BASE}/api/places?q=${encodeURIComponent(query)}`);
-  if (!res.ok) return [];
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
   const data = await res.json();
   return data.results || [];
 }
