@@ -4,9 +4,13 @@ FastAPI backend for Human Design chart calculation.
 Real pipeline: UserData → Calculator → Converters → JSON response.
 """
 
+import os
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import Response
+from fastapi.responses import Response, FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from typing import Optional
@@ -350,3 +354,18 @@ def get_solar_return(req: SolarReturnRequest):
 @app.get("/api/health")
 def health():
     return {"status": "ok"}
+
+
+# === Serve frontend static files ===
+_FRONTEND_DIST = Path(__file__).resolve().parent.parent / "frontend" / "dist"
+
+if _FRONTEND_DIST.is_dir():
+    app.mount("/assets", StaticFiles(directory=_FRONTEND_DIST / "assets"), name="assets")
+
+    @app.get("/{full_path:path}")
+    def serve_frontend(full_path: str):
+        """Serve frontend SPA — all non-API routes return index.html."""
+        file_path = _FRONTEND_DIST / full_path
+        if full_path and file_path.is_file():
+            return FileResponse(file_path)
+        return FileResponse(_FRONTEND_DIST / "index.html")

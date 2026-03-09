@@ -41,8 +41,8 @@ export default function App() {
     <div className="app">
       <div className="input-page">
         <div className="input-page-header">
-          <h1>人类图计算器</h1>
-          <p>Human Design Chart Calculator</p>
+          <h1>人类图生成器</h1>
+          <p>Human Design Chart Generator</p>
         </div>
 
         <BirthForm onSubmit={handleSubmit} loading={loading} />
