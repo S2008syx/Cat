@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { searchPlaces } from "../api";
 
 export default function BirthForm({ onSubmit, loading }) {
@@ -13,20 +13,21 @@ export default function BirthForm({ onSubmit, loading }) {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const searchTimeout = useRef(null);
 
-  // Debounced search
-  useEffect(() => {
-    if (!placeQuery.trim()) {
+  // Debounced search triggered on input change
+  const handlePlaceQueryChange = (value) => {
+    setPlaceQuery(value);
+    setSelectedPlace(null);
+    clearTimeout(searchTimeout.current);
+    if (!value.trim()) {
       setSuggestions([]);
       return;
     }
-    clearTimeout(searchTimeout.current);
     searchTimeout.current = setTimeout(async () => {
-      const results = await searchPlaces(placeQuery);
+      const results = await searchPlaces(value);
       setSuggestions(results);
       setShowSuggestions(true);
     }, 300);
-    return () => clearTimeout(searchTimeout.current);
-  }, [placeQuery]);
+  };
 
   const handleSelectPlace = (place) => {
     const [lng, lat] = place.location.split(",").map(Number);
@@ -93,10 +94,7 @@ export default function BirthForm({ onSubmit, loading }) {
         <input
           type="text"
           value={placeQuery}
-          onChange={(e) => {
-            setPlaceQuery(e.target.value);
-            setSelectedPlace(null);
-          }}
+          onChange={(e) => handlePlaceQueryChange(e.target.value)}
           onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
           placeholder="输入城市名称搜索，如：上海、北京、New York"
