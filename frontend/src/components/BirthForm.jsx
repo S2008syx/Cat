@@ -10,7 +10,7 @@ export default function BirthForm({ onSubmit, loading }) {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [searchStatus, setSearchStatus] = useState("idle"); // "idle" | "found" | "not_found"
+  const [searchStatus, setSearchStatus] = useState("idle"); // "idle" | "found" | "not_found" | "error"
   const [searching, setSearching] = useState(false);
 
   const handleSearch = async () => {
@@ -32,7 +32,7 @@ export default function BirthForm({ onSubmit, loading }) {
     } catch {
       setSuggestions([]);
       setShowSuggestions(false);
-      setSearchStatus("not_found");
+      setSearchStatus("error");
     } finally {
       setSearching(false);
     }
@@ -66,7 +66,7 @@ export default function BirthForm({ onSubmit, loading }) {
 
   const searchBtnClass =
     searchStatus === "found" ? "search-btn found" :
-    searchStatus === "not_found" ? "search-btn not-found" :
+    (searchStatus === "not_found" || searchStatus === "error") ? "search-btn not-found" :
     "search-btn";
 
   return (
@@ -143,6 +143,9 @@ export default function BirthForm({ onSubmit, loading }) {
         )}
         {searchStatus === "not_found" && (
           <div className="place-no-result">未找到匹配的城市，请输入正确的中国城市名</div>
+        )}
+        {searchStatus === "error" && (
+          <div className="place-no-result">网络错误，请确认后端服务已启动</div>
         )}
         {selectedPlace && (
           <span className="place-hint">
