@@ -10,6 +10,15 @@
 
 // [MOCK] 固定的图表数据 —— 类型: 生产者, 人生角色: 4/6, 权威: 情绪权威
 export const MOCK_CHART_RESPONSE = {
+  // [MOCK] 模拟用户输入
+  input: {
+    name: "Demo 用户",
+    birth_date: "1990-01-15",
+    birth_time: "06:30",
+    longitude: 121.47,
+    latitude: 31.23,
+    utc_offset: 8,
+  },
   graph: {
     centers: [
       { id: "head", name_zh: "头脑中心", defined: false,
@@ -66,6 +75,8 @@ export const MOCK_CHART_RESPONSE = {
       key: "Generator",
       name_zh: "生产者",
       strategy: "等待回应",
+      strategy_zh: "等待回应",
+      not_self: "挫败感",
       description: "你拥有持续不断的生命力能量，是世界的建造者。",
     },
     authority_info: {
@@ -121,5 +132,38 @@ export const MOCK_CHART_RESPONSE = {
       { gate: 59, name_zh: "分散之门", name_en: "Gate of Sexuality", center: "sacral", keynote: "打破障碍的能量",
         activated_by: [{ side: "personality", planet: "venus", line: 2 }] },
     ],
+    // [MOCK] 星体激活表 —— 13行（太阳到北交点），左设计右个性
+    activations: {
+      personality: [
+        { planet: "sun",           planet_zh: "太阳 ☉",   gate: 6,  line: 4, gate_name_zh: "冲突之门" },
+        { planet: "earth",         planet_zh: "地球 ⊕",   gate: 13, line: 1, gate_name_zh: "倾听者之门" },
+        { planet: "moon",          planet_zh: "月亮 ☽",   gate: 29, line: 3, gate_name_zh: "深渊之门" },
+        { planet: "north_node",    planet_zh: "北交点 ☊", gate: 44, line: 5, gate_name_zh: "聚合之门" },
+        { planet: "south_node",    planet_zh: "南交点 ☋", gate: 24, line: 2, gate_name_zh: "回归之门" },
+        { planet: "mercury",       planet_zh: "水星 ☿",   gate: 20, line: 3, gate_name_zh: "当下之门" },
+        { planet: "venus",         planet_zh: "金星 ♀",   gate: 59, line: 2, gate_name_zh: "分散之门" },
+        { planet: "mars",          planet_zh: "火星 ♂",   gate: 40, line: 1, gate_name_zh: "递送之门" },
+        { planet: "jupiter",       planet_zh: "木星 ♃",   gate: 37, line: 4, gate_name_zh: "友谊之门" },
+        { planet: "saturn",        planet_zh: "土星 ♄",   gate: 54, line: 6, gate_name_zh: "少女之门" },
+        { planet: "uranus",        planet_zh: "天王星 ♅", gate: 38, line: 2, gate_name_zh: "斗士之门" },
+        { planet: "neptune",       planet_zh: "海王星 ♆", gate: 58, line: 1, gate_name_zh: "活力之门" },
+        { planet: "pluto",         planet_zh: "冥王星 ♇", gate: 51, line: 5, gate_name_zh: "激发之门" },
+      ],
+      design: [
+        { planet: "sun",           planet_zh: "太阳 ☉",   gate: 20, line: 5, gate_name_zh: "当下之门" },
+        { planet: "earth",         planet_zh: "地球 ⊕",   gate: 34, line: 2, gate_name_zh: "力量之门" },
+        { planet: "moon",          planet_zh: "月亮 ☽",   gate: 7,  line: 2, gate_name_zh: "军队之门" },
+        { planet: "north_node",    planet_zh: "北交点 ☊", gate: 11, line: 4, gate_name_zh: "和平之门" },
+        { planet: "south_node",    planet_zh: "南交点 ☋", gate: 12, line: 3, gate_name_zh: "静止之门" },
+        { planet: "mercury",       planet_zh: "水星 ☿",   gate: 31, line: 6, gate_name_zh: "影响力之门" },
+        { planet: "venus",         planet_zh: "金星 ♀",   gate: 31, line: 1, gate_name_zh: "影响力之门" },
+        { planet: "mars",          planet_zh: "火星 ♂",   gate: 34, line: 6, gate_name_zh: "力量之门" },
+        { planet: "jupiter",       planet_zh: "木星 ♃",   gate: 2,  line: 3, gate_name_zh: "接收之门" },
+        { planet: "saturn",        planet_zh: "土星 ♄",   gate: 56, line: 1, gate_name_zh: "刺激之门" },
+        { planet: "uranus",        planet_zh: "天王星 ♅", gate: 48, line: 5, gate_name_zh: "井之门" },
+        { planet: "neptune",       planet_zh: "海王星 ♆", gate: 22, line: 4, gate_name_zh: "优雅之门" },
+        { planet: "pluto",         planet_zh: "冥王星 ♇", gate: 49, line: 2, gate_name_zh: "革命之门" },
+      ],
+    },
   },
 };
