@@ -6,14 +6,12 @@ export default function BirthForm({ onSubmit, loading }) {
   const [birthDate, setBirthDate] = useState("1990-01-15");
   const [birthTime, setBirthTime] = useState("06:30");
 
-  // Place search state
   const [placeQuery, setPlaceQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const searchTimeout = useRef(null);
 
-  // Debounced search
   useEffect(() => {
     if (!placeQuery.trim()) {
       setSuggestions([]);
@@ -55,16 +53,14 @@ export default function BirthForm({ onSubmit, loading }) {
   };
 
   return (
-    <form className="birth-form" onSubmit={handleSubmit}>
-      <h2>出生信息</h2>
-
+    <form className="form-card" onSubmit={handleSubmit}>
       <div className="form-field">
         <label>姓名</label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="输入姓名（可选）"
+          placeholder="请输入你的名字"
         />
       </div>
 
@@ -99,7 +95,7 @@ export default function BirthForm({ onSubmit, loading }) {
           }}
           onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          placeholder="输入城市名称搜索，如：上海、北京、New York"
+          placeholder="输入城市名搜索，如：上海、北京"
           autoComplete="off"
         />
         {showSuggestions && suggestions.length > 0 && (
@@ -114,7 +110,7 @@ export default function BirthForm({ onSubmit, loading }) {
         )}
         {selectedPlace && (
           <span className="place-hint">
-            {selectedPlace.name} — 经度 {selectedPlace.lng.toFixed(4)}° / 纬度 {selectedPlace.lat.toFixed(4)}° (UTC{selectedPlace.utcOffset >= 0 ? "+" : ""}{selectedPlace.utcOffset})
+            {selectedPlace.name} — {selectedPlace.lng.toFixed(2)}°E / {selectedPlace.lat.toFixed(2)}°N (UTC+{selectedPlace.utcOffset})
           </span>
         )}
         {!selectedPlace && placeQuery && (
@@ -122,8 +118,8 @@ export default function BirthForm({ onSubmit, loading }) {
         )}
       </div>
 
-      <button type="submit" disabled={loading || !selectedPlace}>
-        {loading ? "计算中..." : "生成图表"}
+      <button type="submit" className="submit-btn" disabled={loading || !selectedPlace}>
+        {loading ? "计算中..." : "生成人类图"}
       </button>
     </form>
   );
