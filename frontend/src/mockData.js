@@ -7,9 +7,12 @@
  * 当后端 API 可用时，请切换回 api.js 中的真实 fetchChart 接口。
  * 对应的真实计算逻辑在: /hd_calculator + /hd_converters (Python)
  */
+import { MOCK_CHART_SVG } from "./mockChartSvg"; // [MOCK] 预渲染的 SVG 人体图
 
 // [MOCK] 固定的图表数据 —— 类型: 生产者, 人生角色: 4/6, 权威: 情绪权威
 export const MOCK_CHART_RESPONSE = {
+  // [MOCK] 预渲染的高质量 SVG 人体图（由 chart_image.py 生成）
+  chart_svg: MOCK_CHART_SVG,
   // [MOCK] 模拟用户输入
   input: {
     name: "Demo 用户",
