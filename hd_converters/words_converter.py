@@ -126,7 +126,7 @@ def convert_words(output: CalculatorOutput) -> WordsData:
                 "theme": cdata["theme"],
             })
         else:
-            # Fallback if key order doesn't match
+            # [FALLBACK] 反转 key 顺序查找 — 防御性代码，处理 gate 顺序不一致的情况
             rev_key = (ch["gate_b"], ch["gate_a"])
             cdata = CHANNEL_DATA.get(rev_key)
             if cdata:
@@ -138,6 +138,8 @@ def convert_words(output: CalculatorOutput) -> WordsData:
                     "theme": cdata["theme"],
                 })
             else:
+                # [FALLBACK] 兜底 — CHANNEL_DATA 覆盖全部 36 条通道，
+                # 正常情况下不会到达这里。保留以防数据不完整时不崩溃。
                 channel_infos.append({
                     "gates": [ch["gate_a"], ch["gate_b"]],
                     "name_zh": "未知通道",
@@ -178,6 +180,8 @@ def convert_words(output: CalculatorOutput) -> WordsData:
                 "activated_by": activation_details.get(gate, []),
             })
         else:
+            # [FALLBACK] GATE_DATA 覆盖全部 64 门，正常不会到达这里。
+            # 保留以防数据不完整时不崩溃。
             gate_infos.append({
                 "gate": gate,
                 "name_zh": f"门 {gate}",
@@ -220,6 +224,8 @@ def convert_words(output: CalculatorOutput) -> WordsData:
                     "gate_name_en": gdata.get("name_en", ""),
                 })
             else:
+                # [FALLBACK] map_all_activations() 总是返回全部 13 颗星体，
+                # 正常不会缺失。保留以防上游数据不完整时不崩溃。
                 rows.append({
                     "planet": p,
                     "planet_zh": planet_zh.get(p, p),

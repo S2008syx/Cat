@@ -114,7 +114,10 @@ def geocode(address: str) -> dict | None:
     }
 
 
-# === Fallback: use cities_db (China only) when no API key ===
+# === [FALLBACK] 离线城市数据降级方案 ===
+# 当 AMAP_API_KEY 未设置或高德 API 请求失败时，使用本地 cities_db.py
+# 提供基础的中国城市搜索和地理编码。
+# 如果部署环境始终有 API key，以下代码和 cities_db.py 可安全删除。
 
 from .cities_db import CITIES as _ALL_CITIES
 

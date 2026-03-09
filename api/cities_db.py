@@ -1,4 +1,11 @@
-"""Offline city database for geocoding fallback."""
+"""
+Offline city database for geocoding fallback.
+
+[FALLBACK] 此文件仅在 AMAP_API_KEY 环境变量未设置时使用。
+当高德地图 API 不可用时，geocode.py 会退回到这个本地城市列表来提供
+基础的地点搜索和地理编码功能（仅覆盖中国城市）。
+如果部署环境始终配置了 AMAP_API_KEY，此文件可安全删除。
+"""
 
 CITIES = [
     # ===== 中国 - 直辖市 (Municipalities) =====
