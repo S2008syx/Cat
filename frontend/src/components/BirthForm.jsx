@@ -22,12 +22,13 @@ export default function BirthForm({ onSubmit, loading }) {
     setSearchStatus("idle");
     setSearchMsg("");
     try {
-      const results = await searchPlaces(q);
+      const { results, source } = await searchPlaces(q);
       setSuggestions(results);
       if (results.length > 0) {
         setShowSuggestions(true);
         setSearchStatus("found");
-        setSearchMsg(`找到 ${results.length} 个结果，请点击选择`);
+        const hint = source === "offline" ? "（离线数据）" : "";
+        setSearchMsg(`找到 ${results.length} 个结果${hint}，请点击选择`);
       } else {
         setShowSuggestions(false);
         setSearchStatus("not_found");
@@ -37,21 +38,7 @@ export default function BirthForm({ onSubmit, loading }) {
       setSuggestions([]);
       setShowSuggestions(false);
       setSearchStatus("error");
-
-      const msg = err?.message || "";
-      if (msg.includes("Failed to fetch") || msg.includes("NetworkError") || msg.includes("ERR_CONNECTION")) {
-        setSearchMsg(`网络连接失败：无法连接到后端API。请检查：1) 后端是否已启动 2) 浏览器地址是否正确访问服务器`);
-      } else if (msg.includes("API error: 404")) {
-        setSearchMsg(`API路径错误(404)：/api/places 端点不存在，请检查后端路由配置`);
-      } else if (msg.includes("API error: 500")) {
-        setSearchMsg(`后端内部错误(500)：服务器处理请求时出错，请查看后端日志`);
-      } else if (msg.includes("API error: 502") || msg.includes("API error: 503")) {
-        setSearchMsg(`后端服务不可用(${msg})：服务器未就绪或正在重启`);
-      } else if (msg.includes("API error")) {
-        setSearchMsg(`API请求失败：${msg}`);
-      } else {
-        setSearchMsg(`请求异常：${msg || "未知错误"}。请检查网络连接和后端服务`);
-      }
+      setSearchMsg(`搜索异常：${err?.message || "未知错误"}`);
     } finally {
       setSearching(false);
     }
