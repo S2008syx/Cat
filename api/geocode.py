@@ -114,62 +114,42 @@ def geocode(address: str) -> dict | None:
     }
 
 
-# === Fallback: built-in city data when no API key ===
+# === Fallback: use cities_db (China only) when no API key ===
 
-_BUILTIN_CITIES = [
-    {"name": "上海", "lng": 121.4737, "lat": 31.2304, "utc_offset": 8},
-    {"name": "北京", "lng": 116.4074, "lat": 39.9042, "utc_offset": 8},
-    {"name": "广州", "lng": 113.2644, "lat": 23.1291, "utc_offset": 8},
-    {"name": "深圳", "lng": 114.0579, "lat": 22.5431, "utc_offset": 8},
-    {"name": "成都", "lng": 104.0665, "lat": 30.5723, "utc_offset": 8},
-    {"name": "杭州", "lng": 120.1551, "lat": 30.2741, "utc_offset": 8},
-    {"name": "武汉", "lng": 114.3054, "lat": 30.5931, "utc_offset": 8},
-    {"name": "南京", "lng": 118.7969, "lat": 32.0603, "utc_offset": 8},
-    {"name": "重庆", "lng": 106.5516, "lat": 29.5630, "utc_offset": 8},
-    {"name": "西安", "lng": 108.9402, "lat": 34.2611, "utc_offset": 8},
-    {"name": "香港", "lng": 114.1694, "lat": 22.3193, "utc_offset": 8},
-    {"name": "台北", "lng": 121.5654, "lat": 25.0330, "utc_offset": 8},
-    {"name": "东京", "lng": 139.6917, "lat": 35.6895, "utc_offset": 9},
-    {"name": "首尔", "lng": 126.9780, "lat": 37.5665, "utc_offset": 9},
-    {"name": "纽约", "lng": -74.0060, "lat": 40.7128, "utc_offset": -5},
-    {"name": "伦敦", "lng": -0.1276, "lat": 51.5074, "utc_offset": 0},
-    {"name": "巴黎", "lng": 2.3522, "lat": 48.8566, "utc_offset": 1},
-    {"name": "悉尼", "lng": 151.2093, "lat": -33.8688, "utc_offset": 10},
-    {"name": "洛杉矶", "lng": -118.2437, "lat": 34.0522, "utc_offset": -8},
-    {"name": "新加坡", "lng": 103.8198, "lat": 1.3521, "utc_offset": 8},
-]
+from .cities_db import CITIES as _ALL_CITIES
+
+_CHINA_CITIES = [c for c in _ALL_CITIES if c.get("country") == "CN"]
+
+
+def _city_to_result(city: dict) -> dict:
+    return {
+        "name": city["name"],
+        "address": "",
+        "district": city.get("province", ""),
+        "location": f"{city['lng']},{city['lat']}",
+        "utc_offset": city.get("utc_offset", 8),
+    }
 
 
 def _fallback_search(query: str) -> list[dict]:
-    """Search built-in cities when no API key."""
+    """Search Chinese cities when no API key."""
     results = []
-    for city in _BUILTIN_CITIES:
-        if query in city["name"]:
-            results.append({
-                "name": city["name"],
-                "address": "",
-                "district": "",
-                "location": f"{city['lng']},{city['lat']}",
-            })
-    return results if results else [
-        {
-            "name": c["name"],
-            "address": "",
-            "district": "",
-            "location": f"{c['lng']},{c['lat']}",
-        }
-        for c in _BUILTIN_CITIES[:5]
-    ]
+    for city in _CHINA_CITIES:
+        if query in city["name"] or query in city.get("province", "") or query in city.get("name_en", "").lower():
+            results.append(_city_to_result(city))
+            if len(results) >= 10:
+                break
+    return results
 
 
 def _fallback_geocode(address: str) -> dict | None:
-    """Geocode from built-in cities when no API key."""
-    for city in _BUILTIN_CITIES:
+    """Geocode from Chinese cities when no API key."""
+    for city in _CHINA_CITIES:
         if city["name"] in address or address in city["name"]:
             return {
                 "longitude": city["lng"],
                 "latitude": city["lat"],
                 "utc_offset": city["utc_offset"],
-                "formatted_address": city["name"],
+                "formatted_address": city.get("province", "") + city["name"],
             }
     return None

@@ -137,6 +137,12 @@
   color: #6b8bb5;
 }
 
+.place-no-result {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #e8a87c;
+}
+
 /* Submit button */
 .submit-btn {
   width: 100%;
