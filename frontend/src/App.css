@@ -180,10 +180,19 @@
   color: #6b8bb5;
 }
 
-.place-no-result {
+.place-msg {
   margin-top: 6px;
   font-size: 13px;
-  color: #e8a87c;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.place-msg-ok {
+  color: #68d391;
+}
+
+.place-msg-err {
+  color: #fc8181;
 }
 
 /* Submit button */

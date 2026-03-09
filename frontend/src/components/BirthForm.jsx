@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { searchPlaces } from "../api";
 
 export default function BirthForm({ onSubmit, loading }) {
@@ -11,6 +11,7 @@ export default function BirthForm({ onSubmit, loading }) {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [searchStatus, setSearchStatus] = useState("idle"); // "idle" | "found" | "not_found" | "error"
+  const [searchMsg, setSearchMsg] = useState("");
   const [searching, setSearching] = useState(false);
 
   const handleSearch = async () => {
@@ -19,20 +20,38 @@ export default function BirthForm({ onSubmit, loading }) {
     setSearching(true);
     setSelectedPlace(null);
     setSearchStatus("idle");
+    setSearchMsg("");
     try {
       const results = await searchPlaces(q);
       setSuggestions(results);
       if (results.length > 0) {
         setShowSuggestions(true);
         setSearchStatus("found");
+        setSearchMsg(`找到 ${results.length} 个结果，请点击选择`);
       } else {
         setShowSuggestions(false);
         setSearchStatus("not_found");
+        setSearchMsg(`未找到"${q}"，请输入正确的中国城市名（如：北京、上海、广州）`);
       }
-    } catch {
+    } catch (err) {
       setSuggestions([]);
       setShowSuggestions(false);
       setSearchStatus("error");
+
+      const msg = err?.message || "";
+      if (msg.includes("Failed to fetch") || msg.includes("NetworkError") || msg.includes("ERR_CONNECTION")) {
+        setSearchMsg(`网络连接失败：无法连接到后端API。请检查：1) 后端是否已启动 2) 浏览器地址是否正确访问服务器`);
+      } else if (msg.includes("API error: 404")) {
+        setSearchMsg(`API路径错误(404)：/api/places 端点不存在，请检查后端路由配置`);
+      } else if (msg.includes("API error: 500")) {
+        setSearchMsg(`后端内部错误(500)：服务器处理请求时出错，请查看后端日志`);
+      } else if (msg.includes("API error: 502") || msg.includes("API error: 503")) {
+        setSearchMsg(`后端服务不可用(${msg})：服务器未就绪或正在重启`);
+      } else if (msg.includes("API error")) {
+        setSearchMsg(`API请求失败：${msg}`);
+      } else {
+        setSearchMsg(`请求异常：${msg || "未知错误"}。请检查网络连接和后端服务`);
+      }
     } finally {
       setSearching(false);
     }
@@ -49,6 +68,7 @@ export default function BirthForm({ onSubmit, loading }) {
     });
     setPlaceQuery(place.district ? `${place.district} ${place.name}` : place.name);
     setShowSuggestions(false);
+    setSearchMsg("");
   };
 
   const handleSubmit = (e) => {
@@ -111,6 +131,7 @@ export default function BirthForm({ onSubmit, loading }) {
               setPlaceQuery(e.target.value);
               setSelectedPlace(null);
               setSearchStatus("idle");
+              setSearchMsg("");
               setShowSuggestions(false);
             }}
             onKeyDown={(e) => {
@@ -141,11 +162,10 @@ export default function BirthForm({ onSubmit, loading }) {
             ))}
           </ul>
         )}
-        {searchStatus === "not_found" && (
-          <div className="place-no-result">未找到匹配的城市，请输入正确的中国城市名</div>
-        )}
-        {searchStatus === "error" && (
-          <div className="place-no-result">网络错误，请确认后端服务已启动</div>
+        {searchMsg && !selectedPlace && (
+          <div className={`place-msg ${searchStatus === "found" ? "place-msg-ok" : "place-msg-err"}`}>
+            {searchMsg}
+          </div>
         )}
         {selectedPlace && (
           <span className="place-hint">
