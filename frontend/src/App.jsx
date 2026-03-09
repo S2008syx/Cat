@@ -7,24 +7,16 @@ import "./App.css";
 export default function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const handleSubmit = async (formData) => {
     setLoading(true);
-    setError(null);
-    try {
-      const data = await fetchChart(formData);
-      setResult(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+    const data = await fetchChart(formData);
+    setResult(data);
+    setLoading(false);
   };
 
   const handleBack = () => {
     setResult(null);
-    setError(null);
   };
 
   // Page 2: Result
@@ -41,13 +33,11 @@ export default function App() {
     <div className="app">
       <div className="input-page">
         <div className="input-page-header">
-          <h1>人类图生成器 1</h1>
+          <h1>人类图生成器 2</h1>
           <p>Human Design Chart Generator</p>
         </div>
 
         <BirthForm onSubmit={handleSubmit} loading={loading} />
-
-        {error && <div className="error-banner" role="alert">错误: {error}</div>}
       </div>
 
       {loading && (
