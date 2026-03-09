@@ -16,6 +16,12 @@ from typing import Optional
 class CalculatorInput:
     """Input from Part 2 (upstream).
 
+    [未使用] 当前 calculate() 直接接收 birth_utc, latitude, longitude 三个参数。
+    保留此 class 作为未来接口重构的参考：
+    - 当 calculate() 参数增多时（如 house_system, ayanamsa 等），
+      可切换为接收单个 CalculatorInput 对象
+    - 提供 IDE 自动补全和类型检查
+
     Attributes:
         birth_utc: UTC birth time, already converted by upstream.
         latitude: Birth place latitude (e.g. 31.2304 for Shanghai).
@@ -35,6 +41,11 @@ class CalculatorInput:
 @dataclass
 class Activation:
     """A single planetary activation (gate/line/color/tone/base assignment).
+
+    [未使用] 当前 activation 数据全部以 dict 形式传递。
+    保留此 class 作为类型化重构的参考：
+    - 如果需要给 activation 添加方法（如 .display_name()、.is_personality()）
+    - 如果希望启用 mypy / pyright 静态类型检查
 
     Attributes:
         planet: Planet name (e.g. "sun", "moon", "mercury").
@@ -58,6 +69,9 @@ class Activation:
 @dataclass
 class Channel:
     """An active (defined) channel.
+
+    [未使用] 当前 channel 数据全部以 dict 形式传递。
+    保留此 class 作为类型化重构的参考，与 Activation 同理。
 
     Attributes:
         gate_a: First gate number.
