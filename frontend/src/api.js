@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8000";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 export async function fetchChart({ name, birthDate, birthTime, longitude, latitude, utcOffset }) {
   const res = await fetch(`${API_BASE}/api/chart`, {
@@ -13,7 +13,14 @@ export async function fetchChart({ name, birthDate, birthTime, longitude, latitu
       utc_offset: utcOffset,
     }),
   });
-  if (!res.ok) throw new Error(`API error: ${res.status}`);
+  if (!res.ok) {
+    let detail = `API error: ${res.status}`;
+    try {
+      const body = await res.json();
+      if (body.detail) detail = body.detail;
+    } catch {}
+    throw new Error(detail);
+  }
   return res.json();
 }
 

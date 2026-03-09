@@ -19,9 +19,13 @@ export default function BirthForm({ onSubmit, loading }) {
     }
     clearTimeout(searchTimeout.current);
     searchTimeout.current = setTimeout(async () => {
-      const results = await searchPlaces(placeQuery);
-      setSuggestions(results);
-      setShowSuggestions(true);
+      try {
+        const results = await searchPlaces(placeQuery);
+        setSuggestions(results);
+        setShowSuggestions(true);
+      } catch {
+        setSuggestions([]);
+      }
     }, 300);
     return () => clearTimeout(searchTimeout.current);
   }, [placeQuery]);
@@ -110,7 +114,7 @@ export default function BirthForm({ onSubmit, loading }) {
         )}
         {selectedPlace && (
           <span className="place-hint">
-            {selectedPlace.name} — {selectedPlace.lng.toFixed(2)}°E / {selectedPlace.lat.toFixed(2)}°N (UTC+{selectedPlace.utcOffset})
+            {selectedPlace.name} — {Math.abs(selectedPlace.lng).toFixed(2)}°{selectedPlace.lng >= 0 ? "E" : "W"} / {Math.abs(selectedPlace.lat).toFixed(2)}°{selectedPlace.lat >= 0 ? "N" : "S"} (UTC{selectedPlace.utcOffset >= 0 ? "+" : ""}{selectedPlace.utcOffset})
           </span>
         )}
         {!selectedPlace && placeQuery && (
