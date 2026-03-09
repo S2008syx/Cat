@@ -37,7 +37,7 @@ export default function BirthForm({ onSubmit, loading }) {
       district: place.district,
       lng,
       lat,
-      utcOffset: Math.round(lng / 15),
+      utcOffset: place.utc_offset != null ? place.utc_offset : Math.round(lng / 15),
     });
     setPlaceQuery(place.district ? `${place.district} ${place.name}` : place.name);
     setShowSuggestions(false);
