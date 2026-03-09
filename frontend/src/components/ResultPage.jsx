@@ -26,7 +26,7 @@ export default function ResultPage({ result, onBack }) {
     <div className="result-page">
       {/* Header bar */}
       <div className="result-header">
-        <button className="back-btn" onClick={onBack}>
+        <button className="back-btn" onClick={onBack} aria-label="返回输入页">
           ← 返回
         </button>
         <div className="result-header-info">
@@ -71,7 +71,7 @@ export default function ResultPage({ result, onBack }) {
             <div className="info-grid">
               <div className="info-card">
                 <div className="info-card-label">策略 Strategy</div>
-                <div className="info-card-value">{typeInfo.strategy || "-"}</div>
+                <div className="info-card-value">{typeInfo.strategy_zh || "-"}</div>
               </div>
               <div className="info-card">
                 <div className="info-card-label">内在权威 Authority</div>
@@ -96,14 +96,14 @@ export default function ResultPage({ result, onBack }) {
             {/* Not-self theme */}
             <div className="info-card not-self">
               <div className="info-card-label">非自我主题 Not-Self Theme</div>
-              <div className="info-card-value">{typeInfo.not_self_theme || "-"}</div>
+              <div className="info-card-value">{typeInfo.not_self || "-"}</div>
             </div>
 
             {/* Incarnation Cross */}
             <div className="info-card cross">
               <div className="info-card-label">化身十字 Incarnation Cross</div>
               <div className="info-card-value">{crossInfo.name_zh || "-"}</div>
-              <div className="info-card-sub">{crossInfo.key || ""}</div>
+              <div className="info-card-sub">{crossInfo.name_en || ""}</div>
             </div>
           </div>
         </div>

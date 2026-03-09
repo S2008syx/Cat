@@ -47,11 +47,11 @@ export default function App() {
 
         <BirthForm onSubmit={handleSubmit} loading={loading} />
 
-        {error && <div className="error-banner">错误: {error}</div>}
+        {error && <div className="error-banner" role="alert">错误: {error}</div>}
       </div>
 
       {loading && (
-        <div className="loading-overlay">
+        <div className="loading-overlay" role="status" aria-live="polite">
           <div className="loading-spinner" />
           <div className="loading-text">正在计算你的人类图...</div>
         </div>
