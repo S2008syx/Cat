@@ -325,6 +325,75 @@
     .checklist-dist-row .input { flex: 1; }
     .checklist-dist-row .btn { flex-shrink: 0; }
 
+    /* -- Financial Calculator -- */
+    .calc-fab {
+      position: fixed; bottom: 28px; left: 28px; z-index: 90;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; border-radius: 28px;
+      background: linear-gradient(135deg, #4ADE80 0%, #22C55E 100%);
+      color: #0C0F14; font-weight: 700; font-size: 14px;
+      border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(74,222,128,0.3);
+      transition: all .2s; font-family: inherit;
+    }
+    .calc-fab:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(74,222,128,0.4); }
+    .calc-inv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 24px; }
+    .calc-inv-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px 24px; cursor: pointer; transition: all .2s; animation: fadeUp .4s ease-out both;
+    }
+    .calc-inv-card:hover { border-color: var(--accent); transform: translateY(-3px); background: var(--card-hover); }
+    .calc-inv-card h3 { font-size: 16px; font-weight: 700; color: var(--accent); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; }
+    .calc-inv-card p { font-size: 13px; color: var(--text-sec); line-height: 1.6; }
+    .calc-expiry-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+      font-family: 'JetBrains Mono', monospace; letter-spacing: 0.3px;
+    }
+    .calc-expiry-green { background: rgba(74,222,128,0.1); color: var(--success); }
+    .calc-expiry-red { background: rgba(248,113,113,0.1); color: var(--danger); }
+    .fang-slider-wrap { margin: 24px 0; }
+    .fang-slider-row { display: flex; align-items: center; gap: 16px; }
+    .fang-slider {
+      flex: 1; -webkit-appearance: none; appearance: none; height: 6px;
+      background: var(--border); border-radius: 3px; outline: none;
+    }
+    .fang-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 20px; height: 20px;
+      background: var(--accent); border-radius: 50%; cursor: pointer;
+      box-shadow: 0 2px 8px rgba(74,222,128,0.3);
+    }
+    .fang-slider-val {
+      font-size: 28px; font-weight: 800; color: var(--accent);
+      font-family: 'JetBrains Mono', monospace; min-width: 120px; text-align: right;
+    }
+    .fang-results-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    .fang-results-table th, .fang-results-table td {
+      padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px;
+    }
+    .fang-results-table th { color: var(--text-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-size: 11px; }
+    .fang-results-table td { font-family: 'JetBrains Mono', monospace; }
+    .fang-results-table tr:hover td { background: var(--accent-dim); }
+    .fang-results-table .row-mean td { font-weight: 700; color: var(--accent); border-top: 2px solid var(--accent); font-size: 14px; }
+    .fang-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0; }
+    .fang-stat-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 16px 18px; text-align: center; animation: fadeUp .4s ease-out both;
+    }
+    .fang-stat-label { font-size: 11px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 6px; }
+    .fang-stat-value { font-size: 20px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+    .fang-warn {
+      padding: 12px 18px; border-radius: var(--radius-sm);
+      background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2);
+      color: var(--warn); font-size: 13px; font-weight: 500; margin: 16px 0;
+    }
+    .fang-dist-wrap {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px; margin: 20px 0; animation: fadeUp .5s ease-out both;
+    }
+    .fang-dist-wrap h4 { font-size: 13px; font-weight: 600; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 16px; }
+    .fang-target-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+    .fang-target-row label { font-size: 13px; font-weight: 600; color: var(--text-sec); white-space: nowrap; }
+
     /* -- Footer -- */
     .detail-footer {
       background: var(--card); border: 1px solid var(--border);
@@ -1691,7 +1760,7 @@ function SupplementSection({ mktCapEbitda }) {
 // ============================================================
 // SECTION 17: DASHBOARD PAGE
 // ============================================================
-function DashboardPage({ apiKeys, watchlist, setWatchlist, onSelectStock, onOpenKeys, proMode, setProMode }) {
+function DashboardPage({ apiKeys, watchlist, setWatchlist, onSelectStock, onOpenKeys, proMode, setProMode, onOpenCalc }) {
   function handleSelect(stock) {
     if (watchlist.some(w => w.ticker === stock.ticker)) return;
     const newList = [...watchlist, stock];
@@ -1743,6 +1812,7 @@ function DashboardPage({ apiKeys, watchlist, setWatchlist, onSelectStock, onOpen
           )}
         </div>
       </main>
+      <button className="calc-fab" onClick={onOpenCalc}>&#128196; Financial Calculator</button>
     </div>
   );
 }
@@ -1986,7 +2056,401 @@ function DetailPage({ stock, apiKeys, rawData, checklist, userInputs, onBack, on
 }
 
 // ============================================================
-// SECTION 19: APP (Root Component)
+// SECTION 19: FANG OIL CALCULATOR
+// ============================================================
+const FANG_EXPIRY_DATE = '2026-05-04';
+
+function fangMethod1(wti) {
+  const base_eps_quarterly = 3.64;
+  const base_wti = 70.3;
+  const oil_prod_bpd = 475900;
+  const days_per_year = 365;
+  const production_tax = 0.07;
+  const income_tax = 0.23;
+  const shares = 286000000;
+  const annual_sensitivity = oil_prod_bpd * days_per_year * (1 - production_tax) * (1 - income_tax) / shares;
+  const delta_wti = wti - base_wti;
+  return (base_eps_quarterly * 4) + (annual_sensitivity * delta_wti);
+}
+
+function fangBottomUp(wti, gasPrice, biasCorrection, applyBias) {
+  const oil_kbpd = 503.8;
+  const ngl_kbpd = 205.0;
+  const gas_mcfd = 1404000;
+  const total_boe_kbpd = 942.9;
+  const LOE = 5.65;
+  const GPT = 1.41;
+  const cash_GA = 0.55;
+  const DDA = 14.80;
+  const interest_per_boe = 0.55;
+  const production_tax_pct = 0.07;
+  const income_tax_rate = 0.23;
+  const shares = 286000000;
+  const ngl_to_wti_ratio = 0.305;
+  const oil_premium_to_wti = 0.00;
+  const days_per_quarter = 92;
+
+  const oil_price = wti + oil_premium_to_wti;
+  const ngl_price = wti * ngl_to_wti_ratio;
+
+  const quarterly_oil_rev = oil_kbpd * 1000 * days_per_quarter * oil_price;
+  const quarterly_ngl_rev = ngl_kbpd * 1000 * days_per_quarter * ngl_price;
+  const quarterly_gas_rev = gas_mcfd * days_per_quarter * gasPrice;
+  const quarterly_total_rev = quarterly_oil_rev + quarterly_ngl_rev + quarterly_gas_rev;
+
+  const quarterly_total_boe = total_boe_kbpd * 1000 * days_per_quarter;
+
+  const quarterly_prod_tax = production_tax_pct * quarterly_total_rev;
+  const quarterly_cash_costs = (LOE + GPT + cash_GA) * quarterly_total_boe;
+  const quarterly_dda = DDA * quarterly_total_boe;
+  const quarterly_interest = interest_per_boe * quarterly_total_boe;
+
+  const quarterly_ebitda = quarterly_total_rev - quarterly_prod_tax - quarterly_cash_costs;
+  const quarterly_ebt = quarterly_ebitda - quarterly_dda - quarterly_interest;
+  const quarterly_net_income = quarterly_ebt < 0 ? quarterly_ebt : quarterly_ebt * (1 - income_tax_rate);
+  const quarterly_eps = quarterly_net_income / shares;
+
+  if (applyBias) return quarterly_eps * 4 * biasCorrection;
+  return quarterly_eps;
+}
+
+function fangMethod2(wti) { return fangBottomUp(wti, 1.40, 0.848, true); }
+function fangMethod3(wti) { return fangBottomUp(wti, 3.00, 0.861, true); }
+
+function fangMethod4(wti) {
+  const cal_intercept = -1.464;
+  const cal_slope = 1.290;
+  const raw_quarterly_eps = fangBottomUp(wti, 3.00, 0, false);
+  const calibrated = cal_intercept + cal_slope * raw_quarterly_eps;
+  return calibrated * 4;
+}
+
+function fangMethod5(wti) {
+  const reg_intercept = -8.490;
+  const reg_slope = 0.1779;
+  return (reg_intercept + reg_slope * wti) * 4;
+}
+
+function fangCalcAll(wti) {
+  const m = [fangMethod1(wti), fangMethod2(wti), fangMethod3(wti), fangMethod4(wti), fangMethod5(wti)];
+  const mean = m.reduce((a, b) => a + b, 0) / 5;
+  const variance = m.reduce((a, v) => a + (v - mean) ** 2, 0) / 4;
+  const sd = Math.sqrt(variance);
+  return {
+    methods: m,
+    mean, sd,
+    ci68Low: mean - sd,
+    ci68High: mean + sd,
+    ci95Low: mean - 2.776 * sd / Math.sqrt(5),
+    ci95High: mean + 2.776 * sd / Math.sqrt(5),
+  };
+}
+
+// Normal distribution PDF
+function normalPDF(x, mu, sigma) {
+  if (sigma === 0) return x === mu ? 1 : 0;
+  const exp = -0.5 * ((x - mu) / sigma) ** 2;
+  return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(exp);
+}
+
+// Normal CDF approximation
+function normalCDF(x, mu, sigma) {
+  if (sigma === 0) return x >= mu ? 1 : 0;
+  const z = (x - mu) / sigma;
+  const t = 1 / (1 + 0.2316419 * Math.abs(z));
+  const d = 0.3989422804014327;
+  const p = d * Math.exp(-z * z / 2) * (t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.8212560 + t * 1.3302744)))));
+  return z > 0 ? 1 - p : p;
+}
+
+const METHOD_LABELS = [
+  { name: 'M1: Constant \u0394WTI', desc: 'Sensitivity from Q4\'24 base EPS + production' },
+  { name: 'M2: Bottom-Up (Oil)', desc: 'Full cost stack, gas@$1.40, bias-corrected' },
+  { name: 'M3: Bottom-Up (Oil+Gas$3)', desc: 'Full cost stack, gas@$3.00, bias-corrected' },
+  { name: 'M4: Regression-Calibrated', desc: 'M3 raw EPS calibrated via OLS regression' },
+  { name: 'M5: Historical OLS', desc: 'Direct EPS~WTI regression (R\u00B2=0.94)' },
+];
+
+// --- Normal Distribution Chart with interactive red dot ---
+function NormalDistChart({ mean, sd, targetEps }) {
+  const canvasRef = useRef(null);
+  const chartRef = useRef(null);
+  const [tooltipInfo, setTooltipInfo] = useState(null);
+
+  const activeEps = targetEps != null && !isNaN(targetEps) ? targetEps : mean;
+  const percentile = sd > 0 ? normalCDF(activeEps, mean, sd) * 100 : 50;
+
+  useEffect(() => {
+    if (chartRef.current) chartRef.current.destroy();
+    if (!canvasRef.current || sd === 0) return;
+
+    const lo = mean - 4 * sd;
+    const hi = mean + 4 * sd;
+    const step = (hi - lo) / 200;
+    const labels = [];
+    const values = [];
+    for (let x = lo; x <= hi; x += step) {
+      labels.push(x);
+      values.push(normalPDF(x, mean, sd));
+    }
+
+    // Find the y value of the active point on the curve
+    const dotY = normalPDF(activeEps, mean, sd);
+
+    const ctx = canvasRef.current.getContext('2d');
+    chartRef.current = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'PDF',
+            data: values,
+            borderColor: '#4ADE80',
+            backgroundColor: 'rgba(74,222,128,0.08)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 0,
+            borderWidth: 2,
+          },
+          {
+            label: 'Target',
+            data: labels.map((x, i) => {
+              const dist = Math.abs(x - activeEps);
+              if (dist < step) return dotY;
+              return null;
+            }),
+            pointRadius: labels.map((x) => Math.abs(x - activeEps) < step ? 7 : 0),
+            pointBackgroundColor: '#F87171',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointHoverRadius: 10,
+            showLine: false,
+            borderColor: 'transparent',
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            filter: (item) => item.datasetIndex === 1 && item.raw != null,
+            callbacks: {
+              title: () => '',
+              label: () => {
+                const pct = normalCDF(activeEps, mean, sd) * 100;
+                return `EPS: $${activeEps.toFixed(2)} | Percentile: ${pct.toFixed(1)}%`;
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            type: 'linear',
+            title: { display: true, text: 'Annual EPS ($)', color: '#94A3B8', font: { family: "'JetBrains Mono', monospace", size: 11 } },
+            ticks: { callback: v => '$' + v.toFixed(0), maxTicksLimit: 10 },
+            grid: { display: false },
+          },
+          y: {
+            title: { display: true, text: 'Probability Density', color: '#94A3B8', font: { family: "'JetBrains Mono', monospace", size: 11 } },
+            ticks: { display: false },
+            grid: { color: 'rgba(37,45,58,0.4)' },
+          },
+        },
+      },
+    });
+    return () => { if (chartRef.current) chartRef.current.destroy(); };
+  }, [mean, sd, activeEps]);
+
+  return (
+    <div className="fang-dist-wrap">
+      <h4>EPS Normal Distribution</h4>
+      <div className="chart-canvas-wrap" style={{ height: '280px' }}>
+        <canvas ref={canvasRef} />
+      </div>
+      <div style={{ textAlign: 'center', marginTop: 8, fontSize: 12, color: 'var(--text-dim)', fontFamily: "'JetBrains Mono', monospace" }}>
+        {targetEps != null && !isNaN(targetEps)
+          ? `Target EPS $${activeEps.toFixed(2)} is at the ${percentile.toFixed(1)}th percentile`
+          : `Mean EPS $${mean.toFixed(2)} (50th percentile)`}
+      </div>
+    </div>
+  );
+}
+
+// --- FANG Calculator Inventory Page ---
+function CalcInventoryPage({ onBack, onSelectCalc }) {
+  return (
+    <div className="app">
+      <header className="header">
+        <div className="container header-inner">
+          <div className="header-actions" style={{ left: 0, right: 'auto' }}>
+            <button className="btn btn-outline btn-sm" onClick={onBack}>&larr; Back to Home</button>
+          </div>
+          <span className="header-title">Financial Calculator</span>
+        </div>
+      </header>
+      <main className="main">
+        <div className="container">
+          <div className="calc-inv-grid">
+            <div className="calc-inv-card" onClick={() => onSelectCalc('fang')}>
+              <h3>FANG Oil Calculator</h3>
+              <p>Diamondback Energy (FANG) — Convert WTI oil price to annualized EPS using 5 independent estimation methods with statistical confidence intervals.</p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+// --- FANG Calculator Detail Page ---
+function FangCalcPage({ onBack }) {
+  const [wti, setWti] = useState(85);
+  const [targetEps, setTargetEps] = useState('');
+
+  const isExpired = new Date() > new Date(FANG_EXPIRY_DATE);
+  const expiryLabel = `Accurate until ${FANG_EXPIRY_DATE.replace(/-/g, '/')}`;
+
+  const result = fangCalcAll(wti);
+  const outOfRange = wti < 55 || wti > 75;
+  const parsedTarget = targetEps !== '' ? parseFloat(targetEps) : null;
+
+  return (
+    <div className="app">
+      <header className="header">
+        <div className="container header-inner">
+          <div className="header-actions" style={{ left: 0, right: 'auto', gap: 12 }}>
+            <button className="btn btn-outline btn-sm" onClick={onBack}>&larr; Back to Inventory</button>
+            <span className={`calc-expiry-badge ${isExpired ? 'calc-expiry-red' : 'calc-expiry-green'}`}>
+              {isExpired ? '\u26A0 ' : '\u2713 '}{expiryLabel}
+            </span>
+          </div>
+          <span className="header-title">Stock Analyzer</span>
+        </div>
+      </header>
+      <main className="main">
+        <div className="container">
+          <div className="detail-header">
+            <h1 className="detail-title">FANG Oil Price → EPS Calculator</h1>
+            <span className="detail-ticker">FANG</span>
+          </div>
+
+          {/* WTI Input */}
+          <div className="fang-slider-wrap">
+            <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-sec)', marginBottom: 10, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              WTI Crude Oil Price ($/bbl)
+            </div>
+            <div className="fang-slider-row">
+              <input
+                type="range" className="fang-slider"
+                min={40} max={120} step={0.5}
+                value={wti} onChange={e => setWti(Number(e.target.value))}
+              />
+              <input
+                className="input" type="number" step="0.5" min={40} max={120}
+                value={wti} onChange={e => { const v = Number(e.target.value); if (v >= 0 && v <= 200) setWti(v); }}
+                style={{ width: 100, textAlign: 'center', fontSize: 18, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace" }}
+              />
+              <span className="fang-slider-val">${fmtNum(wti, 2)}</span>
+            </div>
+          </div>
+
+          {outOfRange && (
+            <div className="fang-warn">
+              &#9888; Oil price is outside the historical backtesting range ($55–$75). Extrapolation risk increases.
+            </div>
+          )}
+
+          {/* Results Table */}
+          <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '20px 24px', marginBottom: 20, animation: 'fadeUp .4s ease-out both' }}>
+            <table className="fang-results-table">
+              <thead>
+                <tr><th>Method</th><th>Description</th><th style={{ textAlign: 'right' }}>Annual EPS</th></tr>
+              </thead>
+              <tbody>
+                {result.methods.map((eps, i) => (
+                  <tr key={i}>
+                    <td style={{ fontWeight: 600, color: CHART_COLORS[i] }}>{METHOD_LABELS[i].name}</td>
+                    <td style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-sec)' }}>{METHOD_LABELS[i].desc}</td>
+                    <td style={{ textAlign: 'right', fontWeight: 700, fontSize: 15 }}>${fmtNum(eps)}</td>
+                  </tr>
+                ))}
+                <tr className="row-mean">
+                  <td>Mean</td>
+                  <td style={{ fontFamily: "'Inter', sans-serif" }}>Average of all 5 methods</td>
+                  <td style={{ textAlign: 'right', fontSize: 16 }}>${fmtNum(result.mean)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* Stats Grid */}
+          <div className="fang-stats-grid">
+            <div className="fang-stat-card">
+              <div className="fang-stat-label">Mean EPS</div>
+              <div className="fang-stat-value" style={{ color: 'var(--accent)' }}>${fmtNum(result.mean)}</div>
+            </div>
+            <div className="fang-stat-card">
+              <div className="fang-stat-label">Std Dev</div>
+              <div className="fang-stat-value" style={{ color: 'var(--blue)' }}>${fmtNum(result.sd)}</div>
+            </div>
+            <div className="fang-stat-card">
+              <div className="fang-stat-label">68% CI Low</div>
+              <div className="fang-stat-value" style={{ color: 'var(--warn)' }}>${fmtNum(result.ci68Low)}</div>
+            </div>
+            <div className="fang-stat-card">
+              <div className="fang-stat-label">68% CI High</div>
+              <div className="fang-stat-value" style={{ color: 'var(--warn)' }}>${fmtNum(result.ci68High)}</div>
+            </div>
+          </div>
+
+          {/* Normal Distribution Chart */}
+          <NormalDistChart mean={result.mean} sd={result.sd} targetEps={parsedTarget} />
+
+          {/* Target EPS Input */}
+          <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', padding: '20px 24px', marginBottom: 28 }}>
+            <div className="fang-target-row">
+              <label>Target EPS ($):</label>
+              <input
+                className="input"
+                type="number" step="0.01"
+                placeholder="Enter target EPS to mark on distribution..."
+                value={targetEps}
+                onChange={e => setTargetEps(e.target.value)}
+                style={{ maxWidth: 280, fontFamily: "'JetBrains Mono', monospace" }}
+              />
+              {parsedTarget != null && !isNaN(parsedTarget) && result.sd > 0 && (
+                <span style={{ fontSize: 13, color: 'var(--text-sec)', fontFamily: "'JetBrains Mono', monospace" }}>
+                  = {(normalCDF(parsedTarget, result.mean, result.sd) * 100).toFixed(1)}th percentile
+                </span>
+              )}
+              {targetEps !== '' && (
+                <button className="btn btn-outline btn-sm" onClick={() => setTargetEps('')}>Clear</button>
+              )}
+            </div>
+          </div>
+
+          {/* Disclaimer */}
+          <div className="detail-footer">
+            <h4>Disclaimer</h4>
+            <ul>
+              <li>All data sourced from FANG SEC filings (10-K Q4'24, 10-Q Q3'25) and EIA.</li>
+              <li>Calculations are estimates only — actual EPS depends on hedging, acquisitions, weather, etc.</li>
+              <li>Methods 2–4 use Q3 2025 production volumes; Method 1 uses Q4 2024 base.</li>
+              <li>Regression models trained on post-Endeavor 5-quarter dataset (Q4'24–Q4'25).</li>
+              <li>Data becomes stale after next earnings report ({FANG_EXPIRY_DATE}).</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+// ============================================================
+// SECTION 20: APP (Root Component)
 // ============================================================
 function App() {
   const [apiKeys, setApiKeysState] = useState(getApiKeys);
@@ -2003,6 +2467,7 @@ function App() {
   const [checklistSource, setChecklistSource] = useState('dashboard');
   const [detailVersion, setDetailVersion] = useState(0);
   const [proMode, setProMode] = useState(false);
+  const [selectedCalc, setSelectedCalc] = useState(null);
 
   function handleSaveKeys(keys) {
     setApiKeys(keys);
@@ -2094,6 +2559,7 @@ function App() {
           onOpenKeys={() => setShowKeyModal(true)}
           proMode={proMode}
           setProMode={setProMode}
+          onOpenCalc={() => setPage('calcInventory')}
         />
       )}
       {page === 'detail' && selectedStock && rawData && checklist && (
@@ -2107,6 +2573,15 @@ function App() {
           onBack={handleBackToDashboard}
           onBackToChecklist={handleBackToChecklist}
         />
+      )}
+      {page === 'calcInventory' && (
+        <CalcInventoryPage
+          onBack={() => setPage('dashboard')}
+          onSelectCalc={(id) => { setSelectedCalc(id); setPage('calcDetail'); }}
+        />
+      )}
+      {page === 'calcDetail' && selectedCalc === 'fang' && (
+        <FangCalcPage onBack={() => setPage('calcInventory')} />
       )}
     </>
   );
